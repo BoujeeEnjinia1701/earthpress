@@ -139,7 +139,20 @@ Quote version numbers so YAML keeps `1.0` as text instead of turning it into a n
 | SWC | SwapCell | PLP | PalletPilot | FTK | FlatTrike |
 | WWK | WaterWalker | GRR | GrowRider | SSP | SunSpoke |
 | SGN | StepGen | PBX | PowerBox | WML | WasteWise-ml |
+| SBD | StillBand | SKT | SteadyKit | SSV | SteadySleeve |
 | WSC | WasteWise Scan | RFE | ReflowEconomy | | |
+| FND | FieldNode | CGD | CellGuard | MTC | MotionCore |
+| TCT | ThermaCart | TWK | TwinKit | GVS | GravitySort |
+| DBG | DustBadge | SLW | SlopeWatch | HGD | H2Guard |
+| HBN | H2Bench | CLR | CalRig | RDK | ReadyKit |
+| GBN | GridBench | PVT | PVTrace | CCK | CellCheck |
+| MMD | MicroMold | EPR | EarthPress | BBX | BreatheBox |
+| MPL | MachinePulse | WLS | WellSense | CBC | CurbCount |
+| CRS | CrossSafe | PHL | PotholeLog | DKH | DockHub |
+| LDZ | LoadZone | HMN | HeatMap Node | FLG | FloodGauge |
+| AST | AirStreet | NSM | NoiseMap | CSH | CoolShade |
+| LKL | LeakListen | BNL | BinLevel | LPN | LampNode |
+| BRP | BridgePulse | CTW | CityTwin |  |  |
 | OHP | Portfolio-wide | | | | |
 
 ## 8. Build and publish

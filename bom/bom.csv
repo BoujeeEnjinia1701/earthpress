@@ -1,7 +1,13 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
-Steel mold box and lid,,,,,,
-Lever and toggle linkage,,,,,,
-Ejection mechanism,,,,,,
-Frame on skids,,,,,,
-Soil sieve and test kit,,,,,,
-Block gauge,,,,,,
+1 Frame on skids,1,"Two 100 x 50 mm channel columns about 0.82 m; two 60 x 60 x 4 mm tube skids 1.0 m; 20 mm base plate 240 x 580 mm; two cross members; four 28 mm round-bar braces; lever pivot bracket; about 61 kg of mild steel",Local steel stockist and welder,95.00,make,Indicative price (steel about $1.30/kg plus cutting); welding labor not included
+2 Mold box,1,"12 mm mild steel plate welded around a 290 x 140 x 250 mm cavity; bolt-on flanges to the columns; optional 3 mm wear liners",Local steel stockist and welder,70.00,make,Indicative price; internal faces ground flat and square; liners proposed awaiting Amish
+3 Lid with hinge and latch,1,"22 mm plate about 360 x 220 mm; 28 mm hinge pin in welded knuckles; hook latch rated at 1.5 times peak block force (about 122 kN)",Local steel stockist and welder,30.00,make,Indicative price; latch capacity to be checked at TRL 3
+4 Piston and push rod,1,"20 mm plate 288 x 138 mm on a 50 x 50 mm solid or heavy-wall bar with pin eye",Local steel stockist and welder,25.00,make,Indicative price
+5 Toggle linkage and pins,1,"Four 20 mm flat links about 190 mm between centers; three 30 mm turned steel pins with retaining clips; six bronze or steel bushings; grease nipples",Bearing and power transmission shop; local welder,55.00,buy,Indicative price; pins and bushings bought turned
+6 Lever and crank,1,"1.5 m schedule 40 steel pipe (about 42 mm OD) with rubber grip; removable socket on an 80 mm crank of 20 mm plate",Local steel stockist and welder,20.00,make,Indicative price
+7 Ejection stop and lever catch,1,"Adjustable stop bolt on a column bracket; lever catch post on the skid",Local steel stockist and welder,12.00,make,Indicative price
+8 Soil sieve,1,"5 mm welded wire mesh in a 700 x 900 mm timber frame with a hinged prop",Local hardware shop,18.00,make,Indicative price
+9 Soil test kit,1,"Two 1 L clear jars with lids; 600 x 40 x 40 mm shrinkage box; three measuring buckets; 25 kg spring scale; salt for dispersion; laminated test chart",Local hardware and market,25.00,buy,Indicative price; field tests only
+10 Block gauge,1,"Steel flat bar go or no-go gauge for 290 mm length and 90 mm height, ± 2 to 3 mm",Local welder,8.00,make,Indicative price
+11 Hardware and finish,1,"Bolts M16 and M12 with nuts and washers; retaining clips; primer and paint",Local hardware shop,25.00,buy,Indicative price; no exploded-view callout
+12 Fabrication consumables,1,"Welding rods, cutting and grinding discs",Local hardware shop,20.00,buy,Indicative price; no exploded-view callout

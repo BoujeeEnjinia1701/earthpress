@@ -1,0 +1,17 @@
+# Card metadata consumed by https://designmolecule.com
+name: EarthPress
+slug: earthpress
+area: Sustainable Housing
+status: concept          # concept | design | prototype | tested | released
+shortlisted: false
+pitch: >-
+  A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
+problem: >-
+  Fired bricks and cement blocks carry high embodied carbon and cost; compressed earth blocks are proven but good presses are expensive or hard to source.
+budget_usd: 450
+difficulty: 3  # 1 easiest, 5 hardest
+hero_image: media/hero.png
+licenses:
+  hardware: CERN-OHL-S-2.0
+  software: MIT
+tags: [sustainable-housing, open-hardware, cern-ohl-s]

@@ -1,6 +1,21 @@
-# EarthPress: design precis
+---
+doc_id: EPR-PRC-001
+title: EarthPress design precis
+project: EarthPress
+doc_type: Design precis
+version: "0.1"
+status: Draft
+date: '2026-09-25'
+author: Amish Chadha
+license: CERN-OHL-S-2.0
+revisions:
+- version: "0.1"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Initial scaffold
+---
 
-> Status: concept. This precis is a working draft and will be expanded before prototyping.
+# EarthPress design precis
 
 ## Summary
 

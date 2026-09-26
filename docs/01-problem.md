@@ -3,7 +3,7 @@ doc_id: EPR-PRB-001
 title: EarthPress problem statement
 project: EarthPress
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Open questions updated after EPR-CAL-001 and EPR-DDR-001 (block size and stabilizer adopted for TRL 3; two operators needed on paper)
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # EarthPress problem statement
@@ -51,7 +55,7 @@ The press works outdoors on uneven ground, in dust, heat and rain, and is moved 
 
 ## Constraints
 
-- Garage-buildable prototype for about $450 USD in parts (`project.yaml`), with no machining beyond drilling and purchased turned pins.
+- Garage-buildable prototype for about $500 USD in parts (`project.yaml`), with no machining beyond drilling and purchased turned pins.
 - Human powered: no electricity, hydraulics or engine on site.
 - Parts from local steel stockists: flat bar, plate, channel, rectangular tube and pipe in common sizes.
 - Wear parts and pins replaceable with hand tools.
@@ -69,7 +73,7 @@ The press works outdoors on uneven ground, in dust, heat and rain, and is moved 
 
 | Work | What it offers | Gap for EarthPress |
 | --- | --- | --- |
-| CINVA-Ram, a manual lever press developed in Colombia in the 1950s | The original single-lever, bottom-piston press; widely copied | Low compaction by modern standards; drawings vary and are rarely open-licensed |
+| CINVA-Ram, a manual lever press designed by Raúl Ramírez at CINVA, Bogotá, in 1956 and patented in 1958 ([Botti, 2023](https://www.sciencedirect.com/science/article/pii/S2095263523000584)) | The original single-lever, bottom-piston press; widely copied | Low compaction by modern standards; drawings vary and are rarely open-licensed |
 | Auroville Earth Institute and its Auram presses (India) | Mature CSEB practice: 5 % cement on average, compaction pressure of 2 to 4 MPa, strength classes; the Auram 3000 makes about 1,000 blocks a day ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)) | Commercial presses; not open hardware |
 | Open Source Ecology CEB Press | Open hardware (CC BY-SA 4.0, GPLv3), about 6 blocks a minute; materials cost $3,000 to $6,500, about $10,000 assembled ([OSE wiki](https://wiki.opensourceecology.org/wiki/CEB_Press)) | Hydraulic and engine powered; too costly for a self-builder |
 | 2021 New Mexico Earthen Building Materials Code, 14.7.4 NMAC | Covers CEB; cured units need 300 psi compressive strength and 50 psi modulus of rupture, with five random units tested per project ([NM Commission of Public Records](https://www.srca.nm.gov/parts/title14/14.007.0004.html)) | A strength target, not a press design |
@@ -86,8 +90,8 @@ This design is for communities the author is not part of, so requirements come f
 
 ## Open questions
 
-- The flat 290 x 140 x 90 mm block is adopted for TRL 3 (EPR-DDR-001 item 3, open for Amish's review). Do local masons prefer it, a larger module or an interlocking block?
-- EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Is a two-person lever acceptable to builders, or would they rather accept a lower pressure and more cement?
+- The flat 290 x 140 x 90 mm block was decided by Amish on 2026-09-25 (EPR-DDR-001 item 3, EPR-DDR-002). Do local masons prefer it, a larger module or an interlocking block?
+- EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Amish decided on 2026-09-25 to go with a two-person T-handle (EPR-DDR-002); co-design should still confirm that builders accept it rather than a lower pressure and more cement.
 - Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press?
 - What block strength do local building rules or funders require, and who will test blocks?
 - How far do blocks and the press travel, and on what vehicle? The press is about 187 kg in eight pieces of 37 kg or less.

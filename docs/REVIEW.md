@@ -1,5 +1,44 @@
 # Review note: EarthPress
 
+## Session 2026-09-25: recommendations accepted
+
+On 2026-09-25 Amish wrote: "i accept all your recommendations, go with them across all repos." Every item with a recommendation is now **Decided by Amish, 2026-09-25: go with recommendation**, recorded in `docs/decisions/0002-recommendations-accepted.md` (EPR-DDR-002 v0.1). EPR-DDR-001 moves to v0.2 with the new statuses.
+
+### Decisions applied and what changed
+
+- 15 items decided: TRL 2 items 1 to 7 and 9, and TRL 3 items 10 to 16. Most were already in the model, so the geometry, STEP, STL and EPR-DWG-001 (Rev P1) are unchanged in substance; all were regenerated.
+- Budget (item 14): `budget_usd` $450 to **$500**; R13 target $450 to $500. BOM unchanged at $488, so R13 goes from not met to met on paper ($12 margin).
+- R5 wording (item 12): 500 N with the grip between 0.9 and 1.6 m, to 500 N or less per operator, grip 0.8 to 1.9 m, peak at 1.0 m or higher. With two operators (item 11) at 334 N each and the peak at 1,157 mm, R5 goes from not met to met on paper.
+- R7 total (item 13): 140 kg to **190 kg**, piece limit 50 kg kept. At 187 kg, R7 goes from not met to met on paper (3.0 kg margin).
+- Items 10, 15 and 16 (eject seesaw, weighed fill, linkage proposals): already in the model, BOM and precis; the word "proposal" was removed.
+- Item 9: pitch and problem unchanged; its budget part is superseded by item 14.
+- `docs/04-calcs/sizing.py` and EPR-CAL-001 to v0.2: the script checks the accepted R5 band and peak height and the 190 kg total, and reads the budget from `project.yaml`; results table updated.
+- Controlled docs bumped with revision "Recommendations accepted by Amish (DDR-002)": EPR-PRB-001 0.3 to 0.4, EPR-PRC-001 0.3 to 0.4, EPR-REQ-001 0.3 to 0.4, EPR-CAL-001 0.1 to 0.2, EPR-DDR-001 0.1 to 0.2. `bom/bom-notes.md` and `README.md` updated for the $500 budget and the new status.
+- Kit links switched to designmolecule.com: all docs PDFs, EPR-DWG-001 and all media regenerated; superseded PDFs removed from `docs/pdf/` where they still showed the old domain; `media/_views*` deleted. Hero, blueprint and exploded images checked by eye.
+- README "What sparked the idea" rewritten around the CINVA-Ram (Raúl Ramírez, CINVA, Bogotá, 1956; patented 1958), cited to Botti, *Frontiers of Architectural Research*, 2023. The same source now closes the TRL 2 citation flag on the CINVA-Ram origin in EPR-PRB-001.
+
+### Requirement status (EPR-CAL-001 v0.2)
+
+| Status | Requirements |
+| --- | --- |
+| Not met | None |
+| At risk | R2 (2.00 MPa only with two operators, a weighed fill and the assumed soil); R4 (296 against 300 blocks a day; item 16g, revisit when timed) |
+| Not verifiable at TRL 3 | R3, R8, R10, R14 |
+| Met on paper | R1, R5, R7 (3 kg margin), R11, R12, R13 ($12 margin) |
+| Met (design review) | R6, R9 |
+
+### Still awaiting Amish
+
+1. **First co-design partner and region (item 8).** No recommendation; stays "Proposed, awaiting Amish".
+
+### Cross-repo actions
+
+None. EarthPress uses no shared component and no recommendation required another repo to change.
+
+### TRL 4
+
+TRL 4 remains on hold by Amish's instruction. Decided but on hold: confirming the stabilizer with partner soils (item 5), timing cycles for R4 (item 16g), and any build, block test, proof-load test or soil compaction measurement. `trl: 3`, `trl_target: 3`.
+
 ## Session 2026-09-25: TRL 3
 
 ### What was done
@@ -33,18 +72,18 @@ TRL 2 figures corrected: press mass 123 to 187 kg; cost $403 to $488; compaction
 
 ### Decisions recorded (EPR-DDR-001)
 
-Adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review: toggle mechanism (item 1); longer lever arc with a higher end grip (item 2, met in intent with a low pivot, since the 800 mm pivot and 100° arc would put the grip below the ground); 290 x 140 x 90 mm block (3); 2 MPa (4); 5 % cement with lime for clay soils (5); 12 mm base plate and bolted mold (6); field tests only (7); no change to budget, pitch or problem (9).
+Adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, now decided by Amish, 2026-09-25: go with recommendation (EPR-DDR-002): toggle mechanism (item 1); longer lever arc with a higher end grip (item 2, met in intent with a low pivot, since the 800 mm pivot and 100° arc would put the grip below the ground); 290 x 140 x 90 mm block (3); 2 MPa (4); 5 % cement with lime for clay soils (5); 12 mm base plate and bolted mold (6); field tests only (7); no change to budget, pitch or problem (9).
 
-### Still awaiting Amish
+### Items then awaiting Amish (all but item 8 now decided, EPR-DDR-002)
 
 1. **First co-design partner and region (item 8).** No recommendation.
-2. **Ejection (item 10).** Recommendation: separate eject seesaw with the lever in a second socket and a lost-motion slot (in the model).
-3. **Two operators (item 11).** Recommendation: two people on a T-handle (in the model).
-4. **R5 wording (item 12).** Recommendation: 500 N or less per operator; grip 0.8 to 1.9 m with the peak force at 1.0 m or higher.
-5. **R7 total (item 13).** Recommendation: relax the total to 190 kg, keep the 50 kg piece limit.
-6. **Budget (item 14).** Recommendation: raise `budget_usd` to $500 ($488 now). Not applied.
-7. **Fill control (item 15).** Weigh every fill on a 10 kg scale to about +1.3 % ± 100 g.
-8. **Engineering proposals (item 16).** Linkage geometry and 940 mm rim, crank stop at 6° (173 kN design load), ribbed lid, end pawl, linkage guard, hardened steel bushes, and R4 at 296 blocks a day.
+2. **Ejection (item 10).** Recommendation: separate eject seesaw with the lever in a second socket and a lost-motion slot (in the model). **Decided by Amish, 2026-09-25: go with recommendation.**
+3. **Two operators (item 11).** Recommendation: two people on a T-handle (in the model). **Decided by Amish, 2026-09-25: go with recommendation.**
+4. **R5 wording (item 12).** Recommendation: 500 N or less per operator; grip 0.8 to 1.9 m with the peak force at 1.0 m or higher. **Decided by Amish, 2026-09-25: go with recommendation.**
+5. **R7 total (item 13).** Recommendation: relax the total to 190 kg, keep the 50 kg piece limit. **Decided by Amish, 2026-09-25: go with recommendation.**
+6. **Budget (item 14).** Recommendation: raise `budget_usd` to $500 ($488 now). Not applied. **Decided by Amish, 2026-09-25: go with recommendation.**
+7. **Fill control (item 15).** Weigh every fill on a 10 kg scale to about +1.3 % ± 100 g. **Decided by Amish, 2026-09-25: go with recommendation.**
+8. **Engineering proposals (item 16).** Linkage geometry and 940 mm rim, crank stop at 6° (173 kN design load), ribbed lid, end pawl, linkage guard, hardened steel bushes, and R4 at 296 blocks a day. **Decided by Amish, 2026-09-25: go with recommendation.**
 
 ### Cross-repo notes
 
@@ -107,7 +146,7 @@ Requirements not met or at risk:
 - **R3, R8 and R10 cannot be shown at TRL 2**; block strength depends on soil, mix and curing and needs block tests (TRL 4).
 - R12 and R14 are addressed in concept only.
 
-### Proposed, awaiting Amish
+### Proposed, awaiting Amish (items 1 to 7 and 9 now decided by Amish, 2026-09-25: go with recommendation, EPR-DDR-002; item 8 still awaiting Amish)
 
 1. **Mechanism.** Option A: bottom piston with a toggle and one lever for press and eject (CINVA-Ram pattern). Option B: the same frame with a 20 t hydraulic bottle jack (reaches 4 MPa easily, adds a bought hydraulic part). Option C: screw press (slow). Recommendation: A, with B documented later as a variant.
 2. **Lever layout.** Raise the lever pivot to about 800 mm for a 100° arc, to fix R2 and R5, rather than keeping the low pivot in the model. Recommendation: raise it at TRL 3.

@@ -2,13 +2,13 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** about $450 USD · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** about $500 USD · **Difficulty:** 3 of 5
 
 A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
 
 ![EarthPress concept](media/hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0001-trl2-review-decisions.md) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0002-recommendations-accepted.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -47,7 +47,7 @@ Meeting that demand with fired brick and cement block would lock in large emissi
 
 ## What sparked the idea
 
-It came out of a September 2026 review of Design Molecule's applied research areas against the open projects already in the lab. It extends the sustainable housing work of SnapFrame and ThermaBrick. The practical trigger was a gap in open presses: the best-documented open design, the Open Source Ecology CEB Press, is hydraulic and costs $3,000 to $6,500 in materials ([OSE wiki](https://wiki.opensourceecology.org/wiki/CEB_Press)), while the manual lever presses that suit a self-builder are mostly closed products or old drawings.
+The starting point was the CINVA-Ram, the steel lever press that Chilean engineer Raúl Ramírez designed in 1956 at the Inter-American Housing Center (CINVA) in Bogotá and patented in 1958. Self-help housing programs then carried it as far as Ghana and South Vietnam, showing that one hand-operated press could put earth-block walls within reach of families building their own homes ([Botti, *Frontiers of Architectural Research*, 2023](https://www.sciencedirect.com/science/article/pii/S2095263523000584)). Seventy years on, that pattern still has no open, dimensioned and calculated successor that a local welder can build, while the best-documented open press, the Open Source Ecology CEB Press, is hydraulic and costs $3,000 to $6,500 in materials ([OSE wiki](https://wiki.opensourceecology.org/wiki/CEB_Press)). EarthPress sets out to update the CINVA-Ram idea with a toggle sized by calculation, a soil test kit and open drawings.
 
 ## Problem
 
@@ -55,7 +55,7 @@ Fired bricks and cement blocks carry high embodied carbon and cost; compressed e
 
 ## Concept
 
-A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, a press of about 187 kg in pieces of 37 kg or less, and about $488 in parts, over the $450 budget. Requirements R5 (operator force), R7 (total mass) and R13 (cost) are not met on paper; see the [review note](docs/REVIEW.md).
+A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, a press of about 187 kg in pieces of 37 kg or less, and about $488 in parts, within the $500 budget. With the targets Amish accepted on 2026-09-25 ([EPR-DDR-002](docs/decisions/0002-recommendations-accepted.md)), no requirement is not met on paper; R2 (pressure) and R4 (output) are at risk. See the [review note](docs/REVIEW.md).
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -101,4 +101,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-A project of the [Design Molecule](https://designmolecule.com) lab. Extending strong areas set.
+A project of the [Design Molecule](https://designmolecule.com) lab.

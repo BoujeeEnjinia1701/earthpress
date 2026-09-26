@@ -1,4 +1,4 @@
-"""EarthPress sizing calculations, EPR-CAL-001 v0.1 (TRL 3).
+"""EarthPress sizing calculations, EPR-CAL-001 v0.2 (TRL 3).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes docs/04-calcs/results.csv.
@@ -112,6 +112,7 @@ out("kin", "Grip height at start / end", f"{grip_z[0]:.0f} / {grip_z[-1]:.0f}", 
 # the R5 band 0.9 to 1.6 m: largest arc any lever of this radius can sweep inside it
 band_arc = 2 * math.degrees(math.asin((1600 - 900) / 2 / R))
 out("kin", "Largest arc inside 0.9 to 1.6 m with this grip radius", band_arc, "deg")
+out("kin", "Grip inside the R5 band 0.8 to 1.9 m (EPR-DDR-002)", "yes" if min(grip_z) >= 800 and max(grip_z) <= 1900 else "no")
 out("kin", "Arc of the TRL 2 proposal (800 mm pivot, 100 deg)", 100.0, "deg", "{:.0f}")
 out("kin", "Lowest grip height for that proposal (symmetric arc)", 800 - R * math.sin(math.radians(50)), "mm", "{:.0f}")
 
@@ -155,6 +156,7 @@ ipk = max(range(N), key=lambda i: Gb[i])
 out("grip", "Peak grip force, base soil (14 mm per decade)", Gb[ipk], "N", "{:.0f}")
 out("grip", "Travel at the peak", s_mm[ipk], "mm")
 out("grip", "Grip height at the peak", grip_z[ipk], "mm", "{:.0f}")
+out("grip", "Peak at 1.0 m or higher (R5, EPR-DDR-002)", "yes" if grip_z[ipk] >= 1000 else "no")
 out("grip", "Grip force at the end of the stroke", Gb[-1], "N", "{:.0f}")
 for dec in (A["decade_lo"], A["decade_hi"]):
     out("grip", f"Peak grip force, soil {dec:.0f} mm per decade", max(grip_profile(dec)), "N", "{:.0f}")
@@ -327,6 +329,7 @@ for n, m in masses.items():
 tot = sum(masses.values())
 out("mass", "Press total, steel", tot, "kg")
 out("mass", "Heaviest single piece", max(masses.values()), "kg")
+out("mass", "Margin to the R7 total of 190 kg (EPR-DDR-002)", 190.0 - tot, "kg")
 out("mass", "Lever pipe alone (removable)", math.pi / 4 * (Do ** 2 - Di ** 2) * P["lever_len"] * 7850e-9, "kg")
 
 # ---------------------------------------------------------------- 8 output and crew
@@ -382,8 +385,9 @@ with open(ROOT / "bom/bom.csv", newline="") as f:
     for r_ in csv.DictReader(f):
         total += float(r_["qty"]) * float(r_["unit_cost_usd"])
 out("cost", "BOM total, press and kit", total, "USD", "{:.0f}")
-out("cost", "Budget in project.yaml", 450.0, "USD", "{:.0f}")
-out("cost", "Over budget by", total - 450.0, "USD", "{:.0f}")
+budget = next(float(l.split(":")[1].split("#")[0]) for l in (ROOT / "project.yaml").read_text().splitlines() if l.startswith("budget_usd:"))
+out("cost", "Budget in project.yaml", budget, "USD", "{:.0f}")
+out("cost", "Under budget by", budget - total, "USD", "{:.0f}")
 out("cost", "Steel in the press at the indicative price", tot * A["steel_usd_kg"], "USD", "{:.0f}")
 
 with open(ROOT / "docs/04-calcs/results.csv", "w", newline="") as f:

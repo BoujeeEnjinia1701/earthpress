@@ -17,6 +17,7 @@ kin,Lever arc,59.2,deg
 kin,Grip path length,1.71,m
 kin,Grip height at start / end,1893 / 863,mm
 kin,Largest arc inside 0.9 to 1.6 m with this grip radius,24.5,deg
+kin,Grip inside the R5 band 0.8 to 1.9 m (EPR-DDR-002),yes,
 kin,"Arc of the TRL 2 proposal (800 mm pivot, 100 deg)",100,deg
 kin,Lowest grip height for that proposal (symmetric arc),-464,mm
 kin,Overall force ratio at the end of the stroke,173,:1
@@ -25,6 +26,7 @@ kin,Force ratio rises monotonically to the stop,yes,
 grip,"Peak grip force, base soil (14 mm per decade)",668,N
 grip,Travel at the peak,56.9,mm
 grip,Grip height at the peak,1157,mm
+grip,"Peak at 1.0 m or higher (R5, EPR-DDR-002)",yes,
 grip,Grip force at the end of the stroke,469,N
 grip,"Peak grip force, soil 10 mm per decade",571,N
 grip,"Peak grip force, soil 20 mm per decade",809,N
@@ -115,6 +117,7 @@ mass,"Lever, crank hub and T-handle",18.3,kg
 mass,"Eject lever, fork, catch and end pawl",12.6,kg
 mass,"Press total, steel",187.0,kg
 mass,Heaviest single piece,36.6,kg
+mass,Margin to the R7 total of 190 kg (EPR-DDR-002),3.0,kg
 mass,Lever pipe alone (removable),9.2,kg
 out,Cycle time,85,s
 out,Blocks per 8 h day (7 h working),296,
@@ -143,6 +146,6 @@ house,"CO2, CSEB",0.35,t
 house,"CO2, fired brick",4.55,t
 house,CSEB as a share of fired brick,7.6,%
 cost,"BOM total, press and kit",488,USD
-cost,Budget in project.yaml,450,USD
-cost,Over budget by,38,USD
+cost,Budget in project.yaml,500,USD
+cost,Under budget by,12,USD
 cost,Steel in the press at the indicative price,243,USD

@@ -3,7 +3,7 @@ doc_id: EPR-PRC-001
 title: EarthPress design precis
 project: EarthPress
 doc_type: Design precis
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -21,13 +21,17 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: TRL 3 update from EPR-CAL-001 and EPR-DDR-001 (linkage geometry, two-person T-handle, separate eject lever, ribbed lid, weighed fill, masses, cost, safety)
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # EarthPress design precis
 
 ## Summary
 
-EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). The press weighs about 187 kg in eight pieces, none over 37 kg, and the press and kit cost about $488 in parts. R5 (operator force and grip height), R7 (total mass) and R13 (cost) are not met on paper; R2 and R4 are at risk. All values are estimates.
+EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). The press weighs about 187 kg in eight pieces, none over 37 kg, and the press and kit cost about $488 in parts. Against the targets Amish accepted on 2026-09-25 (EPR-DDR-002), R5 (334 N per operator), R7 (187 kg against 190 kg) and R13 ($488 against $500) are met on paper; R2 and R4 are at risk. All values are estimates.
 
 ![Hero render](../media/hero.png)
 
@@ -102,7 +106,7 @@ All values are estimates from EPR-CAL-001, where the assumptions are stated.
 
 ## Key design choices
 
-The first six choices are adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction and remain open for his review (EPR-DDR-001 Table 1). The rest are TRL 3 engineering proposals, awaiting Amish (EPR-DDR-001 Table 2).
+All of these choices were decided by Amish on 2026-09-25: go with recommendation (EPR-DDR-001, EPR-DDR-002).
 
 - **Bottom piston with a toggle and one lever**, following the CINVA-Ram pattern rather than a screw, a bottle jack or a top-down ram. It needs no hydraulic parts and a welder can build and repair it.
 - **Flat 290 x 140 x 90 mm block**, the module used by the Auroville Earth Institute. Interlocking molds could follow as inserts.
@@ -110,10 +114,10 @@ The first six choices are adopted as recommended for TRL 3 under Amish's 2026-09
 - **Cement stabilization at 5 % by default**, with lime as an option for clay-rich soils.
 - **Field soil tests only**, with no lab equipment.
 - **Bolted frame and mold with a 12 mm base plate**, so the press splits into pieces of 37 kg or less.
-- **Longer arc from a low pivot** (proposal): the lever starts nearly upright, which gives 59° of arc with the grip between 0.86 and 1.89 m. Raising the pivot to 800 mm for a 100° arc, as proposed at TRL 2, would take the grip below the ground.
-- **Two operators on a T-handle** (proposal), since one person at 500 N stalls at 0.53 MPa.
-- **Separate eject seesaw with a lost-motion slot** (proposal), because a toggle ending near straight cannot lift the piston another 90 mm.
-- **Crank stop at the design end angle and a weighed fill** (proposal), which caps the force at 173 kN and fixes the block height at 90 mm.
+- **Longer arc from a low pivot**: the lever starts nearly upright, which gives 59° of arc with the grip between 0.86 and 1.89 m. Raising the pivot to 800 mm for a 100° arc, as proposed at TRL 2, would take the grip below the ground.
+- **Two operators on a T-handle**, since one person at 500 N stalls at 0.53 MPa.
+- **Separate eject seesaw with a lost-motion slot**, because a toggle ending near straight cannot lift the piston another 90 mm.
+- **Crank stop at the design end angle and a weighed fill**, which caps the force at 173 kN and fixes the block height at 90 mm.
 
 ## Safety
 

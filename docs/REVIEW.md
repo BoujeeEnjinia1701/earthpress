@@ -1,5 +1,12 @@
 # Review note: EarthPress
 
+## Session 2026-09-26: sources strengthened
+
+- "By country or region" in `README.md`: the Colombia and Latin America row had no citation. It now cites [Botti, *Frontiers of Architectural Research*, 2023](https://www.sciencedirect.com/science/article/pii/S2095263523000584), and the row was rewritten to what the paper supports (soil-cement blocks in Colombian projects by the 1940s; the CINVA-Ram designed at CINVA in Bogotá in 1956 and spread to Bolivia, Brazil, Peru and beyond). The unsupported phrase "living tradition of earth building" was removed.
+- Kept and verified by fetching: UNEP *Global Status Report 2024/2025* (32 % energy, 34 % CO2), Chatham House 2018 (cement about 8 % of CO2), UN-Habitat housing page (3 billion people, 96,000 units a day), Auroville Earth Institute (49 against 643 kg CO2/m³), UN SDG Report 2024 Goal 11 (regional slum figures), 14.7.4 NMAC (300 psi for CEB), Botti 2023 (CINVA-Ram, What sparked the idea) and the OSE wiki (kept alongside Botti; hydraulic, $3,000 to $6,500 in materials).
+- Inspiration unchanged; it already rests on a peer-reviewed paper.
+- No controlled document changed. No budget change.
+
 ## Session 2026-09-25: recommendations accepted
 
 On 2026-09-25 Amish wrote: "i accept all your recommendations, go with them across all repos." Every item with a recommendation is now **Decided by Amish, 2026-09-25: go with recommendation**, recorded in `docs/decisions/0002-recommendations-accepted.md` (EPR-DDR-002 v0.1). EPR-DDR-001 moves to v0.2 with the new statuses.

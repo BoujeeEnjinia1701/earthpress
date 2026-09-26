@@ -42,7 +42,7 @@ Meeting that demand with fired brick and cement block would lock in large emissi
 | Sub-Saharan Africa | 265 million people lived in slums in 2022, with an estimated 360 million more by 2030 if trends persist ([UN SDG Report 2024](https://unstats.un.org/sdgs/report/2024/Goal-11/)); soil is abundant and cement is costly |
 | India and South Asia | Central and Southern Asia had 334 million slum dwellers in 2022 ([UN SDG Report 2024](https://unstats.un.org/sdgs/report/2024/Goal-11/)); India is home to the Auroville Earth Institute, a long-running center of CSEB practice, and fired-brick kilns are widespread |
 | Eastern and South-Eastern Asia | The largest slum population, 362 million people in 2022 ([UN SDG Report 2024](https://unstats.un.org/sdgs/report/2024/Goal-11/)) |
-| Colombia and Latin America | Birthplace of the CINVA-Ram manual press in the 1950s, with a living tradition of earth building |
+| Colombia and Latin America | Soil-cement blocks were used in Colombian projects by the 1940s, and the CINVA-Ram manual press, designed at CINVA in Bogotá in 1956, spread to Bolivia, Brazil, Peru and beyond ([Botti, *Frontiers of Architectural Research*, 2023](https://www.sciencedirect.com/science/article/pii/S2095263523000584)) |
 | United States (New Mexico) | The 2021 New Mexico Earthen Building Materials Code covers CEB and requires 300 psi (about 2.1 MPa) compressive strength ([14.7.4 NMAC](https://www.srca.nm.gov/parts/title14/14.007.0004.html)) |
 
 ## What sparked the idea
@@ -95,6 +95,12 @@ The priced bill of materials is in [bom/bom.csv](bom/bom.csv) (13 lines; lines 1
 ## Documentation
 
 Controlled documents follow the portfolio [documentation standard](.kit/STANDARDS.md). Each carries a document ID (EPR-PRC-001 for the precis), a version and a revision history. Branded PDFs are built with `python .kit/render.py` and attached to GitHub Releases when a document is tagged, for example `EPR-PRC-001/v1.0`.
+
+## Credits
+
+Designed by Amish Chadha, with contributions from Ashok Kumar Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
+
+AI assistance (Claude) was used to accelerate concept renders, prototype documentation and first-pass sizing calculations. Design direction and all decisions are Amish Chadha's, recorded in this repository's decision records (`docs/decisions/`).
 
 ## Licenses
 

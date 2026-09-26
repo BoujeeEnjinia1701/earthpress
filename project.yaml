@@ -1,6 +1,7 @@
 # Card metadata consumed by https://designmolecule.com
 name: EarthPress
 slug: earthpress
+repo: BoujeeEnjinia1701/earthpress         # GitHub repository, shown on every drawing and render
 area: Sustainable Housing
 trl: 3                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
 trl_target: 3

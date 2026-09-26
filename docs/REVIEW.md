@@ -1,5 +1,76 @@
 # Review note: EarthPress
 
+## Session 2026-09-25: TRL 3
+
+### What was done
+
+- `docs/decisions/0001-trl2-review-decisions.md` (EPR-DDR-001 v0.1): TRL 2 items 1 to 7 and 9 adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review; item 8 (partner) and seven new TRL 3 items (10 to 16) listed as open.
+- `docs/04-calcs/01-sizing.md` (EPR-CAL-001 v0.1) with `docs/04-calcs/sizing.py` and `results.csv`: force, linkage kinematics, grip force and work against a soil compaction law, fill tolerance, structure at the design load, ejection, mass, output, material flow, carbon and cost, with a results table for R1 to R14. The script reads `cad/src/model.py` and `bom/bom.csv` and prints every quoted number.
+- `cad/src/model.py`: parametric build123d model with the toggle kinematics (`toggle_state`, `knee_and_crank`, `lever_angle`) shared with the calculation. Parts: base on skids with lever bracket, press core (columns and base beam), mold box with belt, ribbed lid with hinge and latch, piston with slotted push rod, toggle links and pins, connecting link, lever hub, crank and T-handle, eject seesaw and end pawl, plus the sieve, test kit, gauge and context. Exports `cad/step/` and `cad/stl/` `earthpress-assembly`, `earthpress-set`, `earthpress-mold`, `earthpress-lid` and `earthpress-toggle`.
+- `cad/src/sheets.py` and `cad/drawings/EPR-DWG-001.svg`, `.pdf`, `.png`: general arrangement, Rev P1, "CONCEPT, NOT FOR FABRICATION" and "PRELIMINARY, NOT FOR FABRICATION". The concept blueprint keeps EPR-DWG-010.
+- `bom/bom.csv`: 13 lines, all priced with supplier types; new line 13 (linkage guard); `bom/bom-notes.md` totals against $450 and the recommended $500.
+- `cad/src/concept_media.py` now builds from the model; every image in `media/` regenerated and checked by eye; the exploded-view lever offset was moved so it no longer crosses the legend; temporary `media/_views*` folders deleted.
+- Docs updated to v0.3 with revision entries dated 2026-09-25: EPR-PRB-001, EPR-PRC-001, EPR-REQ-001. `project.yaml`: `trl: 3`, `trl_target: 3`, evidence listed; pitch, problem and `budget_usd` unchanged. `README.md`: TRL 3, numbers from EPR-CAL-001, links to the drawing, sizing note and DDR; the five required sections kept in order.
+
+### Requirements (EPR-CAL-001)
+
+Three met on paper, two met by design review, three not met, two at risk, four not verifiable at TRL 3.
+
+| ID | Status | Value |
+| --- | --- | --- |
+| R5 | **Not met** | Peak pull 668 N (334 N each with two); grip 0.86 to 1.89 m. The 0.9 to 1.6 m band allows only 24.5° of arc with a 1.65 m grip radius |
+| R7 | **Not met** | 187 kg against 140 kg; heaviest piece 36.6 kg (limit 50 kg); fits a 1.5 m bed |
+| R13 | **Not met** | $488 against $450 (recommended $500, awaiting Amish) |
+| R2 | At risk | 2.00 MPa with two operators and a fill of 0 to +2.7 %; one operator at 500 N stalls at 0.53 MPa; peak 571 to 809 N over the soil range |
+| R4 | At risk | 296 blocks a day on an assumed 85 s cycle |
+| R3, R8, R10, R14 | Not verifiable at TRL 3 | Need block tests, wear data or an outside review; fatigue range 89 MPa against 243 MPa allowed |
+| R1, R11, R12 | Met on paper | Height 90.0 mm at the stop; CO2 7.6 % of fired brick; lid and latch checked at 173 kN, end pawl, guard |
+| R6, R9 | Met (design review) | Bought turned parts only; kit defined |
+
+Other key numbers: 81.2 kN for 2 MPa; force ratio 173:1 at the stop; lever arc 59.2°; compaction work 494 J (353 to 705 J); design load 173 kN (1,000 N at the grip); lowest safety factor 1.13 (bush bearing); kickback 47 J; eject 4.83 kN at 468 N on the grip; 1,683 blocks and 556 kg of cement for a small house.
+
+TRL 2 figures corrected: press mass 123 to 187 kg; cost $403 to $488; compaction work 0.6 to 1.2 kJ to 0.35 to 0.71 kJ; output about 300 to 296 blocks a day; lever 1.5 to 1.7 m; the 22 mm lid (275 MPa at 2 MPa, above yield) replaced by a ribbed lid; ejection by continuing the stroke replaced, because a toggle ending near straight cannot lift the piston another 90 mm.
+
+### Decisions recorded (EPR-DDR-001)
+
+Adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review: toggle mechanism (item 1); longer lever arc with a higher end grip (item 2, met in intent with a low pivot, since the 800 mm pivot and 100° arc would put the grip below the ground); 290 x 140 x 90 mm block (3); 2 MPa (4); 5 % cement with lime for clay soils (5); 12 mm base plate and bolted mold (6); field tests only (7); no change to budget, pitch or problem (9).
+
+### Still awaiting Amish
+
+1. **First co-design partner and region (item 8).** No recommendation.
+2. **Ejection (item 10).** Recommendation: separate eject seesaw with the lever in a second socket and a lost-motion slot (in the model).
+3. **Two operators (item 11).** Recommendation: two people on a T-handle (in the model).
+4. **R5 wording (item 12).** Recommendation: 500 N or less per operator; grip 0.8 to 1.9 m with the peak force at 1.0 m or higher.
+5. **R7 total (item 13).** Recommendation: relax the total to 190 kg, keep the 50 kg piece limit.
+6. **Budget (item 14).** Recommendation: raise `budget_usd` to $500 ($488 now). Not applied.
+7. **Fill control (item 15).** Weigh every fill on a 10 kg scale to about +1.3 % ± 100 g.
+8. **Engineering proposals (item 16).** Linkage geometry and 940 mm rim, crank stop at 6° (173 kN design load), ribbed lid, end pawl, linkage guard, hardened steel bushes, and R4 at 296 blocks a day.
+
+### Cross-repo notes
+
+EarthPress depends on none of the shared components in this batch (FieldNode, CellGuard, MotionCore, ThermaCart, TwinKit, CalRig) or SwapCell. No other repo was read or changed.
+
+### Safety concerns
+
+- Up to 173 kN in the linkage if two people pull hard at the stop; crushing in the mold, linkage, crank scissor and eject fork. The guard is not modeled.
+- Lever kickback of about 47 J if released at the end of the stroke; the end pawl is a paper design.
+- The lid weighs 26 kg and is lifted every cycle (about 127 N at the latch end); it must never be opened with the lever off its rest stop.
+- The soil law is an assumption: a softer soil raises the peak pull to 809 N, and operators may then hang on the lever.
+- Cement burns, silica dust from dry sieving, 7.6 kg blocks handled about 300 times a day, and uncertified blocks for structural use are unchanged from TRL 2.
+
+### Other notes
+
+- No TRL 4 material exists in the repo: no test plans or reports, build procedures, cut lists or purchasing lists. `build-log/README.md` is the scaffold stub and was not touched.
+- Citations: the TRL 2 note flags the CINVA-Ram origin (Colombia, 1950s) as stated without a link. WebFetch could not reach the Wikipedia CINVA Ram page (the domain is cache-only for this tool), and the Wikipedia compressed earth block page does not mention it, so the flag stays. WebSearch was not used (quota exhausted).
+- The linkage geometry came from a numerical design search (minimum peak grip force with the grip between 0.8 and 1.9 m); the search script is not in the repo, and `sizing.py` checks the chosen geometry.
+- The kit's cutaway cuts at the mean Y of the parts; the press is centered on Y = 0 and the sieve, kit, gauge and blocks are excluded, so the cut passes through the piston axis without shifting the model.
+- The soil compaction law (tenfold over the last 14 mm) is the largest single uncertainty in R2 and R5.
+- `render.py --check` and `render.py` pass; PDFs are in `docs/pdf/`.
+
+### Recommended next step
+
+Review EPR-DDR-001, in particular the two-person lever (item 11), the R5 and R7 rewording (items 12 and 13) and the budget (item 14), and choose the first partner (item 8). TRL 4 is on hold by Amish's instruction. For reference only, TRL 4 would need: a bench build of the press; a lab test report (TST, `environment: lab`) covering the soil compaction curve with partner soil, grip force through the stroke with one and two operators, fill-mass sensitivity, lid and latch proof load at 1.5 times the block force, ejection force, cycle time and block strength after curing; and build-log entries. None of this has been started.
+
 ## Session 2026-09-25: /populate to a strong TRL 2
 
 ### What was done

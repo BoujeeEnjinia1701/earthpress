@@ -1,0 +1,148 @@
+section,quantity,value,unit
+block,Block face area,0.0406,m2
+block,Block volume,3.65,L
+block,Dry block mass,6.94,kg
+block,Moist mass at the press,7.64,kg
+block,Cement per block,0.33,kg
+block,Force for 2 MPa (nominal),81.2,kN
+block,Force for 4 MPa,162.4,kN
+block,Loose to pressed height ratio,1.67,
+block,Loose dry density in the mold,1140,kg/m3
+kin,Toggle link length,245,mm
+kin,Toggle angle at start / end (from vertical),29.3 / 6.0,deg
+kin,Piston stroke,60.0,mm
+kin,Base pin height / upper pin height at end,298 / 785,mm
+kin,Lever angle at start / end (from +X),99.6 / 158.8,deg
+kin,Lever arc,59.2,deg
+kin,Grip path length,1.71,m
+kin,Grip height at start / end,1893 / 863,mm
+kin,Largest arc inside 0.9 to 1.6 m with this grip radius,24.5,deg
+kin,"Arc of the TRL 2 proposal (800 mm pivot, 100 deg)",100,deg
+kin,Lowest grip height for that proposal (symmetric arc),-464,mm
+kin,Overall force ratio at the end of the stroke,173,:1
+kin,Force ratio at mid-stroke (30 mm),20.0,:1
+kin,Force ratio rises monotonically to the stop,yes,
+grip,"Peak grip force, base soil (14 mm per decade)",668,N
+grip,Travel at the peak,56.9,mm
+grip,Grip height at the peak,1157,mm
+grip,Grip force at the end of the stroke,469,N
+grip,"Peak grip force, soil 10 mm per decade",571,N
+grip,"Peak grip force, soil 20 mm per decade",809,N
+grip,One operator at 500 N: stalls at travel,51.9,mm
+grip,One operator at 500 N: pressure reached,0.53,MPa
+grip,"Two operators at 1,000 N: reach the stop",yes,
+grip,Two operators: pressure at the stop,2.00,MPa
+grip,Share per operator at the peak (two on the T-handle),334,N
+grip,"Compaction work, base soil",494,J
+grip,"Compaction work, soil 10 mm per decade",353,J
+grip,"Compaction work, soil 20 mm per decade",705,J
+grip,Work one operator can give at 500 N over the arc,853,J
+grip,Matching efficiency needed for one operator,58,%
+profile,s = 0.0 mm,0.00 kN; ratio 14.8; grip 0 N; height 1893 mm,
+profile,s = 20.0 mm,0.11 kN; ratio 17.4; grip 6 N; height 1811 mm,
+profile,s = 30.1 mm,0.59 kN; ratio 20.0; grip 29 N; height 1735 mm,
+profile,s = 40.0 mm,3.04 kN; ratio 25.0; grip 122 N; height 1621 mm,
+profile,s = 45.0 mm,6.90 kN; ratio 29.5; grip 234 N; height 1540 mm,
+profile,s = 50.0 mm,15.67 kN; ratio 37.5; grip 417 N; height 1429 mm,
+profile,s = 53.0 mm,25.77 kN; ratio 46.5; grip 554 N; height 1337 mm,
+profile,s = 55.0 mm,35.73 kN; ratio 56.5; grip 632 N; height 1257 mm,
+profile,s = 57.0 mm,49.76 kN; ratio 74.5; grip 668 N; height 1150 mm,
+profile,s = 59.0 mm,68.67 kN; ratio 115.8; grip 593 N; height 994 mm,
+profile,s = 60.0 mm,81.20 kN; ratio 173.0; grip 469 N; height 863 mm,
+fill,"Fill mass window for 2 MPa at the stop, two operators",+0.0 to +2.7,%
+fill,Same window in grams of moist mix,+0 to +206,g
+fill,"Fill -2 %: pressure, block height","1.49 MPa, 90.0 mm",
+fill,"Fill -1 %: pressure, block height","1.72 MPa, 90.0 mm",
+fill,"Fill +0 %: pressure, block height","2.00 MPa, 90.0 mm",
+fill,"Fill +2 %: pressure, block height","2.69 MPa, 90.0 mm",
+fill,"Fill +4 %: pressure, block height","1.15 MPa, 97.0 mm",
+fill,Best pressure one operator reaches at any overfill,0.53,MPa
+str,"Abuse load: 1,000 N at the grip at the stop",173.0,kN
+str,Equivalent pressure on the block,4.26,MPa
+str,"R12 latch requirement, 1.5 x nominal block force",121.8,kN
+str,"Toggle pin 35 mm, double shear, nominal",42 MPa (SF 5.03),
+str,"Bush bearing, 2 x 28 mm links, nominal",42 MPa (SF 2.40),
+str,"Link net section at the pin hole, nominal",44 MPa (SF 5.66),
+str,"Link buckling out of plane, nominal",41 kN on 4211 kN (SF 103.2),
+str,"Push rod net section at the slot, nominal",59 MPa (SF 4.25),
+str,"Lid bending (plate 20 + ribs 20 x 70), nominal",64 MPa (SF 3.93),
+str,"Lid deflection at mid-span, nominal",0.06,mm
+str,"Hinge and latch pins 30 mm, double shear, nominal",29 MPa (SF 7.43),
+str,"Mold long wall with belt, nominal",89 MPa (SF 2.80),
+str,Mold wall bulge at 2 MPa,0.078,mm
+str,"Columns UPN 80 in tension, nominal",37 MPa (SF 6.77),
+str,"Mold to column bolts, 8 x M16 8.8, nominal",81 kN on 482 kN (SF 5.9),
+str,"Base beam, 2 x 20 x 100 plates, nominal",73 MPa (SF 3.41),
+str,"Toggle pin 35 mm, double shear, abuse",90 MPa (SF 2.36),
+str,"Bush bearing, 2 x 28 mm links, abuse",89 MPa (SF 1.13),
+str,"Link net section at the pin hole, abuse",94 MPa (SF 2.66),
+str,"Link buckling out of plane, abuse",87 kN on 4211 kN (SF 48.4),
+str,"Push rod net section at the slot, abuse",125 MPa (SF 1.99),
+str,"Lid bending (plate 20 + ribs 20 x 70), abuse",136 MPa (SF 1.84),
+str,"Lid deflection at mid-span, abuse",0.13,mm
+str,"Hinge and latch pins 30 mm, double shear, abuse",61 MPa (SF 3.49),
+str,"Mold long wall with belt, abuse",190 MPa (SF 1.31),
+str,"Columns UPN 80 in tension, abuse",79 MPa (SF 3.18),
+str,"Mold to column bolts, 8 x M16 8.8, abuse",173 kN on 482 kN (SF 2.8),
+str,"Base beam, 2 x 20 x 100 plates, abuse",156 MPa (SF 1.60),
+str,"TRL 2 lid, plain 22 mm plate, at nominal load",275,MPa
+str,Connecting link moment arm about the lever pivot at the stop,39.1,mm
+str,Connecting link force at the abuse case,42.2,kN
+str,Connecting link buckling capacity (50 x 24 flat),645 kN (SF 15.3),
+str,"Tie tube load (two 40 mm tubes), horizontal component",34.1,kN
+str,"Lever 2 in sch 40 at the socket mouth, working peak",102 MPa (SF 2.35),
+str,"Lever 2 in sch 40 at the socket mouth, abuse",153 MPa (SF 1.57),
+str,Lowest safety factor on yield or capacity (abuse case),1.13,
+str,Highest nominal stress range per block,89,MPa
+str,"Allowed range, FAT 71 welded detail at 50,000 cycles",243,MPa
+str,Column stretch at 2 MPa,0.16,mm
+str,Energy returned to the lever if released at the end,47,J
+str,Clearance from the T-handle to the ground at the end,846,mm
+ej,Wall friction to break the block free,4.64,kN
+ej,Ejection force including piston and block weight,4.83,kN
+ej,Eject lever ratio,10.3,:1
+ej,Grip force to eject,468,N
+ej,Force to lift the lid at the latch end,127,N
+ej,"Eject lift (60 mm to the block, 90 mm out, 10 mm clear)",160,mm
+ej,Eject lever arc,60.0,deg
+mass,"Base on skids, lever bracket and catch post",36.6,kg
+mass,"Press core, columns and base beam",27.7,kg
+mass,"Mold box, 290 x 140 mm cavity",32.0,kg
+mass,"Lid with ribs, hinge and latch",25.9,kg
+mass,Piston and slotted push rod,11.3,kg
+mass,"Toggle links, pins and bushes",22.5,kg
+mass,"Lever, crank hub and T-handle",18.3,kg
+mass,"Eject lever, fork, catch and end pawl",12.6,kg
+mass,"Press total, steel",187.0,kg
+mass,Heaviest single piece,36.6,kg
+mass,Lever pipe alone (removable),9.2,kg
+out,Cycle time,85,s
+out,Blocks per 8 h day (7 h working),296,
+out,Soil dug per day,2375,kg
+out,"Sieving and mixing, person-hours",9.8,h
+out,Available from two helpers,16,h
+flow,Dug soil per 100 blocks,778,kg
+flow,Oversize removed,117,kg
+flow,Sieved soil,661,kg
+flow,Cement added,33,kg
+flow,Water added,69,kg
+flow,Moist mix incl. remixed rejects,787,kg
+flow,"Spill and rejects, remixed",23,kg
+flow,Pressed blocks,764,kg
+flow,Cured blocks,712,kg
+flow,Water lost in curing,51,kg
+house,"Wall area, small house",50.5,m2
+house,Blocks per m2 (10 mm joints),33.3,
+house,Blocks for the house,1683,
+house,Press days,5.7,
+house,Wall per day,8.9,m2
+house,Cement for the house,556,kg
+house,50 kg bags,11.1,
+house,Walling volume,7.07,m3
+house,"CO2, CSEB",0.35,t
+house,"CO2, fired brick",4.55,t
+house,CSEB as a share of fired brick,7.6,%
+cost,"BOM total, press and kit",488,USD
+cost,Budget in project.yaml,450,USD
+cost,Over budget by,38,USD
+cost,Steel in the press at the indicative price,243,USD

@@ -1,26 +1,26 @@
 # EarthPress
 
-![TRL 2](https://img.shields.io/badge/TRL-2%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Sustainable Housing · **TRL:** 2 of 9 (concept formulated) · **Prototype budget:** about $450 USD · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** about $450 USD · **Difficulty:** 3 of 5
 
 A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
 
 ![EarthPress concept](media/hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0001-trl2-review-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
 Compressed stabilized earth blocks turn the soil on a building site into walling with a fraction of the energy of fired brick, but only if someone has a press. A manual lever and toggle press needs no fuel, power or hydraulics, can be welded from stock steel sections, and puts block making in the hands of the builder instead of a factory. The toggle suits the job because soil gets stiffer as it compacts, and a toggle's force ratio rises sharply at the end of its stroke, exactly where the force is needed.
 
-EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press is about $400 in parts, well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
+EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press and soil kit come to about $490 in parts (indicative), well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
 
 ## Burning platform
 
 Buildings and construction account for about 32 % of global energy use and 34 % of global CO2 emissions ([UNEP, 2025](https://www.unep.org/resources/report/global-status-report-buildings-and-construction-20242025)), and cement alone for around 8 % of global CO2 ([Chatham House, 2018](https://www.chathamhouse.org/2018/06/making-concrete-change-innovation-low-carbon-cement-and-concrete)). At the same time UN-Habitat estimates that about 3 billion people will need adequate housing by 2030, about 96,000 new affordable homes every day ([UN-Habitat](https://unhabitat.org/topic/housing)).
 
-Meeting that demand with fired brick and cement block would lock in large emissions. Cement-stabilized earth blocks embody about 49 kg CO2/m³ against about 643 kg CO2/m³ for locally fired bricks ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)), so the walls of a small house (about 7 m³ of blockwork) would avoid roughly 4 t of CO2 (estimate, excluding mortar and transport).
+Meeting that demand with fired brick and cement block would lock in large emissions. Cement-stabilized earth blocks embody about 49 kg CO2/m³ against about 643 kg CO2/m³ for locally fired bricks ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)), so the walls of a small house (about 7 m³ of blockwork) would avoid roughly 4.2 t of CO2 (estimate from EPR-CAL-001, excluding mortar and transport).
 
 ## Where it could be used
 
@@ -55,28 +55,28 @@ Fired bricks and cement blocks carry high embodied carbon and cost; compressed e
 
 ## Concept
 
-A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. One 1.5 m lever drives a toggle under the piston to compact moist, sieved soil into a 290 x 140 x 90 mm block at about 2 MPa (about 81 kN), then ejects the block. First estimates: about 300 blocks a day with a crew of four and about $403 in parts. All figures are estimates to be checked at TRL 3.
+A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, a press of about 187 kg in pieces of 37 kg or less, and about $488 in parts, over the $450 budget. Requirements R5 (operator force), R7 (total mass) and R13 (cost) are not met on paper; see the [review note](docs/REVIEW.md).
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
-1. Frame on skids
+1. Frame on skids, in two bolted pieces
 2. Steel mold box
-3. Lid with hinge and latch
+3. Ribbed lid with hinge and latch
 4. Piston and push rod
-5. Toggle linkage and pins
-6. Lever and crank (removable)
-7. Ejection stop and lever catch
+5. Toggle links, pins and bushes
+6. Lever, crank hub and T-handle (removable)
+7. Eject lever, lever catch and end pawl
 8. Soil sieve, 5 mm mesh
 9. Soil test kit
 10. Block gauge
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv). Numbers match the [exploded view](media/exploded.png).
+The priced bill of materials is in [bom/bom.csv](bom/bom.csv) (13 lines; lines 11 to 13 are hardware, consumables and the linkage guard). Numbers match the [exploded view](media/exploded.png). Geometry comes from the parametric model in [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step` and `cad/stl`.
 
 ## Safety
 
-> High lever forces: the piston applies about 81 kN. Keep hands clear of the mold and linkage, use the lever catch whenever the lever is released, and never unlatch the lid under load. Cement burns skin and eyes, and sieving dry soil raises silica dust: wear gloves, eye protection and a respirator. Use two-person lifting for the press parts. Blocks are not certified; structural use needs an engineer and block tests under the local code. See the safety section of [docs/02-concept.md](docs/02-concept.md).
+> High lever forces: the piston applies 81 kN at 2 MPa and up to 173 kN if two people pull hard at the stop. Keep hands clear of the mold, linkage and eject fork, engage the end pawl before letting go (the lever kicks back with about 47 J), and never unlatch the lid until the lever is back on its rest stop. Cement burns skin and eyes, and sieving dry soil raises silica dust: wear gloves, eye protection and a respirator. Use two-person lifting for the press parts (up to 37 kg each). Blocks are not certified; structural use needs an engineer and block tests under the local code. See the safety section of [docs/02-concept.md](docs/02-concept.md).
 
 ## Repository layout
 

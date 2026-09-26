@@ -3,7 +3,7 @@ doc_id: EPR-PRB-001
 title: EarthPress problem statement
 project: EarthPress
 doc_type: Problem statement
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Populate to TRL 2 (users, context, constraints, prior work with sources, open questions)
+- version: "0.3"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Open questions updated after EPR-CAL-001 and EPR-DDR-001 (block size and stabilizer adopted for TRL 3; two operators needed on paper)
 ---
 
 # EarthPress problem statement
@@ -51,7 +55,7 @@ The press works outdoors on uneven ground, in dust, heat and rain, and is moved 
 - Human powered: no electricity, hydraulics or engine on site.
 - Parts from local steel stockists: flat bar, plate, channel, rectangular tube and pipe in common sizes.
 - Wear parts and pins replaceable with hand tools.
-- Movable by four people, or by two people once dismantled.
+- Movable by four people, or by two people once dismantled (EPR-CAL-001: about 187 kg in eight pieces).
 - Blocks must meet a recognized strength reference for the intended use (for example Auroville class B, or the New Mexico code minimum of 300 psi, about 2.1 MPa) when made from suitable, tested soil.
 
 ## Out of scope
@@ -82,8 +86,8 @@ This design is for communities the author is not part of, so requirements come f
 
 ## Open questions
 
-- Which block size and shape do local masons prefer: flat 290 x 140 x 90 mm, a larger module or an interlocking block?
-- Is a single operator's pull enough to reach 2 MPa in practice, or does the crew need two people on the lever?
-- Which soils in the first partner region pass the field tests, and what cement or lime content do they need?
+- The flat 290 x 140 x 90 mm block is adopted for TRL 3 (EPR-DDR-001 item 3, open for Amish's review). Do local masons prefer it, a larger module or an interlocking block?
+- EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Is a two-person lever acceptable to builders, or would they rather accept a lower pressure and more cement?
+- Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press?
 - What block strength do local building rules or funders require, and who will test blocks?
-- How far do blocks and the press travel, and on what vehicle?
+- How far do blocks and the press travel, and on what vehicle? The press is about 187 kg in eight pieces of 37 kg or less.

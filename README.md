@@ -6,9 +6,9 @@
 
 A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
 
-![EarthPress concept](media/hero.png)
+![EarthPress: manual lever and toggle press for compressed earth blocks, product render](media/render-hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0002-recommendations-accepted.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0002-recommendations-accepted.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 

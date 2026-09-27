@@ -182,3 +182,38 @@ Requirements not met or at risk:
 ### Recommended next step
 
 Review this note and the media, then decide items 1 to 4 and 6. If approved, run `/advance-trl3` to size the linkage and lever layout by calculation (force ratio and work over the stroke), check the lid, latch, pins and links, and build the parametric model and drawing sheet.
+
+## Session 2026-09-26: product appearance model and photoreal renders
+
+Amish chose this repo for the first batch of product renders on 2026-09-26.
+
+### What was added
+
+`cad/src/product_model.py` exposes `product_parts()` (54 parts: 24 shell, 9 internal, 17 accessory, 4 context), `TITLE` and `RENDER_VIEWS` (hero with the operator, exploded, and a detail view of the toggle linkage, connecting link and lever hub under the mold box, without the lever pipe, operator or ground). It imports PARAMS and the kinematics (`geometry()`, `theta_start()`, `toggle_state()`, `knee_and_crank()`) and the geometry helpers from `cad/src/model.py`; every main dimension and interface is as model.py. It adds:
+
+- Base skids and cross tubes as rounded 60 and 50 mm hollow sections with rubber end caps; filleted base plate, lever bracket plates and rest stop with a rubber pad.
+- UPN 80 columns, base beam, rounded toggle base lugs and column feet with eight M12 bolt heads; a yellow pinch-point label on the front column.
+- Teal mold box with a rounded belt, flanges, guide strap, hinge base and latch keeper; a bright ground rim; eight M16 bolt heads on the column webs; a raised EARTHPRESS nameplate on the belt.
+- Lid with filleted plate and ribs, hinge knuckle, latch hook with a rubber grip, bright hinge and latch pins with circlips.
+- Piston and slotted push rod in bright steel, with the foot pin.
+- Round-ended toggle links and connecting link in safety orange; 35 mm pins with circlips, bush flanges and brass grease nipples.
+- Lever hub, round-ended crank plates and socket; crank pin and circlips. The 2 in lever pipe and T-handle as a removable accessory, with ringed rubber grips and end caps.
+- Eject seesaw with round-ended fork plates, posts, pivot pin and socket; the end-of-stroke pawl.
+- Soil sieve with a timber frame, wire mesh and prop; soil test kit crate with hand holes and vents, a shrinkage box, two clear 1 L jars showing settled sand, silt and clay layers, and a laminated chart; block gauge with a grip.
+- Context: a compact patch of compacted earth, the stack of 32 finished blocks, the loose soil in the mold, and the shared clay mannequin (1.75 m, push pose) with both hands on the T-handle grips and feet on the ground.
+
+`README.md` now shows `media/render-hero.png` and links `media/render-exploded.png`; the orchestrator produces both files. Matplotlib self-check previews (clear parts left out) are in `/tmp/earthpress-prod/`.
+
+### Differences from model.py (Proposed, awaiting Amish)
+
+1. **Pose.** The press is shown at 85 % of the compaction stroke (toggle about 9.5° from vertical, T-handle at about 1.21 m) instead of at the start of the stroke, so the operator's push reads. The pose uses model.py's own kinematics; no dimension changes. Recommendation: keep this pose for renders only.
+2. **Link ends.** Toggle links, the connecting link, crank plates and eject fork plates extend half their width past the pin centres with round ends; model.py stops each bar at the pin centres, which leaves no metal round the pins. Recommendation: adopt round ends in model.py at the next model revision.
+3. **Added visible details not in the BOM:** the nameplate, the pinch-point label, rubber tube end caps, the rest stop pad and the latch hook grip. Recommendation: add labels and caps to BOM line 11 (hardware and finish) if Amish accepts them.
+4. **One operator.** The mannequin is a single person, while EPR-CAL-001 needs two people on the T-handle (668 N peak pull). Recommendation: keep one figure for a clean hero, and state two operators in the caption; or add a second mannequin on the other half of the T-handle.
+5. **Placement of the kit.** The soil sieve moves from about (1150, 750) to (250, 690) mm, behind the press, and the test kit 50 mm toward the press, to keep the ground patch compact. The sieve mesh is drawn at a 30 mm pitch, not 5 mm. Recommendation: accept for renders.
+6. **Colours** differ from the concept media: graphite frame, teal mold and lid, orange linkage, black lever, grey eject lever. Recommendation: accept as the product palette.
+7. **Linkage guard (BOM 13)** is not shown, as in model.py, so the toggle can be seen. Recommendation: show it as expanded metal in a later render once its shape is drawn.
+
+### TRL
+
+This is an appearance model only. No tolerances, fabrication detail, build or test work were added. `trl: 3`, `trl_target: 3`; TRL 4 remains on hold.

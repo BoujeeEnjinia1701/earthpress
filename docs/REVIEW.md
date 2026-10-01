@@ -1,5 +1,61 @@
 # Review note: EarthPress
 
+## Session 2026-10-01: constructable design and prototype build plan (kit 1.7.0)
+
+Kit 1.7.0 installed (`.kit/`, `.claude/commands/`, `CLAUDE.md`). The design was checked for construction with build123d and made buildable under Amish's 2026-09-30 instruction ("fix the design assumptions to match and be physically feasible"); every change is in `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003, Draft, open for his review).
+
+### Design changes made for construction
+
+- P1 Base frame: cross tubes flush with the skid tops and two of them under the base plate (the plate floated); base plate 315 x 340 mm, carrying the eject posts.
+- P2 Columns turned so the webs face the mold; mold flanges tapped M16 and bolted from inside the channel (no room for a nut before); beam plates moved to the outside of the column flanges; base pin lugs welded between them (they floated); column feet bolted with 4 x M12 each.
+- P3 Push rod guide strap removed (it sat in the path of the upper links and pin); two 12 mm end skirts under the piston keep it square; upper pin shortened to 128 mm (its ends passed through the mold walls).
+- P4 40 mm access holes in the +Y column web for the base pin and the upper pin, and a 31 mm access hole in the +Y lever bracket plate for the crank pin (none could be fitted before); spacer tubes on the base and knee pins.
+- P5 Round ends on every link and pressed-in 41 mm bushes (the links stopped at the pin centres).
+- P6 Lid hinge: the lid ribs are cut long as ears on a 30 mm pin between two lugs on the mold (the knuckle cut into the belt and had no pin).
+- P7 Latch: a 30 mm pin with a T-handle through the rib ears and two mold lugs (the hook sat above its keeper).
+- P8 Rest stop bar under the crank; spring rest catch (-Y) and end pawl (+Y) on the crank pin (the old rest bar blocked the stroke and the pawl could not reach the lever).
+- P9 Eject: one central cranked arm with a round nose under the push rod's foot, pivot at 607.5 mm (the fork and foot pin crossed the upper links at the end of the stroke).
+- P10 Ties moved out to 90 mm off the centre line and bolted to the beam with tabs (they ran through the crank pin's path).
+- P11 Linkage guard modelled and fixed (it was only in the BOM).
+- P12 Lever pipe starts clear of the hub; 12 mm locking pin. P13 Hub washers and circlips. P14 Block gauge made real (legs 292 mm apart, 93 mm notch). P15 Bracket plates reshaped.
+
+`cad/src/model.py` now builds each part on its own and runs 47 constructability checks at seven poses (`python cad/src/model.py --check`); all pass.
+
+### What was done
+
+- `docs/05-build-plan.md` (EPR-BLD-001 v0.1) with `cad/src/build_plan_media.py`: overview, 15 making sketches (`cad/drawings/EPR-DWG-101` to `115`), 11 joint pictures and 13 step pictures in `docs/05-build-plan/`.
+- `docs/06-design-decisions.md` (EPR-DEC-001 v0.1): 9 open decisions (8 after the 2026-10-01 budget wording pass), 6 items to confirm when parts are bought, decisions made. The precis's open questions moved there.
+- Regenerated: STEP and STL (`cad/step`, `cad/stl`), EPR-DWG-001 Rev P2, concept media (hero, blueprint EPR-DWG-010 Rev P2, cutaway, exploded, flow, model.glb).
+- Calculations re-run: EPR-CAL-001 v0.3 (`docs/04-calcs/sizing.py`, `results.csv`). Updated: EPR-PRC-001 v0.5, EPR-REQ-001 v0.5, `bom/bom.csv`, `bom/bom-notes.md`, `README.md` (links line, "Building the prototype" section, numbers), `project.yaml` (`design_state: constructable`, new evidence).
+
+### Key results and requirements
+
+- Force ratio, grip heights (1.89 to 0.86 m), peak pull (668 N, 334 N each), crank stop and eject force (470 N) are unchanged.
+- Lowest safety factor still 1.13 (bush bearing); lid 1.61 (was 1.84, longer pin span); column at its access hole 2.49; eject arm 1.72.
+- **R7 not met:** 200.0 kg against 190 kg (heaviest piece 45.0 kg, within 50 kg). The total now counts the guard and bolts (6.7 kg) that the concept left out.
+- **R13 over the value-engineering target:** $520 estimated against the $500 target, USD 20 over.
+- R2 and R4 at risk; R5, R1, R11 and R12 met on paper; R6 and R9 met by design review; R3, R8, R10 and R14 not verifiable at TRL 3.
+
+### Proposed, awaiting Amish (register EPR-DEC-001)
+
+The budget is not a decision: `budget_usd` stays $500 as a value-engineering target, with the savings worth trying in the register's Value engineering section (2026-10-01 wording pass).
+
+1. R7: relax the total to 200 kg (recommended) or lighten.
+2. Rest catch: hand release (recommended) or a foot pedal.
+3. First co-design partner and region (no recommendation), plus the open questions carried over from the precis (bushes, wear liners, fill by volume, lime, design soil).
+
+### Stale until regenerated on Amish's Mac
+
+The photoreal renders (`media/render-*.png`, referenced by the README), `media/card.png`, `media/social-preview.png` and `cad/src/product_model.py` still show the concept's hinge knuckle, latch hook, eject fork, guide strap and plain link ends. `product_model.py` still imports from `model.py` (same names) but was not re-run.
+
+### Safety concerns
+
+Unchanged in kind: up to 173 kN in the linkage, 47 J kickback (now taken end on by the pawl), crushing at the mold, linkage and eject arm, a 27 kg lid, cement burns and silica dust. The rest catch must be in before the latch is opened; the build plan's safety stops cover this.
+
+### Recommended next step
+
+Amish reviews EPR-DDR-003 and decides open decisions 1 and 2. TRL 4 (building to the plan) stays on hold.
+
 ## Session 2026-09-26: sources strengthened
 
 - "By country or region" in `README.md`: the Colombia and Latin America row had no citation. It now cites [Botti, *Frontiers of Architectural Research*, 2023](https://www.sciencedirect.com/science/article/pii/S2095263523000584), and the row was rewritten to what the paper supports (soil-cement blocks in Colombian projects by the 1940s; the CINVA-Ram designed at CINVA in Bogotá in 1956 and spread to Bolivia, Brazil, Peru and beyond). The unsupported phrase "living tradition of earth building" was removed.

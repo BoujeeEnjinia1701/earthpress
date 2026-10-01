@@ -19,15 +19,15 @@ parts = [Part(n, shape, colour, bom, ex) for n, shape, colour, bom, ex in build_
 
 if __name__ == "__main__":
     render_all(
-        parts, project="EarthPress", title="Manual CSEB press concept", dwg_no="EPR-DWG-010", date="2026-09-25",
+        parts, project="EarthPress", title="Manual CSEB press concept", dwg_no="EPR-DWG-010", date="2026-10-01", rev="P2",
         key_figures=["Block 290 x 140 x 90 mm, 6.9 kg dry (est.)",
                      "81 kN on the block for 2 MPa (est.)",
                      "Toggle and 1.7 m lever: 173:1 at the stop",
                      "Peak pull 668 N: two people on the T-handle",
                      "Fill weighed to 0 to +2.7 % (about 200 g)",
                      "About 296 blocks per day, crew of 4 (est.)",
-                     "Press about 187 kg in 8 pieces, none over 37 kg",
-                     "About $488 in parts, press and kit (indicative)"],
+                     "Press about 200 kg; heaviest piece 45 kg (est.)",
+                     "About $520 in parts, press and kit (indicative)"],
         cut_exclude=("Soil sieve, 5 mm mesh", "Soil test kit", "Block gauge", "Pressed blocks (context)"),
         flow={"title": "material flow per 100 blocks, kg (estimates, EPR-CAL-001; mixing adds 33 kg cement and 69 kg water)",
               "unit": "kg",

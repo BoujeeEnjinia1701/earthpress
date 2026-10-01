@@ -1,4 +1,4 @@
-"""EarthPress sizing calculations, EPR-CAL-001 v0.2 (TRL 3).
+"""EarthPress sizing calculations, EPR-CAL-001 v0.3 (TRL 3, constructable design, EPR-DDR-003).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes docs/04-calcs/results.csv.
@@ -112,6 +112,7 @@ out("kin", "Grip height at start / end", f"{grip_z[0]:.0f} / {grip_z[-1]:.0f}", 
 # the R5 band 0.9 to 1.6 m: largest arc any lever of this radius can sweep inside it
 band_arc = 2 * math.degrees(math.asin((1600 - 900) / 2 / R))
 out("kin", "Largest arc inside 0.9 to 1.6 m with this grip radius", band_arc, "deg")
+out("kin", "Highest grip height over the arc (the lever passes upright)", max(grip_z), "mm", "{:.0f}")
 out("kin", "Grip inside the R5 band 0.8 to 1.9 m (EPR-DDR-002)", "yes" if min(grip_z) >= 800 and max(grip_z) <= 1900 else "no")
 out("kin", "Arc of the TRL 2 proposal (800 mm pivot, 100 deg)", 100.0, "deg", "{:.0f}")
 out("kin", "Lowest grip height for that proposal (symmetric arc)", 800 - R * math.sin(math.radians(50)), "mm", "{:.0f}")
@@ -226,7 +227,7 @@ for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
     link = F / cth
     chk(f"Toggle pin {d:.0f} mm, double shear, {tag}", link / (2 * Apin), 0.577 * A["fy_pin"])
     chk(f"Bush bearing, 2 x {P['link_t']:.0f} mm links, {tag}", link / (2 * P["link_t"] * d), A["bush_allow"])
-    net = (P["link_w"] - d - 2) * P["link_t"]
+    net = (P["link_w"] - P["bush_od"]) * P["link_t"]          # the bush sits in a 41 mm hole
     chk(f"Link net section at the pin hole, {tag}", link / 2 / net, A["fy_plate"])
     Iw = P["link_w"] * P["link_t"] ** 3 / 12
     Pcr = math.pi ** 2 * A["E"] * Iw / P["link_l"] ** 2
@@ -235,7 +236,7 @@ for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
     r = P["rod"]
     chk(f"Push rod net section at the slot, {tag}", F / ((r - d - 2) * r), A["fy_plate"])
     # lid: simply supported between hinge and latch, block pressure over the middle 290 mm
-    span = P["lid_l"] / 2 + 5 + P["lid_l"] / 2 + 20
+    span = P["hinge_x"] - P["latch_x"]                       # hinge pin to latch pin
     M = F / 2 * (span / 2) - F / 2 * (BL / 4)
     b_, t_, rt, rh, = P["lid_w"], P["lid_t"], P["rib_t"], P["rib_h"]
     A1, A2 = b_ * t_, 2 * rt * rh
@@ -260,6 +261,7 @@ for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
         dw = w * Lw ** 4 / (384 * A["E"] * I2)
         out("str", "Mold wall bulge at 2 MPa", dw, "mm", "{:.3f}")
     chk(f"Columns UPN 80 in tension, {tag}", F / 2 / 1100.0, A["fy_plate"])
+    chk(f"Column net section at the 40 mm access hole, {tag}", F / 2 / (1100.0 - 40 * P["col_web"]), A["fy_plate"])
     out("str", f"Mold to column bolts, {A['n_bolts_mold']} x M16 8.8, {tag}",
         f"{F / 1000:.0f} kN on {A['n_bolts_mold'] * A['bolt_FvRd_kN']:.0f} kN (SF {A['n_bolts_mold'] * A['bolt_FvRd_kN'] * 1000 / F:.1f})", "")
     col_y = BW / 2 + P["wall"] + P["flange_t"] + P["col_b"] / 2
@@ -267,7 +269,7 @@ for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
     chk(f"Base beam, 2 x {P['beam_t']:.0f} x {P['beam_d']:.0f} plates, {tag}", Mb / (2 * P["beam_t"] * P["beam_d"] ** 2 / 6), A["fy_plate"])
 
 # TRL 2 lid: plain 22 mm plate 220 mm wide over the same span, nominal load
-span = P["lid_l"] / 2 + 5 + P["lid_l"] / 2 + 20
+span = P["hinge_x"] - P["latch_x"]
 M22 = F_nom / 2 * (span / 2) - F_nom / 2 * (BL / 4)
 out("str", "TRL 2 lid, plain 22 mm plate, at nominal load", M22 / (220 * 22 ** 2 / 6), "MPa", "{:.0f}")
 
@@ -318,7 +320,9 @@ out("ej", "Wall friction to break the block free", F_fric / 1000, "kN", "{:.2f}"
 out("ej", "Ejection force including piston and block weight", F_ej / 1000, "kN", "{:.2f}")
 out("ej", "Eject lever ratio", ratio_ej, ":1", "{:.1f}")
 out("ej", "Grip force to eject", F_ej / ratio_ej, "N", "{:.0f}")
-out("ej", "Force to lift the lid at the latch end", masses["Lid with ribs, hinge and latch"] * G / 2, "N", "{:.0f}")
+Z_arm = 20 * 40 ** 2 / 6
+out("ej", "Eject arm, 20 x 40 mm, bending at the hub (SF on yield)", f"{F_ej * P['eject_arm'] / Z_arm:.0f} MPa (SF {A['fy_plate'] / (F_ej * P['eject_arm'] / Z_arm):.2f})", "")
+out("ej", "Force to lift the lid at the latch end", masses["Lid with ribs, hinge and latch pins"] * G / 2, "N", "{:.0f}")
 out("ej", "Eject lift (60 mm to the block, 90 mm out, 10 mm clear)", P["eject_lift"], "mm", "{:.0f}")
 out("ej", "Eject lever arc", 2 * math.degrees(math.asin(P["eject_lift"] / 2 / P["eject_arm"])), "deg")
 
@@ -329,7 +333,7 @@ for n, m in masses.items():
 tot = sum(masses.values())
 out("mass", "Press total, steel", tot, "kg")
 out("mass", "Heaviest single piece", max(masses.values()), "kg")
-out("mass", "Margin to the R7 total of 190 kg (EPR-DDR-002)", 190.0 - tot, "kg")
+out("mass", "Margin to the R7 total of 190 kg (EPR-DDR-002); negative is over", 190.0 - tot, "kg")
 out("mass", "Lever pipe alone (removable)", math.pi / 4 * (Do ** 2 - Di ** 2) * P["lever_len"] * 7850e-9, "kg")
 
 # ---------------------------------------------------------------- 8 output and crew

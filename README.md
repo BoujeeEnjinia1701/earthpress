@@ -2,19 +2,19 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1388476301.svg)](https://zenodo.org/badge/latestdoi/1388476301) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/earthpress/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/earthpress/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/earthpress/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/earthpress)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** about $500 USD · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** about $500 USD (estimated parts cost $520) · **Difficulty:** 3 of 5
 
 A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
 
 ![EarthPress: manual lever and toggle press for compressed earth blocks, product render](media/render-hero.png)
 
-[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0002-recommendations-accepted.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/EPR-DWG-001.pdf) · [Sizing note](docs/04-calcs/01-sizing.md) · [Decisions](docs/decisions/0002-recommendations-accepted.md) · [Prototype build plan](docs/05-build-plan.md) · [Design decisions](docs/06-design-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
 Compressed stabilized earth blocks turn the soil on a building site into walling with a fraction of the energy of fired brick, but only if someone has a press. A manual lever and toggle press needs no fuel, power or hydraulics, can be welded from stock steel sections, and puts block making in the hands of the builder instead of a factory. The toggle suits the job because soil gets stiffer as it compacts, and a toggle's force ratio rises sharply at the end of its stroke, exactly where the force is needed.
 
-EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press and soil kit come to about $490 in parts (indicative), well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
+EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press and soil kit come to about $520 in parts (indicative), well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
 
 ## Burning platform
 
@@ -55,7 +55,7 @@ Fired bricks and cement blocks carry high embodied carbon and cost; compressed e
 
 ## Concept
 
-A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, a press of about 187 kg in pieces of 37 kg or less, and about $488 in parts, within the $500 budget. With the targets Amish accepted on 2026-09-25 ([EPR-DDR-002](docs/decisions/0002-recommendations-accepted.md)), no requirement is not met on paper; R2 (pressure) and R4 (output) are at risk. See the [review note](docs/REVIEW.md).
+A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, and, since the design was made buildable on 2026-10-01 ([EPR-DDR-003](docs/decisions/0003-design-for-construction.md)), a press of about 200 kg in pieces of 45 kg or less and about $520 in parts. Against the targets Amish accepted on 2026-09-25 ([EPR-DDR-002](docs/decisions/0002-recommendations-accepted.md)), R7 (190 kg total) is not met and is an open decision in the [design decisions register](docs/06-design-decisions.md), and R13 is USD 20 over its $500 value-engineering target; R2 (pressure) and R4 (output) are at risk. See the [review note](docs/REVIEW.md).
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -67,16 +67,22 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 4. Piston and push rod
 5. Toggle links, pins and bushes
 6. Lever, crank hub and T-handle (removable)
-7. Eject lever, lever catch and end pawl
+7. Eject lever, rest catch and end pawl
 8. Soil sieve, 5 mm mesh
 9. Soil test kit
 10. Block gauge
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv) (13 lines; lines 11 to 13 are hardware, consumables and the linkage guard). Numbers match the [exploded view](media/exploded.png). Geometry comes from the parametric model in [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step` and `cad/stl`.
 
+## Building the prototype
+
+![EarthPress prototype: every component pulled apart and numbered in build order](docs/05-build-plan/overview.png)
+
+The [prototype build plan](docs/05-build-plan.md) (EPR-BLD-001) shows how to make each of the 14 press components and fit them together in 13 steps, with a making sketch for every made part (EPR-DWG-101 to 115) and a picture of every joint and step. The press is welded from plate, UPN 80 channel, tube and pipe in a small fabrication shop; the turned pins, shaft and bushes are bought. Making the concept buildable changed how parts join, not what the press does: the columns face the mold with their webs, the lid's hinge and latch are pins through rib ears, a spring catch and pawl hold the crank, and a central arm ejects the block ([EPR-DDR-003](docs/decisions/0003-design-for-construction.md)). It is a plan, not yet built; building and testing to it is TRL 4 work.
+
 ## Safety
 
-> High lever forces: the piston applies 81 kN at 2 MPa and up to 173 kN if two people pull hard at the stop. Keep hands clear of the mold, linkage and eject fork, engage the end pawl before letting go (the lever kicks back with about 47 J), and never unlatch the lid until the lever is back on its rest stop. Cement burns skin and eyes, and sieving dry soil raises silica dust: wear gloves, eye protection and a respirator. Use two-person lifting for the press parts (up to 37 kg each). Blocks are not certified; structural use needs an engineer and block tests under the local code. See the safety section of [docs/02-concept.md](docs/02-concept.md).
+> High lever forces: the piston applies 81 kN at 2 MPa and up to 173 kN if two people pull hard at the stop. Keep hands clear of the mold, linkage and eject arm, engage the end pawl before letting go (the lever kicks back with about 47 J), and never unlatch the lid until the lever is back on its rest stop. Cement burns skin and eyes, and sieving dry soil raises silica dust: wear gloves, eye protection and a respirator. Use two-person lifting for the press parts (up to 45 kg each). Blocks are not certified; structural use needs an engineer and block tests under the local code. See the safety section of [docs/02-concept.md](docs/02-concept.md).
 
 ## Repository layout
 

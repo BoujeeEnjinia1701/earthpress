@@ -3,9 +3,9 @@ doc_id: EPR-PRB-001
 title: EarthPress problem statement
 project: EarthPress
 doc_type: Problem statement
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,6 +25,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.5"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Partner rule and first candidate; design soil and lime option; press mass (EPR-DEC-001, 2026-10-02)"
 ---
 
 # EarthPress problem statement
@@ -83,7 +87,7 @@ The press works outdoors on uneven ground, in dust, heat and rain, and is moved 
 
 This design is for communities the author is not part of, so requirements come from the people who will use it.
 
-- [ ] Identify a local partner organization (Helpful Engineering network, NGO or university)
+- [ ] Identify a local partner organization. Decided on 2026-10-02 (EPR-DEC-001): a partner that already trains builders in stabilized earth blocks and has local soils and cement supply; first candidate to approach, the Auroville Earth Institute in India. Nothing is agreed yet.
 - [ ] Run co-design sessions with intended users; record who, where and what was learned
 - [ ] Validate load, distance, terrain and cost assumptions in the field
 - [ ] Revise requirements (REQ) from findings before freezing the design
@@ -92,6 +96,6 @@ This design is for communities the author is not part of, so requirements come f
 
 - The flat 290 x 140 x 90 mm block was decided by Amish on 2026-09-25 (EPR-DDR-001 item 3, EPR-DDR-002). Do local masons prefer it, a larger module or an interlocking block?
 - EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Amish decided on 2026-09-25 to go with a two-person T-handle (EPR-DDR-002); co-design should still confirm that builders accept it rather than a lower pressure and more cement.
-- Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press?
+- Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press? Until they are measured, the operating chart uses the softer soil (809 N, 405 N per operator), and lime is a documented option with its own chart and longer curing (decided 2026-10-02).
 - What block strength do local building rules or funders require, and who will test blocks?
-- How far do blocks and the press travel, and on what vehicle? The press is about 187 kg in eight pieces of 37 kg or less.
+- How far do blocks and the press travel, and on what vehicle? The press is about 200 kg with its guard and bolts, in pieces of 45 kg or less (R7 total set at 200 kg on 2026-10-02).

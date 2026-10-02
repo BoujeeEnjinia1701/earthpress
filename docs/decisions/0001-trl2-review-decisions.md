@@ -3,9 +3,9 @@ doc_id: EPR-DDR-001
 title: EarthPress TRL 2 review decisions
 project: EarthPress
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Item 8 decided by Amish on 2026-10-02 (EPR-DEC-001)"
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted except item 8. Items 1 to 7 and 9 to 16: Decided by Amish, 2026-09-25: go with recommendation (see EPR-DDR-002). Item 8 has no recommendation and remains proposed, awaiting Amish.
+- **Status:** accepted; item 8 decided on 2026-10-02. Items 1 to 7 and 9 to 16: Decided by Amish, 2026-09-25: go with recommendation (see EPR-DDR-002). Item 8 had no recommendation on 2026-09-25; a recommendation was written later and Amish approved it on 2026-10-02 ("i approve your recommendations for all 555 open decisions."; EPR-DEC-001).
 
 ## Context
 
@@ -57,7 +61,7 @@ No pitch or problem rewording was recommended at TRL 2, so `project.yaml` and `R
 
 | # | Item | Options and recommendation | Status |
 | --- | --- | --- | --- |
-| 8 | First co-design partner and region | Examples at TRL 2: an earth-building NGO in East Africa or India. No recommendation was made | Proposed, awaiting Amish |
+| 8 | First co-design partner and region | Examples at TRL 2: an earth-building NGO in East Africa or India. No recommendation was made | Decided by Amish, 2026-10-02: a partner that already trains builders in stabilized earth blocks and has local soils and cement supply; first candidate to approach, the Auroville Earth Institute (EPR-DEC-001) |
 | 10 | Ejection | The TRL 2 concept ejected by pulling the lever past the compaction point; a toggle ending near straight cannot lift the piston another 90 mm. Options: (a) a seesaw eject lever on the +X side, driven by the same removable lever in a second socket, with a 200 mm lost-motion slot in the push rod (in the model); (b) a bell crank that ejects on an upward lever stroke (awkward to push up at 1.9 m and above); (c) a permanently fitted second lever. Recommendation: (a) | Decided by Amish, 2026-09-25: go with recommendation; (a) is in the model |
 | 11 | Two operators for R2 | Peak pull is 668 N; one operator at 500 N stalls at 0.53 MPa. Options: (a) two people on a T-handle (334 N each; in the model); (b) accept one operator pulling about 670 N with body weight; (c) lower the target pressure. Recommendation: (a) | Decided by Amish, 2026-09-25: go with recommendation |
 | 12 | R5 wording | The 0.9 to 1.6 m band allows only 24.5° of arc. Recommendation: reword R5 as 500 N or less per operator, grip between 0.8 and 1.9 m, with the peak force at 1.0 m or higher (the design gives 1.16 m) | Decided by Amish, 2026-09-25: go with recommendation; R5 reworded in EPR-REQ-001 v0.4 |

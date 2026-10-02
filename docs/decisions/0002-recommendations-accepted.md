@@ -3,9 +3,9 @@ doc_id: EPR-DDR-002
 title: EarthPress recommendations accepted
 project: EarthPress
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's acceptance of every recommendation in EPR-DDR-001 and docs/REVIEW.md, what changed in the repo, and the items still open
+- version: "0.2"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Item 8 decided by Amish on 2026-10-02 (EPR-DEC-001)"
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted. Every item with a recommendation is decided; item 8 (first co-design partner and region) has no recommendation and remains proposed, awaiting Amish.
+- **Status:** accepted. Every item with a recommendation is decided; item 8 (first co-design partner and region) had no recommendation and was decided by Amish on 2026-10-02 (EPR-DEC-001).
 
 ## Context
 
@@ -52,7 +56,7 @@ No decision changed the geometry, so `cad/src/model.py`, the STEP and STL export
 
 | # | Item | Status |
 | --- | --- | --- |
-| 8 | First co-design partner and region (examples: an earth-building NGO in East Africa or India) | Proposed, awaiting Amish; no recommendation was made |
+| 8 | First co-design partner and region (examples: an earth-building NGO in East Africa or India) | No recommendation was made on 2026-09-25. Decided by Amish, 2026-10-02: a partner that already trains builders in stabilized earth blocks and has local soils and cement supply; first candidate to approach, the Auroville Earth Institute (EPR-DEC-001) |
 
 ### On hold (TRL 4)
 

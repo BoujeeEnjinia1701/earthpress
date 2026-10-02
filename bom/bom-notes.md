@@ -7,3 +7,4 @@
 - Changes from TRL 2 ($403): heavier frame with a base beam (two bolted pieces), ribbed lid, larger toggle pins and links with case-hardened bushes, 2 in lever pipe with a T-handle, eject seesaw and end pawl, 10 kg scale in the test kit, and the linkage guard.
 - Not included: welding labor, cement, water, soil, curing covers and transport.
 - The loose soil and the stack of blocks in the renders are context only and are not BOM lines.
+- Decided on 2026-10-02 (EPR-DEC-001): the case-hardened steel bushes get simple felt or rubber dust seals at their faces (not yet in the BOM lines or prices); the mold walls stay plain 12 mm plate with no liners for the prototype.

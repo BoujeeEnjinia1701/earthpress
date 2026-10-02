@@ -279,3 +279,60 @@ This is an appearance model only. No tolerances, fabrication detail, build or te
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-10-02: open decisions decided
+
+Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." This approves the recommendation written for every open decision in the design decisions register (EPR-DEC-001). trl stays 3; nothing was built, bought or tested, and TRL 4 remains on hold.
+
+### Decisions recorded (8)
+
+| Register item | Decision |
+| --- | --- |
+| 1 | R7 total 200 kg including the guard and bolts; 50 kg piece limit kept (EPR-DDR-003 A1 accepted) |
+| 2 | Hand release of the rest catch for the prototype; the catch is in before the latch is opened; foot pedal only if timed cycles show a cost (EPR-DDR-003 A3 accepted) |
+| 3 | Partner that already trains builders in stabilized earth blocks; first candidate to approach, the Auroville Earth Institute |
+| 4 | Case-hardened steel bushes with grease nipples kept; felt or rubber dust seals added at the bush faces |
+| 5 | Plain 12 mm mold walls for the prototype, wear measured against R8; liners only if needed |
+| 6 | Weigh every fill; calibrated scoop only for a soil with measured scatter inside the 0 to 2.7 % window |
+| 7 | Cement default; lime a documented option with its own chart and longer curing; no press change |
+| 8 | Operating chart on the softer soil (809 N, 405 N per operator) until partner soils are measured |
+
+All 8 moved to Decisions made in EPR-DEC-001, dated 2026-10-02; the Open decisions section now reads "None."
+
+### Documents changed
+
+- `docs/06-design-decisions.md` (EPR-DEC-001 v0.3): items 1 to 8 moved to Decisions made; Open decisions reads "None"; the lighter-press saving in Value engineering reworded now that decision 1 is made
+- `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003 v0.3): A1 and A3 recorded as accepted (status kept Draft; Table 1 still open for review, see below); R7 consequence updated
+- `docs/03-requirements.md` (EPR-REQ-001 v0.7): R7 relaxed to 200 kg including guard and bolts, now met on paper; R5 status gives the softer design soil; summary updated
+- `docs/04-calcs/01-sizing.md` (EPR-CAL-001 v0.5): R7 text and results row against 200 kg; softer design soil noted under R5
+- `docs/02-concept.md` (EPR-PRC-001 v0.7): R7 status; weighed fill and scoop rule; design soil; bush dust seals; lime option; plain mold walls
+- `docs/01-problem.md` (EPR-PRB-001 v0.5): partner rule and first candidate; design soil and lime; press mass
+- `bom/bom-notes.md`: dust seals at the bush faces and plain mold walls noted
+- `README.md`: R7 status
+- `docs/decisions/0001-trl2-review-decisions.md` (EPR-DDR-001 v0.3): item 8 ("Proposed, awaiting Amish") recorded as decided
+- `docs/decisions/0002-recommendations-accepted.md` (EPR-DDR-002 v0.2): item 8 recorded as decided
+- PDFs regenerated with `python3 .kit/render.py`; superseded versions removed.
+
+Note: the register had no open item for accepting the design-for-construction changes P1 to P15 as a whole (EPR-DDR-003, Table 1), so this approval does not cover them; EPR-DDR-003 still says they are open for Amish's review, and the 2026-10-01 row in Decisions made says the same. They should be put to Amish, or confirmed as covered, before the record is treated as accepted.
+
+### Follow-up actions to carry approved decisions into the design
+
+The model, BOM quantities and prices, calculations and pictures were not changed in this session. These actions carry the approved decisions into them:
+
+1. Decision 1 (calculations): Re-run `docs/04-calcs/sizing.py` with the R7 total at 200 kg including the guard and bolts so its R7 line and `results.csv` show met on paper.
+2. Decision 4 (model, BOM): Add felt or rubber dust seals at the bush faces: a BOM line or an addition to line 5 with a price, and the seal faces in the model and the link making sketches if they change the stack-up.
+3. Decision 4 (drawings, build plan pictures): Show the dust seals in the toggle linkage joint pictures and making sketches once modelled.
+4. Decision 6 and 8 (calculations, documents): Write the operating chart for the softer design soil (809 N, 405 N per operator) and the scoop calibration rule into the test kit procedure; recompute per soil once partner soils are measured.
+5. Decision 7 (documents): Add a lime mix chart and its curing period to the soil test kit procedure.
+6. Decision 5 (test plan): Measure mold wall wear at TRL 4 against R8; design bolt-on liners only if the rate would not last 50,000 sandy blocks.
+7. Decision 3 (documents): Approach the first candidate partner (the Auroville Earth Institute); nothing is agreed yet.
+
+### Points found in the review
+
+Raised when the recommendations were written (2026-10-01) and kept here so they are not lost:
+
+- Item 1 does not compare like with like: the 190 kg limit was set against a 187 kg figure that left out the guard and bolts (6.7 kg), so the 200 kg total is about 6 kg of real growth plus 6.7 kg newly counted.
+- Item 4 overlaps a decision already made: case-hardened steel bushes were accepted on 2026-09-25 (EPR-DDR-002, item 16f).
+- Item 7 overlaps a decision already made: 'lime for clay-rich soils' was accepted with the stabilizer choice on 2026-09-25 (EPR-DDR-001, item 5); only the chart and curing details are open.
+- The seven appearance items from REVIEW.md 2026-09-26 are not in the register. Two touch what the renders claim: item 4 shows one operator although the press needs two (668 N peak), and item 7 leaves the linkage guard out of the renders; both should be resolved before the renders are public.
+- Item 6 is already decided for now (weighed fill, EPR-DDR-002 item 15); the open part is only the future scoop rule.

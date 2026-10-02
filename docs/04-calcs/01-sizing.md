@@ -3,9 +3,9 @@ doc_id: EPR-CAL-001
 title: EarthPress sizing calculations
 project: EarthPress
 doc_type: Calculation note
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.5"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "R7 against the 200 kg total set on 2026-10-02 (met on paper); softer design soil for the operating chart noted under R5; sizing.py still to be re-run"
 ---
 
 # EarthPress sizing calculations
 
-On paper the press reaches 2 MPa on the 290 x 140 x 90 mm block, but only with **two people on the lever** and a **weighed fill**. The toggle and 1.7 m lever give a force ratio of 173:1 at the stop, and the peak pull under the base soil assumption is **668 N**, which comes about 3 mm before the end of the stroke. One operator pulling 500 N stalls at about 0.5 MPa, so the press is a two-person machine, as Amish decided on 2026-09-25 (EPR-DDR-002). Against the targets he accepted that day, **R5** is met on paper (334 N per operator, grip 0.86 to 1.89 m, peak at 1.16 m). Since the design was made buildable on 2026-10-01 (EPR-DDR-003, v0.3 of this note), **R7 is not met** (200 kg against 190 kg; no piece over 45 kg, so the 50 kg piece limit is met) and **R13 is over its value-engineering target** (estimated $520 against a $500 target, USD 20 over); R7 is an open decision and the cost savings worth trying are in the design decisions register (EPR-DEC-001). R2 and R4 are **at risk**; R3, R8, R10 and R14 cannot be verified at TRL 3.
+On paper the press reaches 2 MPa on the 290 x 140 x 90 mm block, but only with **two people on the lever** and a **weighed fill**. The toggle and 1.7 m lever give a force ratio of 173:1 at the stop, and the peak pull under the base soil assumption is **668 N**, which comes about 3 mm before the end of the stroke. One operator pulling 500 N stalls at about 0.5 MPa, so the press is a two-person machine, as Amish decided on 2026-09-25 (EPR-DDR-002). Against the targets he accepted that day, **R5** is met on paper (334 N per operator, grip 0.86 to 1.89 m, peak at 1.16 m). Since the design was made buildable on 2026-10-01 (EPR-DDR-003, v0.3 of this note), R7 was not met (200 kg against 190 kg; no piece over 45 kg, so the 50 kg piece limit is met) until Amish set the total at 200 kg including the guard and bolts on 2026-10-02, so it is now met on paper, and **R13 is over its value-engineering target** (estimated $520 against a $500 target, USD 20 over); the cost savings worth trying are in the design decisions register (EPR-DEC-001). R2 and R4 are **at risk**; R3, R8, R10 and R14 cannot be verified at TRL 3.
 
 The calculation corrects four TRL 2 figures and one TRL 2 mechanism. The press mass rises from about 123 kg to 187 kg, the cost from about $403 to $488 and the compaction work falls from 0.6 to 1.2 kJ to about 0.35 to 0.71 kJ (0.49 kJ base). The 22 mm lid would reach yield at 2 MPa and is now a ribbed lid. The TRL 2 concept ejected the block by pulling the lever on past the compaction point, which a toggle ending near straight cannot do; ejection now uses a separate seesaw lever and a lost-motion slot in the push rod.
 
@@ -102,7 +106,7 @@ The mechanism is a bottom piston driven by a symmetric toggle (two 245 mm links)
 - **Two operators on the T-handle** (334 N each at the peak) reach the stop at 2.00 MPa.
 - Compaction work is **494 J** for the base soil (353 J and 705 J for the range). One operator at 500 N could give 853 J over the arc, so energy is not the limit; the mismatch between the force ratio and the soil curve is. A perfect match would need 58 % of the operator's capacity.
 
-**R2 is at risk** (met with two operators, within the fill window of section 5, for the base soil). With the accepted R5 (500 N or less per operator, EPR-DDR-002), **R5 is met on paper** with two operators at 334 N each and the peak at 1,157 mm; one operator alone cannot make a 2 MPa block.
+**R2 is at risk** (met with two operators, within the fill window of section 5, for the base soil). With the accepted R5 (500 N or less per operator, EPR-DDR-002), **R5 is met on paper** with two operators at 334 N each and the peak at 1,157 mm; one operator alone cannot make a 2 MPa block. On 2026-10-02 Amish decided that the operating chart is based on the softer soil until partner soils are measured: 809 N in all, 405 N per operator, still within R5's 500 N.
 
 ## 5. Fill tolerance (R1, R2)
 
@@ -177,7 +181,7 @@ Breaking the block free takes 4.64 kN of wall friction, 4.84 kN with the piston 
 | Bolts | 1.2 kg |
 | **Total** | **200.0 kg** |
 
-**R7 is not met on paper:** the total is 200.0 kg against the 190 kg accepted by Amish on 2026-09-25 (EPR-DDR-002), 10 kg over. Of the 13 kg added since v0.2, 6.7 kg is the guard and bolts, which v0.2 did not count, and the rest is the round link ends, lugs, larger base plate and other parts added to make the press buildable (EPR-DDR-003). The heaviest piece is 45.0 kg, so the 50 kg piece limit is met. The press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. Relaxing the total to 200 kg is open decision 1 in EPR-DEC-001.
+**R7 was not met on paper** against 190 kg: the total is 200.0 kg against the 190 kg accepted by Amish on 2026-09-25 (EPR-DDR-002), 10 kg over. Of the 13 kg added since v0.2, 6.7 kg is the guard and bolts, which v0.2 did not count, and the rest is the round link ends, lugs, larger base plate and other parts added to make the press buildable (EPR-DDR-003). The heaviest piece is 45.0 kg, so the 50 kg piece limit is met. The press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. On 2026-10-02 Amish set the R7 total at 200 kg, including the guard and bolts, and kept the 50 kg piece limit (EPR-DDR-003, A1), so R7 is now met on paper.
 
 ## 9. Output and crew (R4)
 
@@ -217,9 +221,9 @@ The priced BOM totals **$520**, $20 over the $500 value-engineering target in `p
 | R2 | Compaction pressure | 2.00 MPa with two operators and fill 0 to +2.7 %; 0.53 MPa with one at 500 N | 2.0 MPa or more | At risk |
 | R3 | Block strength | Depends on soil, mix and curing | 4 MPa dry, 2 MPa wet; 2.1 MPa minimum | Not verifiable at TRL 3 |
 | R4 | Output | 296 blocks per day, crew of four | 300 or more | At risk |
-| R5 | Operator force and grip height | Peak 668 N total (334 N each for two) at 1.16 m; grip 0.86 to 1.89 m; eject 470 N | 500 N or less per operator; grip 0.8 to 1.9 m; peak at 1.0 m or higher | Met on paper (two operators) |
+| R5 | Operator force and grip height | Peak 668 N total (334 N each for two) at 1.16 m; 809 N (405 N each) for the softer design soil of the operating chart; grip 0.86 to 1.89 m; eject 470 N | 500 N or less per operator; grip 0.8 to 1.9 m; peak at 1.0 m or higher | Met on paper (two operators) |
 | R6 | Garage-buildable | Plate, sections, pipe and tube; turned pins, shafts and bushes bought | Stick welder, grinder, drill press | Met (design review) |
-| R7 | Movable | 200 kg total; heaviest piece 45.0 kg; plan 1.28 x 0.58 m | 190 kg total; 50 kg per piece; 1.5 m bed | **Not met** (10 kg over; piece limit met) |
+| R7 | Movable | 200 kg total; heaviest piece 45.0 kg; plan 1.28 x 0.58 m | 200 kg total including guard and bolts (190 kg until 2026-10-02); 50 kg per piece; 1.5 m bed | Met on paper (piece limit met) |
 | R8 | Durability | Stress range 89 MPa against 243 MPa; bushes, grease nipples | 50,000 blocks; replaceable bushes | Not verifiable at TRL 3 (wear) |
 | R9 | Soil test kit | Field tests, chart and a 10 kg scale for fill weighing | Go or no-go in 1 h, full result in 24 h | Met (design review); accuracy not verifiable at TRL 3 |
 | R10 | Low stabilizer use | 5 % cement, 0.33 kg per block | 8 % or less reaching R3 | Not verifiable at TRL 3 |

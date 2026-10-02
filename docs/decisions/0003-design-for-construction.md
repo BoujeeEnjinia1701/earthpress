@@ -3,9 +3,9 @@ doc_id: EPR-DDR-003
 title: EarthPress design for construction
 project: EarthPress
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "A1 and A3 accepted by Amish (2026-10-02); Table 1 still open for his review; status kept Draft"
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-10-01
-- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. The items in Table 3 are **Proposed, awaiting Amish** and are listed in the design decisions register (EPR-DEC-001).
+- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. Of the items in Table 3, A1 and A3 were accepted by Amish on 2026-10-02 as recommended in the design decisions register (EPR-DEC-001): "i approve your recommendations for all 555 open decisions." A2 needed no decision and is carried in the register's Value engineering section.
 
 ## Context
 
@@ -62,17 +66,17 @@ The changes keep what the press does: the same block, mold rim height, toggle, l
 | Drawings | EPR-DWG-001 Rev P2; concept blueprint EPR-DWG-010 Rev P2; making sketches EPR-DWG-101 to 115 added. | Follows the model. |
 | Documents | EPR-PRC-001 v0.5, EPR-REQ-001 v0.5, `bom/bom.csv`, `README.md`: mass, cost, latch, catch and eject descriptions. | Follows the model. |
 
-*Table 3. Proposed, awaiting Amish.*
+*Table 3. Items proposed to Amish; A1 and A3 accepted on 2026-10-02.*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
-| A1 | R7 total mass: 200 kg against 190 kg. | (a) Relax the total to 200 kg and keep the 50 kg piece limit (heaviest piece 45 kg). (b) Lighten: a 16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate, perhaps 10 kg, then re-check. (c) Both. | (a), as for EPR-DDR-002 item 13: the piece limit is what governs moving the press. |
+| A1 | R7 total mass: 200 kg against 190 kg. | (a) Relax the total to 200 kg and keep the 50 kg piece limit (heaviest piece 45 kg). (b) Lighten: a 16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate, perhaps 10 kg, then re-check. (c) Both. | (a), as for EPR-DDR-002 item 13: the piece limit is what governs moving the press. Accepted 2026-10-02: the R7 total is 200 kg, defined to include the guard and bolts; the 50 kg piece limit is kept. |
 | A2 | R13 cost: $520 estimated against the $500 value-engineering target (a hypothetical control target), USD 20 over. | No decision needed. The target stays $500. Savings worth trying: a lighter press, and local quotes at TRL 4; plain pins without bushes would save about $30 but R8 fails. | Carry in the value engineering section of EPR-DEC-001. |
-| A3 | The rest catch adds a step: the operator lifts it before each stroke. | (a) Hand release, as modelled. (b) A foot pedal linked to the catch. | (a) for the prototype; reconsider after timing cycles (R4). |
+| A3 | The rest catch adds a step: the operator lifts it before each stroke. | (a) Hand release, as modelled. (b) A foot pedal linked to the catch. | (a) for the prototype; reconsider after timing cycles (R4). Accepted 2026-10-02: hand release, with the rule that the catch is in before the latch is opened; a foot pedal only if timed cycles show the extra step costs output. |
 
 ## Consequences
 
 - `design_state: constructable` in `project.yaml`. The build plan EPR-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`).
-- Requirement status: R7 moves from met on paper to **not met** (A1) and R13 to **over the value-engineering target by USD 20** (A2); R2 and R4 stay at risk; R5, R1, R11 and R12 stay met on paper; R6 and R9 met by design review; R3, R8, R10 and R14 not verifiable at TRL 3.
+- Requirement status: R7 moved from met on paper to **not met** (A1); with A1 accepted on 2026-10-02 the total limit is 200 kg including the guard and bolts, so R7 is met on paper again (EPR-REQ-001) and R13 to **over the value-engineering target by USD 20** (A2); R2 and R4 stay at risk; R5, R1, R11 and R12 stay met on paper; R6 and R9 met by design review; R3, R8, R10 and R14 not verifiable at TRL 3.
 - The photoreal renders (`media/render-*.png`), `media/card.png`, `media/social-preview.png` and the appearance model `cad/src/product_model.py` still show the concept's hinge knuckle, latch hook, eject fork and guide strap; they need updating on Amish's Mac, where Blender is.
 - The UPN 80 section, bush sizes, socket tube and springs are confirmed when bought (register, "To confirm when parts are bought").

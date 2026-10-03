@@ -2,7 +2,7 @@
 
 Finished-product look for photoreal renders of the manual compressed earth block press: rounded
 tube and plate edges, painted steel in a restrained palette, round-ended toggle and crank links,
-bright turned pins with circlips, bush flanges and grease nipples, M16 and M12 bolt heads, rubber
+bright turned pins with circlips, felt dust seals at the bush faces and grease nipples, M16 and M12 bolt heads, rubber
 T-handle grips, a raised nameplate and pinch-point labels, and the soil test kit with clear jars
 showing the settled soil layers. Context: a compact patch of compacted earth, a stack of finished
 blocks and the shared clay mannequin pushing down on the T-handle.
@@ -27,8 +27,8 @@ sys.path.insert(0, str(HERE.parents[1] / ".kit"))
 
 from build123d import (Align, Axis, Box, Compound, Cylinder, Plane, Polygon, Pos, RectangleRounded, RegularPolygon,
                        Rot, Sphere, Text, extrude, fillet)
-from model import (PARAMS, geometry, theta_start, toggle_state, knee_and_crank, _box, _rod, _pipe,
-                   _flat, _ypin)
+from model import (PARAMS, geometry, theta_start, toggle_state, knee_and_crank, derived, build_components,
+                   _box, _rod, _pipe, _flat, _ypin)
 
 TITLE = "EarthPress: manual lever and toggle press for compressed earth blocks"
 
@@ -59,6 +59,7 @@ C_STEEL = "#B8BEC6"      # bright turned pins, piston
 C_ZINC = "#9AA3AE"       # bolts
 C_CLIP = "#4A4F57"
 C_BRASS = "#C9A227"
+C_FELT = "#7A5C3A"       # felt dust seals
 C_RUBBER = "#24272C"
 C_LABEL = "#F2F4F5"
 C_YELLOW = "#E3B21C"
@@ -203,225 +204,75 @@ def product_parts(P=PARAMS, with_person=True):
     th0, th1 = theta_start(p), math.radians(p["theta_end"])
     th = th0 + (th1 - th0) * POSE_F
     g = geometry(p)
-    BL, BW, W = p["blk_l"], p["blk_w"], p["wall"]
-    MT = p["mold_top"]; MB = MT - p["mold_h"]
-    ox, oy = BL / 2 + W, BW / 2 + W
-    col_y = oy + p["flange_t"] + p["col_b"] / 2
+    D = derived(p)
+    C = build_components(p, theta=th)           # the constructable design at the pose, from model.py
+    BL, BW = p["blk_l"], p["blk_w"]
+    MT = D["MT"]
     sk, sy = p["skid"], p["skid_y"]
-    zb_top = sk + p["base_t"]
     L2 = p["skid_len"] / 2
     lx, lz = p["lever_x"], p["lever_z"]
-    r = p["rod"]
+    zb = g["z_b"]
+    knee, z_p, z_face = toggle_state(th, p)
+    kx, kz = knee
+    (cx, cz), psi = knee_and_crank(th, p)
+    ylw, yu = D["y_lower"], D["y_upper"]
 
-    # ============================================================ 1a base on skids (BOM 1)
-    ex_base = (0, 0, -250)
-    skids = _rhs("x", -L2, L2, -sy, sk / 2, sk) + _rhs("x", -L2, L2, sy, sk / 2, sk)
-    cross = _sum([_rhs("y", -sy + sk / 2, sy - sk / 2, xc, sk / 2, 50.0)
-                  for xc in (-L2 + sk / 2, L2 - sk / 2, -120 - sk / 2, 120 + sk / 2)])
-    plate = _rbox(-p["base_l"] / 2, p["base_l"] / 2, -p["base_w"] / 2, p["base_w"] / 2, sk, zb_top, radii=(10.0, 5.0))
-    bt_ = p["bracket_t"]
-    bracket = None
-    for s_ in (-1, 1):
-        y0_, y1_ = sorted((s_ * 60, s_ * (60 + bt_)))
-        pl = _rbox(lx - 45, lx + 45, y0_, y1_, sk, lz + 45, axis=Axis.Y, radii=(12.0, 6.0)) + \
-            _rbox(lx - 95, lx - 45, y0_, y1_, lz - 20, lz + 170, axis=Axis.Y, radii=(10.0, 5.0))
-        bracket = pl if bracket is None else bracket + pl
-    t = p["tie"]
-    ties = (_pipe((lx + 40, 65, lz - 20), (-p["beam_t"] - 30, 65, g["z_b"] - 60), t / 2, t / 2 - 3)
-            + _pipe((lx + 40, -65, lz - 20), (-p["beam_t"] - 30, -65, g["z_b"] - 60), t / 2, t / 2 - 3))
-    catch = _rbox(lx - 95, lx - 60, -70, 70, lz + 100, lz + 160, axis=Axis.Y, radii=(6.0, 3.0))
-    add("Base skids and cross tubes", skids + cross, C_FRAME, "painted", 1, "shell", ex_base)
-    add("Base plate", plate, C_FRAME, "painted", 1, "shell", ex_base)
-    add("Lever bracket, ties and rest stop", bracket + ties + catch, C_FRAME, "painted", 1, "shell", ex_base)
+    def sh(*keys):
+        shp = _sum([C[k].shape for k in keys])
+        if shp.is_valid:
+            return shp
+        return Compound(children=[C[k].shape for k in keys])      # keep the pieces apart where a fuse is not clean
+
+    # Every steel part below is the shape from model.py itself (so the dimensions, holes, bosses, round link
+    # ends, guard and bolts match the constructable design); only paint, rubber, felt, circlips and the like are
+    # added as appearance. Explode offsets are for the exploded view only.
+    ex_base, ex_core, ex_mold, ex_lid = (0, 0, -250), (0, 0, -150), (0, 0, 420), (0, 0, 780)
+    ex_pis, ex_tog, ex_hub, ex_ej = (620, 0, 650), (380, 0, -60), (0, -350, -250), (350, 450, -150)
+    add("Base skids and cross tubes", sh("skids", "cross"), C_FRAME, "painted", 1, "shell", ex_base)
+    add("Base plate", sh("base_plate"), C_FRAME, "painted", 1, "shell", ex_base)
+    add("Lever bracket, ties, rest stop and eject posts", sh("bracket", "rest", "ties", "posts"), C_FRAME, "painted", 1, "shell", ex_base)
     caps = []
     for yc in (-sy, sy):
         for xe, d in ((-L2, -1), (L2, 1)):
             c = Pos(xe + d * 1.5, yc, sk / 2) * Box(3.0, sk - 1, sk - 1)
             caps.append(_fillet_try(c, c.edges().filter_by(Axis.X), [4.5, 2.0]))
     add("Tube end caps", _sum(caps), C_RUBBER, "rubber", 1, "shell", ex_base)
-    # rubber pad under the rest stop, where the lever lands
-    add("Rest stop pad", _rbox(lx - 97, lx - 58, -60, 60, lz + 160, lz + 168, radii=(3.0, 1.5)), C_RUBBER,
-        "rubber", 1, "shell", ex_base)
-
-    # ============================================================ 1b press core (BOM 1)
-    ex_core = (0, 0, -150)
-    zc0 = zb_top; zc1 = MT - 10
-    cols = None
-    for s in (-1, 1):
-        yw0, yw1 = sorted((s * (col_y + p["col_b"] / 2 - p["col_web"]), s * (col_y + p["col_b"] / 2)))
-        yf0, yf1 = sorted((s * (col_y - p["col_b"] / 2), s * (col_y + p["col_b"] / 2)))
-        c = _rbox(-p["col_d"] / 2, p["col_d"] / 2, yw0, yw1, zc0, zc1, radii=(2.0, 1.0)) \
-            + _rbox(-p["col_d"] / 2, -p["col_d"] / 2 + p["col_flange"], yf0, yf1, zc0, zc1, radii=(2.0, 1.0)) \
-            + _rbox(p["col_d"] / 2 - p["col_flange"], p["col_d"] / 2, yf0, yf1, zc0, zc1, radii=(2.0, 1.0))
-        cols = c if cols is None else cols + c
-    bz1 = g["z_b"] - 25; bz0 = bz1 - p["beam_d"]
-    beam = (_rbox(-p["beam_t"] - 30, -30, -col_y, col_y, bz0, bz1, axis=Axis.X, radii=(4.0, 2.0))
-            + _rbox(30, 30 + p["beam_t"], -col_y, col_y, bz0, bz1, axis=Axis.X, radii=(4.0, 2.0))
-            + _box(-30, 30, -col_y, col_y, bz0, bz0 + 12))
-    lugs = _box(-30, 30, -48, -28, bz1 - 20, g["z_b"] + 40) + _box(-30, 30, 28, 48, bz1 - 20, g["z_b"] + 40)
-    lugs = _fillet_try(lugs, lugs.faces().sort_by(Axis.Z)[-1].edges().filter_by(Axis.Y), [20.0, 10.0])
-    feet = _rbox(-70, 70, -col_y - 45, -col_y + 45, zc0, zc0 + 16, radii=(8.0, 4.0)) \
-        + _rbox(-70, 70, col_y - 45, col_y + 45, zc0, zc0 + 16, radii=(8.0, 4.0))
-    add("Press columns, UPN 80", cols, C_CORE, "painted", 1, "shell", ex_core)
-    add("Base beam, lugs and column feet", beam + lugs + feet, C_CORE, "painted", 1, "shell", ex_core)
-    fb = [_bolt_z(xb, yc + dy, zc0 + 16, 12.0) for xb in (-55, 55) for yc in (-col_y, col_y) for dy in (-30, 30)]
-    add("M12 bolts, column feet", _sum(fb), C_ZINC, "metal", 11, "shell", ex_core)
-    # pinch-point labels on both column webs (yellow square, black triangle and bar)
-    lab = []
-    ywf = -(col_y + p["col_b"] / 2)
-    for zc in (560.0,):
-        sq = _front(_fillet_try(Box(56, 56, 0.8, align=(Align.CENTER, Align.CENTER, Align.MIN)),
-                                Box(56, 56, 0.8, align=(Align.CENTER, Align.CENTER, Align.MIN)).edges().filter_by(Axis.Z),
-                                [4.0, 2.0]), 0, ywf, zc)
-        lab.append(sq)
-    add("Pinch-point label", _sum(lab), C_YELLOW, "paper", None, "shell", ex_core)
-    tri = extrude(RegularPolygon(22, 3, rotation=90) - RegularPolygon(16, 3, rotation=90), amount=0.6)
-    mark = Pos(0, 3.0, 0) * tri + Pos(0, 0, 0) * Box(4.0, 14.0, 0.6, align=(Align.CENTER, Align.CENTER, Align.MIN))
-    add("Pinch-point label symbol", _front(Pos(0, 0, 0.8) * mark, 0, ywf, 560.0), C_INK, "paper", None, "shell", ex_core)
-
-    # ============================================================ 2 mold box (BOM 2)
-    ex_mold = (0, 0, 420)
-    mold = _rbox(-ox, ox, -oy, oy, MB, MT, radii=(3.0, 1.5)) - _box(-BL / 2, BL / 2, -BW / 2, BW / 2, MB - 1, MT + 1)
-    bt, bh = p["belt_t"], p["belt_h"]
-    belt = _rbox(-ox - bt, ox + bt, -oy - bt, oy + bt, MT - bh, MT, radii=(8.0, 4.0)) \
-        - _box(-ox + 1, ox - 1, -oy + 1, oy - 1, MT - bh - 1, MT + 1)
-    fl = p["flange_t"]
-    flanges = _rbox(-p["col_d"] / 2 - 20, p["col_d"] / 2 + 20, oy, oy + fl, MB, MT - bh, axis=Axis.Y, radii=(6.0, 3.0)) \
-        + _rbox(-p["col_d"] / 2 - 20, p["col_d"] / 2 + 20, -oy - fl, -oy, MB, MT - bh, axis=Axis.Y, radii=(6.0, 3.0))
-    guide = _rbox(-50, 50, -oy, oy, MB - 16, MB, axis=Axis.Y, radii=(4.0, 2.0)) \
-        - _box(-r / 2 - 1, r / 2 + 1, -r / 2 - 1, r / 2 + 1, MB - 17, MB + 1)
-    hx = p["lid_l"] / 2 + 5
-    hinge_base = _rbox(ox + bt, hx + 30, -p["lid_w"] / 2, p["lid_w"] / 2, MT - 40, MT - 10, axis=Axis.Y, radii=(5.0, 2.0)) \
-        - _ypin(hx, MT + 10, 62, p["lid_w"] + 2)
-    keeper = _rbox(-p["lid_l"] / 2 - 40, -ox - bt, -30, 30, MT - 95, MT - 65, axis=Axis.X, radii=(4.0, 2.0))
-    add("Mold box, 290 x 140 mm cavity", mold + belt + flanges + guide + hinge_base + keeper, C_MOLD, "painted", 2,
-        "shell", ex_mold)
-    # wear-bright rim on the mold top (ground flat), a thin band inside the belt
-    rim = _box(-ox - bt + 0.5, ox + bt - 0.5, -oy - bt + 0.5, oy + bt - 0.5, MT - 0.6, MT) - \
-        _box(-BL / 2, BL / 2, -BW / 2, BW / 2, MT - 2, MT + 1)
-    add("Mold rim, ground face", rim, C_STEEL, "metal", 2, "shell", ex_mold)
-    # nameplate on the belt front
-    yb = -oy - bt
-    NPX = (p["col_d"] / 2 + ox + bt) / 2 + 2      # right of the -Y column, clear of it
-    npl = Box(118, 32, 1.2, align=(Align.CENTER, Align.CENTER, Align.MIN))
-    npl = _fillet_try(npl, npl.edges().filter_by(Axis.Z), [4.0, 2.0])
-    add("Nameplate", _front(npl, NPX, yb, MT - bh / 2), C_LABEL, "paper", None, "shell", ex_mold)
-    txt = _text("EARTHPRESS", 13.0, 0.8)
-    if txt is not None:
-        add("Nameplate lettering", _front(Pos(0, 0, 1.2) * txt, NPX, yb, MT - bh / 2), C_LID, "painted",
-            None, "shell", ex_mold)
-    # M16 bolt heads on the column webs (eight, through the mold flanges)
-    mb = []
-    for s in (-1, 1):
-        yw = s * (col_y + p["col_b"] / 2)
-        for xb in (-22, 22):
-            for zb_ in (MB + 35, MT - bh - 35):
-                mb.append(_bolt_y(xb, yw, zb_, 16.0, s))
-    add("M16 bolts, mold flanges", _sum(mb), C_ZINC, "metal", 11, "shell", ex_mold)
-
-    # ============================================================ 3 lid (BOM 3)
-    ex_lid = (0, 0, 780)
-    lt, ll, lw = p["lid_t"], p["lid_l"], p["lid_w"]
-    lid = _rbox(-ll / 2, ll / 2, -lw / 2, lw / 2, MT, MT + lt, radii=(12.0, 6.0))
-    lid = _fillet_try(lid, lid.faces().sort_by(Axis.Z)[-1].edges(), [3.0, 1.5])
-    for s in (-1, 1):
-        rb = _box(-ll / 2 + 8, ll / 2 - 8, s * p["rib_y"] - p["rib_t"] / 2, s * p["rib_y"] + p["rib_t"] / 2,
-                  MT + lt - 1, MT + lt + p["rib_h"])
-        rb = _fillet_try(rb, rb.faces().sort_by(Axis.Z)[-1].edges(), [5.0, 3.0, 1.5])
-        lid = lid + rb
-    lid = lid + _ypin(hx, MT + 10, 60, lw) - _ypin(hx, MT + 10, p["hinge_pin_d"] + 1, lw + 2)
-    hook = _rbox(-ll / 2 - 40, -ll / 2 + 2, -45, 45, MT - 60, MT + lt, axis=Axis.Y, radii=(10.0, 5.0))
-    lid = lid + hook
-    add("Lid with ribs, hinge and latch", lid, C_LID, "painted", 3, "shell", ex_lid)
-    hpin = _pin(hx, MT + 10, p["hinge_pin_d"], lw + 30)
-    hclips = _clip(hx, MT + 10, p["hinge_pin_d"], lw / 2 + 5) + _clip(hx, MT + 10, p["hinge_pin_d"], -lw / 2 - 5)
-    lpx, lpz = -ll / 2 - 20, MT - 40
-    lpin = _pin(lpx, lpz, p["latch_pin_d"], 120)
-    add("Hinge and latch pins", hpin + lpin, C_STEEL, "metal", 3, "shell", ex_lid)
-    add("Hinge pin circlips", hclips + _clip(lpx, lpz, 30, 55) + _clip(lpx, lpz, 30, -55), C_CLIP, "metal", 3,
-        "shell", ex_lid)
-    # rubber grip on the latch hook, where the operator lifts the lid
-    lg = _rbox(-ll / 2 - 44, -ll / 2 - 34, -40, 40, MT - 30, MT + lt - 4, axis=Axis.Y, radii=(3.0, 1.5))
-    add("Latch hook grip", lg, C_RUBBER, "rubber", 3, "shell", ex_lid)
-
-    # ============================================================ 4 piston and push rod (BOM 4)
-    ex_pis = (620, 0, 650)
-    knee, z_p, z_face = toggle_state(th, p)
-    cl = p["piston_clear"]
-    pl_ = _rbox(-BL / 2 + cl, BL / 2 - cl, -BW / 2 + cl, BW / 2 - cl, z_face - p["piston_t"], z_face, radii=(3.0, 1.5))
-    slot_top = z_p + p["pin_d"] / 2
-    rod_bot = slot_top - p["slot_len"] - 15
-    rod = _rbox(-r / 2, r / 2, -r / 2, r / 2, rod_bot, z_face - p["piston_t"], radii=(3.0, 1.5))
-    slot = _box(-p["pin_d"] / 2 - 1, p["pin_d"] / 2 + 1, -r / 2 - 1, r / 2 + 1, slot_top - p["slot_len"] + p["pin_d"] / 2 + 1,
-                slot_top - p["pin_d"] / 2 - 1)
-    slot += _ypin(0, slot_top - p["slot_len"] + p["pin_d"] / 2 + 1, p["pin_d"] + 2, r + 2)
-    slot += _ypin(0, slot_top - p["pin_d"] / 2 - 1, p["pin_d"] + 2, r + 2)
-    rod = rod - slot
-    foot = _pin(0, rod_bot + 15, 25, 110)
-    add("Piston and slotted push rod", pl_ + rod + foot, C_STEEL, "metal", 4, "internal", ex_pis)
-
-    # ============================================================ 5 toggle (BOM 5)
-    ex_tog = (380, 0, -60)
-    zb = g["z_b"]
-    kx, kz = knee
-    lw_, lt_ = p["link_w"], p["link_t"]
-    links = []
-    ys_up = (-(r / 2 + lt_ / 2 + 2), r / 2 + lt_ / 2 + 2)
-    ys_lo = (-(r / 2 + 1.5 * lt_ + 6), r / 2 + 1.5 * lt_ + 6)
-    for y in ys_up:
-        links.append(_link((0, z_p), (kx, kz), lw_, lt_, y))
-    for y in ys_lo:
-        links.append(_link((0, zb), (kx, kz), lw_, lt_, y))
-    add("Toggle links", _sum(links), C_LINK, "painted", 5, "internal", ex_tog)
-    (cx, cz), psi = knee_and_crank(th, p)
-    add("Connecting link", _link((cx, cz), (kx, kz), 50, p["conlink_t"], 0), C_LINK, "painted", 5, "internal", ex_tog)
-    plen = 2 * (r / 2 + 2 * lt_ + 12)
-    pins, clips, nips, bushes = [], [], [], []
-    for (x, z) in ((0, z_p), (kx, kz), (0, zb)):
-        pins.append(_pin(x, z, p["pin_d"], plen))
-        clips += [_clip(x, z, p["pin_d"], plen / 2 - 4), _clip(x, z, p["pin_d"], -plen / 2 + 4)]
-        nips.append(_nipple(x, z, -plen / 2, -1))
-    # bush flanges on the outer faces of the links (case-hardened bushes)
-    for y in ys_lo:
-        yo = y + math.copysign(lt_ / 2 + 0.75, y)
-        for (x, z) in ((kx, kz), (0, zb)):
-            bushes.append(Pos(x, yo, z) * Rot(90, 0, 0) * (Cylinder(p["pin_d"] / 2 + 6, 1.5) - Cylinder(p["pin_d"] / 2, 2.0)))
-    for y in ys_up:
-        yo = y + math.copysign(lt_ / 2 + 0.75, y)
-        bushes.append(Pos(0, yo, z_p) * Rot(90, 0, 0) * (Cylinder(p["pin_d"] / 2 + 6, 1.5) - Cylinder(p["pin_d"] / 2, 2.0)))
-    add("Toggle pins, 35 mm", _sum(pins), C_STEEL, "metal", 5, "internal", ex_tog)
+    add("Press columns, UPN 80", sh("columns"), C_CORE, "painted", 1, "shell", ex_core)
+    add("Base beam, lugs and column feet", sh("beam", "lugs", "feet"), C_CORE, "painted", 1, "shell", ex_core)
+    add("Mold box, 290 x 140 mm cavity", sh("mold", "flanges", "mold_lugs"), C_MOLD, "painted", 2, "shell", ex_mold)
+    add("Lid with ribs, hinge and latch ears", sh("lid"), C_LID, "painted", 3, "shell", ex_lid)
+    add("Hinge and latch pins", sh("hinge_pin", "latch_pin"), C_STEEL, "metal", 3, "shell", ex_lid)
+    add("Piston, end skirts and slotted push rod", sh("piston"), C_STEEL, "metal", 4, "internal", ex_pis)
+    add("Toggle links", sh("lower_links", "upper_links"), C_LINK, "painted", 5, "internal", ex_tog)
+    add("Connecting link", sh("conlink"), C_LINK, "painted", 5, "internal", ex_tog)
+    add("Toggle pins, 35 mm", sh("base_pin", "knee_pin", "upper_pin"), C_STEEL, "metal", 5, "internal", ex_tog)
+    add("Pin spacer tubes", sh("base_spacers", "knee_spacers"), C_CLIP, "metal", 5, "internal", ex_tog)
+    add("Bush dust seals (felt)", sh("seals_base", "seals_knee", "seals_upper"), C_FELT, "fabric", 5, "internal", ex_tog)
+    # circlips just outside the dust seals, and grease nipples on the -Y pin ends
+    clips, nips = [], []
+    yb_, yk_, yup_ = ylw[1] + p["seal_t"] + 0.75, ylw[1] + p["seal_t"] + 0.75, yu[1] + p["seal_t"] + 0.75
+    for (x, z, yy) in ((0, zb, yb_), (kx, kz, yk_), (0, z_p, yup_)):
+        for sg in (-1, 1):
+            clips.append(Pos(x, sg * yy, z) * Rot(90, 0, 0) * (Cylinder(p["pin_d"] / 2 + 3.0, 1.5) - Cylinder(p["pin_d"] / 2 - 0.5, 2.0)))
+        nips.append(_nipple(x, z, -(yy + 0.75), -1))
     add("Toggle pin circlips", _sum(clips), C_CLIP, "metal", 5, "internal", ex_tog)
-    add("Bush flanges", _sum(bushes), C_ZINC, "metal", 5, "internal", ex_tog)
     add("Grease nipples", _sum(nips), C_BRASS, "metal", 5, "internal", ex_tog)
-
-    # ============================================================ 6 lever hub, crank and lever (BOM 6)
-    ex_hub = (0, -350, -250)
-    lxz = (lx, lz)
-    hub = _pin(lx, lz, 80, 100) + _pin(lx, lz, 40, 150)
-    crank = _link(lxz, (cx, cz), 50, 20, 26) + _link(lxz, (cx, cz), 50, 20, -26)
+    add("Lever hub, crank plates and socket", sh("hub"), C_LEVER, "painted", 6, "shell", ex_hub)
+    add("Hub shaft and crank pin", sh("shaft", "crank_pin"), C_STEEL, "metal", 6, "internal", ex_hub)
+    ex_lev = (-290, -350, -50)
     phi = math.radians(math.degrees(psi) + p["lever_offset"])
     ux, uz = math.cos(phi), math.sin(phi)
     ro = p["lever_od"] / 2
-    sock_end = (lx + 250 * ux, 0, lz + 250 * uz)
-    socket = _pipe((lx, 0, lz), sock_end, ro + 6, ro + 0.5)
-    add("Lever hub, crank plates and socket", hub + crank + socket, C_LEVER, "painted", 6, "shell", ex_hub)
-    cpin = _pin(cx, cz, 30, 90)
-    add("Crank pin", cpin, C_STEEL, "metal", 6, "internal", ex_hub)
-    add("Crank pin circlips", _clip(cx, cz, 30, 40) + _clip(cx, cz, 30, -40), C_CLIP, "metal", 6, "internal", ex_hub)
-    add("Hub shaft circlips", _clip(lx, lz, 40, 70) + _clip(lx, lz, 40, -70), C_CLIP, "metal", 6, "shell", ex_hub)
-    # removable lever: 2 in pipe in the socket, T-handle, rubber grips and end caps
-    ex_lev = (-290 + 0 * ux, -350, -50)
+    add("Lever pipe and T-handle", sh("lever"), C_LEVER, "painted", 6, "accessory", ex_lev)
+    add("Lever locking pin", sh("lever_pin"), C_STEEL, "metal", 6, "accessory", ex_lev)
     tip = (lx + p["lever_len"] * ux, 0, lz + p["lever_len"] * uz)
-    lever = _pipe((lx + 30 * ux, 0, lz + 30 * uz), tip, ro, ro - p["lever_wall"])
     gx, gz = lx + p["grip_r"] * ux, lz + p["grip_r"] * uz
     tb = p["tbar"]
-    tbar = _pipe((gx, -tb / 2, gz), (gx, tb / 2, gz), 16.7, 13.0)
-    add("Lever pipe and T-handle", lever + tbar, C_LEVER, "painted", 6, "accessory", ex_lev)
     grips = None
-    for s in (-1, 1):
-        gr = _rod((gx, s * 60.0, gz), (gx, s * (tb / 2 - 2), gz), 19.5) - _rod((gx, s * 55.0, gz), (gx, s * (tb / 2 + 5), gz), 16.8)
+    for s_ in (-1, 1):
+        gr = _rod((gx, s_ * 60.0, gz), (gx, s_ * (tb / 2 - 2), gz), 19.5) - _rod((gx, s_ * 55.0, gz), (gx, s_ * (tb / 2 + 5), gz), 16.8)
         for k in range(8):   # shallow grip rings
-            yk = s * (80.0 + 20.0 * k)
+            yk = s_ * (80.0 + 20.0 * k)
             gr -= Pos(gx, yk, gz) * Rot(90, 0, 0) * (Cylinder(21.0, 3.0) - Cylinder(18.6, 4.0))
         grips = gr if grips is None else grips + gr
     tcap = _rod((gx, tb / 2 - 4, gz), (gx, tb / 2 + 8, gz), 19.5) + _rod((gx, -tb / 2 + 4, gz), (gx, -tb / 2 - 8, gz), 19.5)
@@ -429,22 +280,11 @@ def product_parts(P=PARAMS, with_person=True):
     ecap = _rod((tip[0] - 4 * ux, 0, tip[2] - 4 * uz), (tip[0] + 10 * ux, 0, tip[2] + 10 * uz), ro + 1.5)
     ecap = _fillet_try(ecap, ecap.edges(), [4.0, 2.0])
     add("T-handle rubber grips", grips + tcap + ecap, C_RUBBER, "rubber", 6, "accessory", ex_lev)
-
-    # ============================================================ 7 eject lever, fork, pawl (BOM 7)
-    ex_ej = (350, 450, -150)
-    exx, ezz = p["eject_x"], p["eject_z"]
-    footp = (0, rod_bot + 15)
-    a = math.atan2(footp[1] - ezz, footp[0] - exx)
-    fork = _link((exx, ezz), footp, 40, 16, 45) + _link((exx, ezz), footp, 40, 16, -45)
-    ej_hub = _pin(exx, ezz, 60, 120) + _rbox(exx - 30, exx + 30, -70, -60, sk - 5, ezz, axis=Axis.Y, radii=(6.0, 3.0)) \
-        + _rbox(exx - 30, exx + 30, 60, 70, sk - 5, ezz, axis=Axis.Y, radii=(6.0, 3.0))
-    ej_hub += Pos(exx, -65, ezz) * Rot(90, 0, 0) * Cylinder(30, 10) + Pos(exx, 65, ezz) * Rot(90, 0, 0) * Cylinder(30, 10)
-    sa = a + math.pi + math.radians(30)
-    ej_sock = _pipe((exx, 0, ezz), (exx + 260 * math.cos(sa), 0, ezz + 260 * math.sin(sa)), ro + 6, ro + 0.5)
-    add("Eject lever, fork and socket", fork + ej_hub + ej_sock, C_EJECT, "painted", 7, "shell", ex_ej)
-    add("Eject pivot pin", _pin(exx, ezz, 30, 160), C_STEEL, "metal", 7, "shell", ex_ej)
-    pawl = _rbox(lx - 30, lx + 30, 75, 95, lz + 45, lz + 110, axis=Axis.Y, radii=(8.0, 4.0))
-    add("End-of-stroke pawl", pawl, C_LINK, "painted", 7, "shell", (0, 250, -250))
+    add("Eject lever, arm and socket", sh("eject"), C_EJECT, "painted", 7, "shell", ex_ej)
+    add("Eject pivot pin", sh("eject_pin"), C_STEEL, "metal", 7, "shell", ex_ej)
+    add("End pawl and rest catch", sh("pawl", "catch"), C_LINK, "painted", 7, "shell", (0, 250, -250))
+    add("Linkage guard (expanded metal)", sh("guard"), C_YELLOW, "painted", 13, "shell", (0, 0, 200))
+    add("Bolts, M16 and M12 and M10", sh("bolts"), C_ZINC, "metal", 11, "shell", ex_core)
 
     # ============================================================ 8 soil sieve (BOM 8), accessory
     ex_sv = (500, 750, 0)
@@ -505,12 +345,7 @@ def product_parts(P=PARAMS, with_person=True):
     # ============================================================ context: ground, blocks, fill, person
     BX, BY = 1000.0, -300.0
     GZ = 4 * p["blk_h"]
-    gauge = (Pos(BX, BY, GZ + 6) * Box(340, 30, 12) + Pos(BX - 164, BY, GZ - 20) * Box(12, 30, 40)
-             + Pos(BX + 164, BY, GZ - 20) * Box(12, 30, 40))
-    gauge = _fillet_try(gauge, gauge.edges().filter_by(Axis.Y), [2.0, 1.0])
-    add("Block gauge", gauge, C_ZINC, "metal", 10, "accessory", (0, 0, 150))
-    add("Block gauge grip", Pos(BX, BY, GZ + 13) * _fillet_try(Box(90, 26, 4), Box(90, 26, 4).edges(), [1.5, 0.8]),
-        C_MOLD, "rubber", 10, "accessory", (0, 0, 150))
+    add("Block gauge", C["gauge"].shape, C_ZINC, "metal", 10, "accessory", (0, 0, 150))
 
     # compact patch hugging the operator, press, test kit, blocks and sieve (plan polygon)
     pts = [(-3000, -400), (150, -880), (720, -880), (1260, -620), (1260, 120), (560, 1100), (-560, 1100),
@@ -527,8 +362,7 @@ def product_parts(P=PARAMS, with_person=True):
                 bb_ = _fillet_try(bb_, bb_.edges(), [3.0, 1.5])
                 blocks.append(Pos(BX + (i - 0.5) * 300, BY + (j - 1.5) * 150, p["blk_h"] * (c_ + 0.5)) * bb_)
     add("Pressed blocks (context)", Compound(children=blocks), C_BLOCK, "paper", None, "context", (0, 0, 0))
-    fill = _box(-BL / 2 + 2, BL / 2 - 2, -BW / 2 + 2, BW / 2 - 2, z_face, MT - 2)
-    add("Loose soil fill (context)", fill, C_SOIL, "paper", None, "context", (0, 0, 0))
+    add("Loose soil fill (context)", C["fill"].shape, C_SOIL, "paper", None, "context", (0, 0, 0))
 
     if with_person:
         from context_parts import mannequin, mannequin_landmarks

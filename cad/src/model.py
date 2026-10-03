@@ -45,6 +45,7 @@ PARAMS = {
     "pin_below_plate": 40.0,     # upper toggle pin below the piston plate at the end of the stroke
     "slot_len": 200.0,           # lost-motion slot for ejection (160 mm lift plus the pin)
     # Toggle (item 5): equal links, knee toward -X
+    "seal_t": 2.0, "seal_od": 50.0, "seal_id": 35.5,   # dust seal washers at the bush faces
     "link_l": 245.0, "link_w": 70.0, "link_t": 28.0, "pin_d": 35.0, "bush_od": 41.0,
     "theta_end": 6.0,            # link angle from vertical at full compaction (nominal fill)
     "theta_stop": 6.0,           # hard stop on the crank at theta_end; limits the force (EPR-CAL-001)
@@ -434,7 +435,7 @@ def build_components(p=PARAMS, theta=None, eject=0.0):
         lo = l_ if lo is None else lo + l_
     add("lower_links", "Lower toggle links (2)", lo, "#C2410C", 6, "toggle", True)
     add("upper_links", "Upper toggle links (2)", up, "#EA580C", 6, "toggle", True)
-    pin_long = ylw[1] + 4
+    pin_long = ylw[1] + 4            # ends 2 mm past the dust seal, room for the circlip
     add("base_pin", "Base pin, 35 mm", _yspan(0, zb, pd, -pin_long, pin_long), "#9CA3AF", 6, "toggle")
     add("knee_pin", "Knee pin, 35 mm", _yspan(kx, kz, pd, -pin_long, pin_long), "#9CA3AF", 6, "toggle", True)
     add("upper_pin", "Upper pin, 35 mm", _yspan(0, z_p, pd, -(yu[1] + 4), yu[1] + 4), "#9CA3AF", 6, "toggle", True)
@@ -449,6 +450,25 @@ def build_components(p=PARAMS, theta=None, eject=0.0):
         sp = _yspan(kx, kz, 50, s * ct / 2, s * yu[0]) - _yspan(kx, kz, pd + 0.5, s * (ct / 2 - 1), s * (yu[0] + 1))
         sp_knee = sp if sp_knee is None else sp_knee + sp
     add("knee_spacers", "Knee pin spacers (2)", sp_knee, "#4B5563", 6, "toggle", True)
+    # dust seals (BOM line 5, decision of 2026-10-02): a 2 mm felt or rubber washer on each pin against the
+    # outer face of a link, round the bush, so grit does not reach the bush faces. Base pin and knee pin: on the
+    # lower links' outer faces; knee pin: also on the upper links' outer faces (in the 4 mm gap); upper pin: on
+    # the upper links' outer faces.
+    st_, so_, si_ = p["seal_t"], p["seal_od"], p["seal_id"]
+
+    def ring(x, z, y0, y1):
+        y0, y1 = min(y0, y1), max(y0, y1)
+        return _yspan(x, z, so_, y0, y1) - _yspan(x, z, si_, y0 - 1, y1 + 1)
+    sb, sk, su = [], [], []
+    for s in (-1, 1):
+        sb.append(ring(0, zb, s * ylw[1], s * (ylw[1] + st_)))
+        sk += [ring(kx, kz, s * ylw[1], s * (ylw[1] + st_)), ring(kx, kz, s * yu[1], s * (yu[1] + st_))]
+        su.append(ring(0, z_p, s * yu[1], s * (yu[1] + st_)))
+    from build123d import Compound as _Cmp
+    sb, sk, su = _Cmp(children=sb), _Cmp(children=sk), _Cmp(children=su)
+    add("seals_base", "Dust seals, base pin (2)", sb, "#F59E0B", 5, "toggle")
+    add("seals_knee", "Dust seals, knee pin (4)", sk, "#F59E0B", 5, "toggle", True)
+    add("seals_upper", "Dust seals, upper pin (2)", su, "#F59E0B", 5, "toggle", True)
     (cx, cz), psi = knee_and_crank(th, p)
     add("conlink", "Connecting link", _link((cx, cz), (kx, kz), cwid, ct, 0, holes=(((cx, cz), p["crank_pin_d"] + 0.5), ((kx, kz), pd + 0.5))),
         "#B45309", 6, "toggle", True)
@@ -582,7 +602,8 @@ GROUPS = [
     ("Lid with ribs, hinge and latch", 3, "#115E59", (0, 0, 780), ("lid", "hinge_pin", "latch_pin")),
     ("Piston and slotted push rod", 4, "#D4A017", (620, 0, 650), ("piston",)),
     ("Toggle links, pins and bushes", 5, "#C2410C", (380, 0, -60),
-     ("lower_links", "upper_links", "base_pin", "knee_pin", "upper_pin", "base_spacers", "knee_spacers", "conlink")),
+     ("lower_links", "upper_links", "base_pin", "knee_pin", "upper_pin", "base_spacers", "knee_spacers", "conlink",
+      "seals_base", "seals_knee", "seals_upper")),
     ("Lever, crank hub and T-handle", 6, "#1F2937", (0, -500, -700), ("hub", "shaft", "crank_pin", "lever", "lever_pin")),
     ("Eject lever, rest catch and end pawl", 7, "#7C3AED", (350, 450, -150), ("eject", "eject_pin", "pawl", "catch")),
     ("Soil sieve, 5 mm mesh", 8, "#A16207", (400, 600, 0), ("sieve",)),
@@ -701,6 +722,8 @@ def check(verbose=True):
         ("upper_links", "knee_pin"), ("knee_spacers", "knee_pin"), ("conlink", "knee_pin"), ("upper_links", "upper_pin"),
         ("piston", "upper_pin"), ("hub", "shaft"), ("hub", "crank_pin"), ("conlink", "crank_pin"), ("hub", "lever"),
         ("hub", "lever_pin"), ("lever", "lever_pin"), ("eject", "eject_pin"), ("posts", "eject_pin"),
+        ("seals_base", "base_pin"), ("seals_base", "lower_links"), ("seals_knee", "knee_pin"), ("seals_knee", "lower_links"),
+        ("seals_knee", "upper_links"), ("seals_upper", "upper_pin"), ("seals_upper", "upper_links"),
         ("bolts", "columns"), ("bolts", "flanges"), ("bolts", "feet"), ("bolts", "base_plate"), ("bolts", "beam"), ("bolts", "ties"),
     ]}
     # designed sliding fits and bearing contacts: (pair, least clearance allowed in mm)
@@ -709,7 +732,9 @@ def check(verbose=True):
             frozenset(("lower_links", "base_spacers")): 0.0, frozenset(("knee_spacers", "upper_links")): 0.0,
             frozenset(("conlink", "knee_spacers")): 0.0, frozenset(("hub", "rest")): 0.0,
             frozenset(("eject", "piston")): 0.0, frozenset(("crank_pin", "pawl")): 0.5, frozenset(("crank_pin", "catch")): 0.5,
-            frozenset(("lower_links", "upper_links")): 1.9, frozenset(("upper_pin", "upper_links")): 0.0}
+            frozenset(("lower_links", "upper_links")): 1.9, frozenset(("seals_knee", "lower_links")): 1.9,
+            frozenset(("seals_base", "columns")): 3.9, frozenset(("seals_knee", "columns")): 3.9,
+            frozenset(("seals_base", "base_spacers")): 0.0, frozenset(("seals_upper", "piston")): 0.0, frozenset(("upper_pin", "upper_links")): 0.0}
     for pname, th, ej in poses:
         C = build_components(theta=th, eject=ej)
         skip = set(kit)
@@ -751,13 +776,16 @@ def check(verbose=True):
     touch = [("skids", "cross"), ("cross", "base_plate"), ("cross", "bracket"), ("base_plate", "feet"), ("feet", "columns"),
              ("columns", "beam"), ("beam", "lugs"), ("flanges", "columns"), ("mold", "flanges"), ("mold", "mold_lugs"),
              ("lid", "mold"), ("ties", "beam"), ("posts", "base_plate"), ("guard", "base_plate"), ("guard", "bracket"),
-             ("piston", "upper_pin"), ("eject", "piston"), ("hub", "rest"), ("pawl", "bracket"), ("catch", "bracket")]
+             ("piston", "upper_pin"), ("eject", "piston"), ("seals_base", "lower_links"), ("seals_knee", "upper_links"), ("seals_upper", "upper_links"), ("hub", "rest"), ("pawl", "bracket"), ("catch", "bracket")]
     for a, b_ in touch:
         d_ = gap(C[a].shape, C[b_].shape)
         rec(d_ < 0.6, f"contact {a} / {b_}: gap {d_:.2f} mm")
     # piston stays inside the mold walls with its plate at the start and the end
     rec(D["zp0"] + PARAMS["pin_d"] / 2 < D["MB"] + 5, "upper pin top below the mold's lower edge at the start (assembly from the side)")
     rec(D["zp_asm"] + PARAMS["pin_d"] / 2 < D["MB"] - 2, f"upper pin clears the mold at the assembly fold ({D['zp_asm']:.0f} mm)")
+    # dust seals: each seal sits against a link face and leaves the pin end room for a 1.5 mm circlip
+    rec(PARAMS["seal_t"] + 1.5 + 0.2 <= 4.0, "pin ends 4 mm past the link face: room for a 2 mm dust seal and a 1.5 mm circlip")
+    rec(D["col_in"] - (D["y_lower"][1] + PARAMS["seal_t"]) >= 3.0, f"dust seals on the base and knee pins clear the column webs by {D['col_in'] - D['y_lower'][1] - PARAMS['seal_t']:.1f} mm")
     # pins clear the column webs
     rec(D["y_lower"][1] + 4 < D["col_in"], f"base and knee pins end {D['col_in'] - D['y_lower'][1] - 4:.1f} mm inside the column webs")
     # eject: the slot leaves the pin 5 mm below its lower end at full lift

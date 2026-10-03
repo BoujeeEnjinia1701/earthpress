@@ -3,7 +3,7 @@ doc_id: EPR-PRC-001
 title: EarthPress design precis
 project: EarthPress
 doc_type: Design precis
-version: "0.7"
+version: "0.8"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -37,13 +37,17 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Decisions of 2026-10-02: R7 total 200 kg; weighed fill and scoop rule; softer design soil for the chart; bush dust seals; lime option; plain mold walls measured against R8"
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Cost USD 523 with the dust seals (R13 over by USD 23); R7 199.996 kg; operating chart and lime chart in the build plan section 3.15'
 ---
 
 # EarthPress design precis
 
 ## Summary
 
-EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003), the press weighs about 200 kg, its heaviest piece 45 kg, and the press and kit cost about $520 in parts. Against the targets Amish accepted on 2026-09-25 (EPR-DDR-002), R5 (334 N per operator) is met on paper, R7 is met on paper against the 200 kg total (including the guard and bolts) that Amish set on 2026-10-02 (EPR-DEC-001), R13 is over its value-engineering target (estimated $520 against a $500 target, USD 20 over), and R2 and R4 are at risk. All values are estimates.
+EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003), the press weighs about 200 kg, its heaviest piece 45 kg, and the press and kit cost about $523 in parts. Against the targets Amish accepted on 2026-09-25 (EPR-DDR-002), R5 (334 N per operator) is met on paper, R7 is met on paper against the 200 kg total (including the guard and bolts) that Amish set on 2026-10-02 (EPR-DEC-001), R13 is over its value-engineering target (estimated $523 against a $500 target, USD 23 over), and R2 and R4 are at risk. All values are estimates.
 
 ![Hero render](../media/hero.png)
 
@@ -113,8 +117,8 @@ All values are estimates from EPR-CAL-001, where the assumptions are stated.
 | Output | 296 blocks per day, crew of four; 8.9 m² of wall | 85 s cycle (assumed) |
 | Small house, 50.5 m² of wall | 1,683 blocks, 5.7 press days, 556 kg cement (11.1 bags) | 22 m perimeter, 2.7 m walls, 15 % openings |
 | Embodied CO2 of that wall | 0.35 t as CSEB against 4.55 t as fired brick (7.6 %) | 49 and 643 kg CO2/m³ ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)); excludes mortar and transport |
-| Press mass | 200 kg with guard and bolts; heaviest piece 45.0 kg | Model volumes at 7,850 kg/m³ |
-| Parts cost | $520 (indicative; USD 20 over the $500 value-engineering target) | `bom/bom.csv` |
+| Press mass | 199.996 kg with guard, bolts and dust seals; heaviest piece 45.0 kg | Model volumes at 7,850 kg/m³ |
+| Parts cost | $523 (indicative; USD 23 over the $500 value-engineering target; includes $3 of dust seals) | `bom/bom.csv` |
 
 ## Key design choices
 

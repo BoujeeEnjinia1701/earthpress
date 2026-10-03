@@ -40,7 +40,7 @@ S = lambda *ks: _fuse([C[k].shape for k in ks])  # noqa: E731
 COL = {"base": "#4B5563", "core": "#6B7280", "mold": "#0F766E", "lid": "#115E59", "piston": "#D4A017",
        "lower": "#C2410C", "upper": "#EA580C", "pin": "#9CA3AF", "spacer": "#374151", "conlink": "#B45309",
        "hub": "#1F2937", "lever": "#111827", "eject": "#7C3AED", "pawl": "#9333EA", "guard": "#94A3B8",
-       "bolt": "#111827", "kit": "#2563EB", "sieve": "#A16207", "gauge": "#16A34A", "rest": "#111827"}
+       "bolt": "#111827", "kit": "#2563EB", "sieve": "#A16207", "gauge": "#16A34A", "rest": "#111827", "seal": "#B08968"}
 
 
 def part(name, shape, color, explode=(0, 0, 0), alpha=1.0):
@@ -53,8 +53,8 @@ def made():
         "core": part("Press core", S("columns", "feet", "beam", "lugs"), COL["core"]),
         "mold": part("Mold box", S("mold", "flanges", "mold_lugs"), COL["mold"]),
         "piston": part("Piston and push rod", C["piston"].shape, COL["piston"]),
-        "lower": part("Lower links (2), base pin, spacers", S("lower_links", "base_pin", "base_spacers"), COL["lower"]),
-        "upper": part("Upper links (2), knee pin, spacers", S("upper_links", "knee_pin", "knee_spacers"), COL["upper"]),
+        "lower": part("Lower links (2), base pin, spacers", S("lower_links", "base_pin", "base_spacers", "seals_base"), COL["lower"]),
+        "upper": part("Upper links (2), knee pin, spacers, seals", S("upper_links", "knee_pin", "knee_spacers", "seals_knee"), COL["upper"]),
         "conlink": part("Connecting link", C["conlink"].shape, COL["conlink"]),
         "upin": part("Upper pin", C["upper_pin"].shape, COL["pin"]),
         "hub": part("Lever hub, shaft, crank pin", S("hub", "shaft", "crank_pin"), COL["hub"]),
@@ -265,6 +265,8 @@ def sheets(only=None):
                    "  one end of each link (6 mm hole into the bore).",
                    "Fit: two lower links outside (64 to 92 from the centre line),",
                    "  two upper links inside (32 to 60), with spacers between.",
+                   "  A 2 mm felt or rubber dust seal washer (50 outside, 35.5 bore)",
+                   "  goes on the pin against each outer link face, round the bush.",
                    "Check: all four links stacked, a 35 pin passes through both ends."],
             **base))
 
@@ -480,9 +482,10 @@ def joints(only=None):
         J(4, [("Lugs, welded between the beam plates", win(C["lugs"].shape, *bx), "#64748B"),
               ("Spacers", win(C["base_spacers"].shape, *bx), "#1F2937"),
               ("Lower links, outside", win(C["lower_links"].shape, *bx), COL["lower"]),
+              ("Dust seals (felt), outside the links", win(C["seals_base"].shape, *bx), COL["seal"]),
               ("Base pin, 35 mm", win(C["base_pin"].shape, *bx), "#E5E7EB"),
               ("Column webs", win(C["columns"].shape, *bx), "#CBD5E1")],
-          "base pin, lugs, spacers and lower links", "Cut through the pin's axis, seen from the lever side. Order across: web, link, spacer, lug, lug, spacer, link, web",
+          "base pin, lugs, spacers and lower links", "Cut through the pin's axis, seen from the lever side. Order across: web, seal, link, spacer, lug, lug, spacer, link, seal, web",
           cut="+X", elev=8, azim=180)
     if want(5):   # knee
         kx, kz = toggle_state(theta_start())[0]
@@ -491,14 +494,16 @@ def joints(only=None):
               ("Upper links", win(C["upper_links"].shape, *bx), COL["upper"]),
               ("Spacers", win(C["knee_spacers"].shape, *bx), COL["spacer"]),
               ("Connecting link, centre", win(C["conlink"].shape, *bx), COL["conlink"]),
+              ("Dust seals (felt), on the outer link faces", win(C["seals_knee"].shape, *bx), COL["seal"]),
               ("Knee pin, 35 mm", win(C["knee_pin"].shape, *bx), "#E5E7EB")],
-          "the knee", "Cut through the pin's axis, seen from the lever side. Lower links outside, upper links inside, connecting link in the middle",
+          "the knee", "Cut through the pin's axis, seen from the lever side. Lower links outside, upper links inside, connecting link in the middle; a dust seal on each outer link face",
           cut="+X", elev=8, azim=180)
     if want(6):   # upper pin in slot, cut down the middle so the slot shows
         zp = D["zp0"]
         bx = (-80, 80, -90, 90, zp - 200, zp + 90)
         J(6, [("Push rod with its slot", win(C["piston"].shape, *bx), COL["piston"]),
               ("Upper link (far side)", win(C["upper_links"].shape, *bx), COL["upper"]),
+              ("Dust seal (felt)", win(C["seals_upper"].shape, *bx), COL["seal"]),
               ("Upper pin, 35 mm", win(C["upper_pin"].shape, *bx), "#E5E7EB")],
           "upper pin in the push rod's slot", "Cut down the middle, seen from the front. The pin bears on the top of the slot when pressing; the rod rises 165 mm past it when ejecting",
           cut="+Y", elev=5, azim=-90)
@@ -586,21 +591,24 @@ def steps(only=None):
     done4 = [M["base"], M["core"], M["mold"], part("Piston", A["piston"].shape, COL["piston"])]
     st(5, done4, [mv(part("Lower links", A["lower_links"].shape, COL["lower"]), (-200, 0, 0)),
                   mv(part("Base pin, through the access hole", A["base_pin"].shape, COL["pin"]), (0, 280, 0)),
-                  mv(part("Spacers", A["base_spacers"].shape, COL["spacer"]), (0, 0, 0))],
-       "lower links on the base pin", "Hold links and spacers between the lugs; push the pin in through the +Y column's lower access hole; circlip",
+                  mv(part("Spacers", A["base_spacers"].shape, COL["spacer"]), (0, 0, 0)),
+                  mv(part("Dust seals (felt)", A["seals_base"].shape, COL["seal"]), (0, 0, 0))],
+       "lower links on the base pin", "Hold links and spacers between the lugs, a dust seal on each outer link face; push the pin in through the +Y column's lower access hole; circlip",
        elev=18, azim=-125, label_done=False)
     done5 = done4 + [part("Lower links", S("lower_links", "base_pin", "base_spacers"), COL["lower"])]
-    done5 = [done5[0], done5[1], done5[2], done5[3], part("Lower links", _fuse([A[k].shape for k in ("lower_links", "base_pin", "base_spacers")]), COL["lower"])]
+    done5 = [done5[0], done5[1], done5[2], done5[3], part("Lower links", _fuse([A[k].shape for k in ("lower_links", "base_pin", "base_spacers", "seals_base")]), COL["lower"])]
     st(6, done5, [mv(part("Upper links", A["upper_links"].shape, COL["upper"]), (-200, 0, 80)),
                   mv(part("Knee pin and spacers", _fuse([A["knee_pin"].shape, A["knee_spacers"].shape]), COL["pin"]), (0, -300, 0)),
-                  mv(part("Connecting link", A["conlink"].shape, COL["conlink"]), (-150, 0, -60))],
-       "the knee", "Upper links inside the lower links, connecting link in the middle between two spacers; knee pin from the side; circlips",
+                  mv(part("Connecting link", A["conlink"].shape, COL["conlink"]), (-150, 0, -60)),
+                  mv(part("Dust seals (felt)", A["seals_knee"].shape, COL["seal"]), (0, 0, 0))],
+       "the knee", "Upper links inside the lower links, connecting link in the middle between two spacers; a dust seal on each outer link face; knee pin from the side; circlips",
        elev=18, azim=-125, label_done=False)
-    done6 = done5 + [part("Upper links and knee", _fuse([A[k].shape for k in ("upper_links", "knee_pin", "knee_spacers", "conlink")]), COL["upper"])]
-    st(7, done6, [mv(part("Upper pin, through the upper access hole", A["upper_pin"].shape, COL["pin"]), (0, 300, 0))],
-       "upper pin through the rod's slot", f"Fold the knee back until the link holes line up with the slot and the upper access hole ({D['zp_asm']:.0f} mm up); pin in, circlip",
+    done6 = done5 + [part("Upper links and knee", _fuse([A[k].shape for k in ("upper_links", "knee_pin", "knee_spacers", "conlink", "seals_knee")]), COL["upper"])]
+    st(7, done6, [mv(part("Upper pin, through the upper access hole", A["upper_pin"].shape, COL["pin"]), (0, 300, 0)),
+          mv(part("Dust seals (felt)", A["seals_upper"].shape, COL["seal"]), (0, 0, 0))],
+       "upper pin through the rod's slot", f"Fold the knee back until the link holes line up with the slot and the upper access hole ({D['zp_asm']:.0f} mm up); a dust seal on each outer link face; pin in, circlip",
        elev=18, azim=-125, label_done=False)
-    T = [M["base"], M["core"], M["mold"], M["piston"], part("Toggle", S("lower_links", "upper_links", "base_pin", "knee_pin", "upper_pin", "base_spacers", "knee_spacers", "conlink"), COL["lower"])]
+    T = [M["base"], M["core"], M["mold"], M["piston"], part("Toggle", S("lower_links", "upper_links", "base_pin", "knee_pin", "upper_pin", "base_spacers", "knee_spacers", "conlink", "seals_base", "seals_knee", "seals_upper"), COL["lower"])]
     st(8, T, [mv(part("Lever hub", C["hub"].shape, COL["hub"]), (0, 0, 220)),
               mv(part("Shaft, 40 mm, and washers", C["shaft"].shape, COL["pin"]), (0, -260, 0)),
               mv(part("Crank pin", C["crank_pin"].shape, "#D1D5DB"), (0, 220, 0))],

@@ -3,9 +3,9 @@ doc_id: EPR-BLD-001
 title: EarthPress prototype build plan
 project: EarthPress
 doc_type: Build plan
-version: "0.2"
+version: "0.4"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,6 +17,14 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: Budget treated as a value-engineering target
+  - version: "0.3"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Section 2: the changes recorded in EPR-DDR-003 accepted by Amish on 2026-10-02"
+  - version: "0.4"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: 'Dust seals at the bush faces added (parts, steps 5 to 7, pictures); section 3.15 soil test kit procedure with the operating chart, scoop rule and lime mix chart; cost USD 523'
 ---
 
 # EarthPress prototype build plan
@@ -29,13 +37,13 @@ revisions:
 
 *Figure 1. Every component pulled apart and numbered in build order. The soil sieve, test kit and block gauge are separate and are made last.*
 
-The prototype is one EarthPress: a welded steel press about 1.3 m long, 0.6 m wide and 1 m to the mold rim, with a removable 1.7 m lever, plus its soil sieve, soil test kit and block gauge. Figure 1 shows the 14 press components in the order you make or fit them. Thirteen are made in a welding shop: the base frame and the press core (two welded pieces that bolt together), the mold box, the lid, the piston with its push rod, four toggle links, the connecting link, the lever hub, the rest catch and end pawl, the eject seesaw, the linkage guard and the lever pipe. Bought parts are the turned pins, shaft and bushes, spacer tubes, bolts, springs and the test kit. The work is sawing, flame or plasma cutting, drilling, tapping, stick welding and grinding of mild steel plate, channel, tube and pipe. The parts cost about $520 from the bill of materials, against a value-engineering target of $500.
+The prototype is one EarthPress: a welded steel press about 1.3 m long, 0.6 m wide and 1 m to the mold rim, with a removable 1.7 m lever, plus its soil sieve, soil test kit and block gauge. Figure 1 shows the 14 press components in the order you make or fit them. Thirteen are made in a welding shop: the base frame and the press core (two welded pieces that bolt together), the mold box, the lid, the piston with its push rod, four toggle links, the connecting link, the lever hub, the rest catch and end pawl, the eject seesaw, the linkage guard and the lever pipe. Bought parts are the turned pins, shaft and bushes, spacer tubes, bolts, springs and the test kit. The work is sawing, flame or plasma cutting, drilling, tapping, stick welding and grinding of mild steel plate, channel, tube and pipe. The parts cost about $523 from the bill of materials, against a value-engineering target of $500.
 
 > **Safety:** The finished press puts 81 kN (over 8 tonne-force) on the block, and up to 173 kN if two people pull hard at the end of the stroke. Keep hands out of the mold, the linkage and the eject arm whenever anyone is on the lever. Building it involves welding, grinding and cutting: wear welding PPE, guard the grinder, and work away from anything that burns. The press weighs about 200 kg; its heaviest piece, the base frame, is 45 kg: lift every piece with two people.
 
 ## 2. What changed to make it buildable
 
-The concept showed what the press does; some of its parts could not be made or fixed as drawn. Each change below keeps what the press does, and all of them are recorded in decision record EPR-DDR-003, open for Amish's review.
+The concept showed what the press does; some of its parts could not be made or fixed as drawn. Each change below keeps what the press does, and all of them are recorded in decision record EPR-DDR-003, accepted by Amish on 2026-10-02.
 
 *Table 1. Changes from the concept.*
 
@@ -46,7 +54,7 @@ The concept showed what the press does; some of its parts could not be made or f
 | Base beam and lugs | Beam plates overlapping the columns; lugs floating above the beam | Beam plates on the outside of the column flanges; lugs welded between them (Figure 12) | One welded clevis for the base pin |
 | Piston | A guide strap under the mold, in the path of the links at the end of the stroke | Strap removed; two end skirts under the piston keep it square in the mold (Figure 9) | Nothing in the links' path |
 | Toggle pins | Pins that could not pass the column webs; links free to slide along their pins | Access holes in one column for the base pin and the upper pin; spacer tubes on the pins (Figures 10 and 12) | The pins can be fitted, and every link is located |
-| Links | Bars ending at the pin centres | Round ends and pressed-in bushes on every link (Figure 11) | Metal round every hole |
+| Links | Bars ending at the pin centres | Round ends and pressed-in bushes on every link, with a felt or rubber dust seal washer on each outer link face (Figure 11) | Metal round every hole; grit kept out of the bushes |
 | Lid hinge and latch | A hinge knuckle cutting into the mold; a latch hook that sat above its keeper | Lid ribs cut long as ears; a 30 mm hinge pin and a 30 mm latch pin through lugs on the mold (Figures 23 and 24) | Each pin works in double shear and holds the full force |
 | Rest stop and end pawl | A rest bar in the lever's path; a pawl that could not reach the lever | A rest stop bar under the crank, and a spring catch and pawl that drop onto the crank pin at the start and the end of the stroke (Figures 16 and 18) | The lever cannot fall into the stroke or kick back |
 | Eject lever | A fork that crossed the links at the end of the stroke | One central cranked arm whose round nose lifts the push rod's foot (Figure 20) | The arm stays inside the rod's width |
@@ -184,6 +192,7 @@ The piston has 1 mm clearance each side in the mold; the upper links pass 2 mm f
 3. Round both ends to a 35 radius about the centres.
 4. Press a bush into each bore with a vice or press. Drill a 6 hole from the edge into one bore of each link and fit a grease nipple.
 5. Ream the bushes to a light running fit on the 35 pins.
+6. Cut or buy eight dust seal washers, 2 thick, 50 outside and 35.5 bore, from felt or rubber sheet (the toggle needs eight in all).
 
 **How it fits the parts next to it.**
 
@@ -377,12 +386,47 @@ A washer and circlip hold each shaft; a torsion spring holds the tip against the
 
 **Check before moving on.** The mesh is tight and has no torn wires.
 
-### 3.15 Bought components
+### 3.15 Soil test kit: how to use it, with the operating chart and the lime chart
+
+The kit (BOM line 9) tells you whether a soil can be used and how to fill the mold. The numbers below are calculated, not yet tested; the laminated chart in the kit repeats them, and they are redone for each soil once a partner's soils are measured.
+
+**Choosing and mixing.** Sieve the soil through the 5 mm mesh. Run the jar test and the shrinkage box test as printed on the chart to see whether the soil is sandy, silty or clay-rich. Cement at 5 % of the dry soil mass is the default; lime is the option for clay-rich soils or where cement is scarce.
+
+**Weighing every fill.** Weigh each fill of moist mix on the hanging scale: 7.64 kg is the nominal mass for the 290 x 140 x 90 mm block.
+
+*Table 2. Operating chart for the design soil (the softer soil), two operators on the T-handle.*
+
+| Fill over the nominal 7.64 kg | Result at the stop | Peak pull for each operator | What to do |
+| --- | --- | --- | --- |
+| Under 0 % (less than 7.64 kg) | Block under strength, under 2 MPa | Under 405 N | Add soil and weigh again |
+| 0 % to +2 % (7.64 to 7.79 kg) | Good block, 90 mm high | 405 to 498 N | Press. The target is +1 % (7.72 kg), give or take 75 g |
+| Over +2 % (more than 7.79 kg) | Operators stall short of the stop; block too tall and weak | Above 500 N | Take some soil out and weigh again |
+
+The softest soil measured so far sets this chart: the pull peaks at 809 N in total, 405 N for each operator, which is under the 500 N limit. A stiffer soil needs less pull and gives a wider fill range, so the chart is safe for it; a still softer soil needs a new chart.
+
+**The scoop rule.** A scoop may replace weighing only for a soil where its scatter has been measured. Weigh 20 scoops of the prepared mix. Accept the scoop only if the mass of one scoop varies by no more than 34 g either way as a typical spread (a standard deviation of 34 g or less) and the average is on the target of the chart. Test again for a new soil, a new moisture or a new scoop.
+
+**Lime option, mix chart.** These are starting values from the calculation and common practice; they are to be confirmed by block strength tests before anyone relies on them.
+
+*Table 3. Lime mix per block and per 100 blocks.*
+
+| Item | Cement (default) | Lime (option) |
+| --- | --- | --- |
+| Share of the dry soil mass | 5 % | 8 % |
+| Binder per block | 0.33 kg | 0.51 kg |
+| Binder per 100 blocks | 33 kg | 51 kg |
+| Water per block | 0.69 kg | 0.69 kg |
+| Fill mass per block | 7.64 kg | 7.64 kg |
+| Keep damp under cover | About 4 weeks | About 8 weeks |
+
+Mix the lime dry into the sieved soil first, then add the water, and press the mix the same day. The press, its stroke and the dwell are the same for both binders. Blocks made with lime gain strength more slowly, so keep them damp under cover for the longer time before stacking them for use, and handle them gently for the first two weeks. Wear gloves and eye protection when mixing lime and cement.
+
+### 3.16 Bought components
 
 Buy to specification, not brand. Line numbers are those of the bill of materials.
 
 - **Toggle pins (line 5).** Three C45 turned pins, 35 diameter, with a circlip groove near each end: two 192 long (base and knee) and one 128 long (upper).
-- **Bushes and spacers (line 5).** Ten case-hardened steel bushes, 35 bore, 41 outside, 28 long (eight for the links, two for the lugs); two spacer tubes 50 x 35.5 inside, 16 long (base pin) and two 20 long (knee pin); six grease nipples.
+- **Bushes and spacers (line 5).** Ten case-hardened steel bushes, 35 bore, 41 outside, 28 long (eight for the links, two for the lugs); two spacer tubes 50 x 35.5 inside, 16 long (base pin) and two 20 long (knee pin); six grease nipples; eight dust seal washers of felt or rubber, 2 thick, 50 outside and 35.5 bore.
 - **Hub shaft and pins (lines 3, 6, 7).** One 40 shaft 154 long; one 30 crank pin 112 long; two 30 pins 196 long (hinge and latch, the latch pin with a welded T-handle); one 30 eject pin 152 long; all C45 with circlip grooves; one 12 locking pin with R-clip.
 - **Springs (line 7).** Two small torsion springs for the catch and the pawl.
 - **Fixings (line 11).** Eight M16 x 20 grade 8.8 hex bolts with washers; eight M12 x 40 and four M12 x 50 grade 8.8 bolts with nuts and washers; four M10 x 30 and four M10 x 50 bolts with nuts, and four 35 mm spacer tubes; ten 10 mm washers for the hub and seesaw; circlips for every pin.
@@ -421,19 +465,19 @@ Rod first, with the slot running across the press. Let it down until the plate i
 
 ![Step 5](05-build-plan/step-05.png)
 
-Hold the two lower links and two spacers between the lugs and push the base pin in from the +Y side through the column's lower access hole. Circlips on both ends.
+Hold the two lower links and two spacers between the lugs and push the base pin in from the +Y side through the column's lower access hole. Fit a dust seal washer on the pin against each outer link face. Circlips on both ends.
 
 ### Step 6: the knee
 
 ![Step 6](05-build-plan/step-06.png)
 
-Put the upper links inside the lower links' free ends, the connecting link in the middle between the two knee spacers, and push the knee pin through from the side. Circlips.
+Put the upper links inside the lower links' free ends, the connecting link in the middle between the two knee spacers, and push the knee pin through from the side. Fit a dust seal washer against each outer link face before the circlips. Circlips.
 
 ### Step 7: upper pin through the rod's slot
 
 ![Step 7](05-build-plan/step-07.png)
 
-Fold the knee back until the upper links' holes line up with the rod's slot and the column's upper access hole (699 above the ground); move the piston's prop to suit. Push the upper pin in through the access hole, the links and the slot. Circlips. Take out the prop.
+Fold the knee back until the upper links' holes line up with the rod's slot and the column's upper access hole (699 above the ground); move the piston's prop to suit. Push the upper pin in through the access hole, the links and the slot. Fit a dust seal washer against each outer upper link face. Circlips. Take out the prop.
 
 ### Step 8: lever hub on its shaft; crank pin
 
@@ -475,7 +519,7 @@ Slide the pipe into the hub socket past the locking hole; fit the 12 mm pin and 
 
 These are the checks a TRL 4 test report would record; this plan only lists them. Requirement numbers are those of EPR-REQ-001.
 
-*Table 2. First checks.*
+*Table 4. First checks.*
 
 | Check | Requirement | How | Pass when |
 | --- | --- | --- | --- |
@@ -516,8 +560,8 @@ Stop at each point. Carry on only when everything listed is true.
 
 - Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`); STEP and STL exports in `cad/step/` and `cad/stl/`.
 - Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/EPR-DWG-101` to `EPR-DWG-115`.
-- General arrangement: `cad/drawings/EPR-DWG-001.pdf`, Rev P2.
-- Calculations: `docs/04-calcs/01-sizing.md` (EPR-CAL-001 v0.3) and `docs/04-calcs/sizing.py`; forces and grip heights section 4, structure section 6, ejection section 7, mass section 8.
+- General arrangement: `cad/drawings/EPR-DWG-001.pdf`, Rev P3.
+- Calculations: `docs/04-calcs/01-sizing.md` (EPR-CAL-001 v0.6) and `docs/04-calcs/sizing.py`; forces and grip heights section 4, structure section 6, ejection section 7, mass section 8; operating chart section 4b and lime chart section 4c of `sizing.py`.
 - Bill of materials: `bom/bom.csv`.
-- Decisions: `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003), with EPR-DDR-001 and EPR-DDR-002; open decisions in `docs/06-design-decisions.md` (EPR-DEC-001).
-- Requirements: `docs/03-requirements.md` (EPR-REQ-001 v0.5).
+- Decisions: `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003), with EPR-DDR-001 and EPR-DDR-002; `docs/06-design-decisions.md` (EPR-DEC-001).
+- Requirements: `docs/03-requirements.md` (EPR-REQ-001 v0.8).

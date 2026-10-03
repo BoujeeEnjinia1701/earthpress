@@ -205,6 +205,45 @@ w_one = [reach(A["decade_mm"], A["G_one"], BH * e) for e in [k / 1000 for k in r
 best_one = max(F / area for (_, F, st) in w_one if st) if any(st for (_, _, st) in w_one) else max(F / area for (_, F, _) in w_one)
 out("fill", "Best pressure one operator reaches at any overfill", best_one, "MPa", "{:.2f}")
 
+# ---------------------------------------------------------------- 4b operating chart for the softer design soil
+head("4b. Operating chart, softer design soil (EPR-DEC-001, 2026-10-02)")
+DEC_SOFT = A["decade_hi"]
+out("chart", "Design soil: pressure rises tenfold over the last", DEC_SOFT, "mm")
+out("chart", "Peak grip force at nominal fill, total", max(grip_profile(DEC_SOFT)), "N", "{:.0f}")
+out("chart", "Peak grip force at nominal fill, per operator (two on the T-handle)", max(grip_profile(DEC_SOFT)) / 2, "N", "{:.0f}")
+for e in (-0.02, -0.01, 0.0, 0.01, 0.013, 0.02, 0.027, 0.04):
+    sft = BH * e
+    s_c, F_c, st_c = reach(DEC_SOFT, A["G_two"], sft)
+    pk = max(soil_force(s_mm[i], DEC_SOFT, sft) / MA[i] for i in range(N) if s_mm[i] <= s_c)
+    out("chart", f"Fill {e * 100:+.1f} % ({e * m_moist * 1000:+.0f} g): pressure, height, peak grip per operator",
+        f"{F_c / area:.2f} MPa, {BH + (s_mm[-1] - s_c):.1f} mm, {pk / 2:.0f} N, {'at the stop' if st_c else 'operators stall'}", "")
+win_soft = []
+for k in range(-50, 101):
+    e = k / 1000
+    s_c, F_c, st_c = reach(DEC_SOFT, A["G_two"], BH * e)
+    if st_c and F_c / area >= A["p_target_MPa"] - 1e-9:
+        win_soft.append(e)
+out("chart", "Fill window for 2 MPa at the stop, softer soil, two operators", f"{min(win_soft) * 100:+.1f} to {max(win_soft) * 100:+.1f}", "%")
+half_g = (e_hi - e_lo) / 2 * m_moist * 1000
+out("chart", "Weighed fill target, base soil window, centre", (e_lo + e_hi) / 2 * m_moist * 1000, "g over nominal", "{:+.0f}")
+out("chart", "Half-width of the fill window", half_g, "g", "{:.0f}")
+out("chart", "Scoop rule: largest scoop-to-mass standard deviation allowed (three of them fill half the window)", half_g / 3, "g", "{:.0f}")
+out("chart", "Scoop rule: as a share of the moist fill mass", half_g / 3 / (m_moist * 1000) * 100, "%", "{:.2f}")
+
+# ---------------------------------------------------------------- 4c lime option (mix chart)
+head("4c. Lime option, mix chart (EPR-DEC-001, 2026-10-02; starting values, to be confirmed by wet-strength tests)")
+LIME_FRAC = 0.08          # of dry soil mass for clay-rich soils (assumed starting value; cement default is 5 %)
+CURE_CEMENT_WEEKS, CURE_LIME_WEEKS = 4, 8     # damp curing, weeks (cement as in EPR-PRC-001; lime longer, assumed)
+m_soil_l = m_dry / (1 + LIME_FRAC)
+out("lime", "Lime fraction of dry soil (assumed starting value)", LIME_FRAC * 100, "%", "{:.0f}")
+out("lime", "Dry soil per block with lime", m_soil_l, "kg", "{:.2f}")
+out("lime", "Hydrated lime per block", m_soil_l * LIME_FRAC, "kg", "{:.2f}")
+out("lime", "Hydrated lime per 100 blocks (cement: " + f"{100 * m_dry * A['cement_frac'] / (1 + A['cement_frac']):.0f} kg)", 100 * m_soil_l * LIME_FRAC, "kg", "{:.0f}")
+out("lime", "Water per block (10 % of dry mix mass, as for cement)", m_dry * A["water_frac"], "kg", "{:.2f}")
+out("lime", "Moist fill mass per block (unchanged: same dry block mass and water)", m_moist, "kg", "{:.2f}")
+out("lime", "Damp curing, cement default", CURE_CEMENT_WEEKS, "weeks")
+out("lime", "Damp curing, lime option (assumed, longer)", CURE_LIME_WEEKS, "weeks")
+
 # ---------------------------------------------------------------- 5 design load and structure
 head("5. Design load and structure (R12, R8)")
 F_abuse = A["G_two"] * MA[-1]
@@ -333,7 +372,12 @@ for n, m in masses.items():
 tot = sum(masses.values())
 out("mass", "Press total, steel", tot, "kg")
 out("mass", "Heaviest single piece", max(masses.values()), "kg")
-out("mass", "Margin to the R7 total of 190 kg (EPR-DDR-002); negative is over", 190.0 - tot, "kg")
+R7_TOTAL = 200.0   # kg, R7 total including the guard and bolts (Amish, 2026-10-02, EPR-DDR-003 A1); was 190 kg
+out("mass", "Margin to the R7 total of 200 kg including guard and bolts (2026-10-02); negative is over", R7_TOTAL - tot, "kg", "{:.2f}")
+m_seals = 8 * math.pi / 4 * (P["seal_od"] ** 2 - P["seal_id"] ** 2) * P["seal_t"] * 0.30e-6   # eight felt washers at 0.30 g/cm3 (assumed)
+out("mass", "Eight felt dust seal washers (assumed 0.30 g/cm3; not steel)", m_seals, "kg", "{:.4f}")
+out("mass", "Press total with the dust seals", tot + m_seals, "kg", "{:.3f}")
+out("mass", "R7 total met (200 kg or less with the seals, heaviest piece 50 kg or less)", "yes" if tot + m_seals <= R7_TOTAL and max(masses.values()) <= 50.0 else "no")
 out("mass", "Lever pipe alone (removable)", math.pi / 4 * (Do ** 2 - Di ** 2) * P["lever_len"] * 7850e-9, "kg")
 
 # ---------------------------------------------------------------- 8 output and crew

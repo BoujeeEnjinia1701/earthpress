@@ -3,7 +3,7 @@ doc_id: EPR-DDR-003
 title: EarthPress design for construction
 project: EarthPress
 doc_type: Design decision record
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -21,12 +21,16 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "A1 and A3 accepted by Amish (2026-10-02); Table 1 still open for his review; status kept Draft"
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Table 1 changes (P1 to P15) accepted by Amish on 2026-10-02"
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-10-01
-- **Status:** Draft. The changes in Table 1 were made under Amish's 2026-09-30 instruction to make the design physically buildable; they are open for his review. Of the items in Table 3, A1 and A3 were accepted by Amish on 2026-10-02 as recommended in the design decisions register (EPR-DEC-001): "i approve your recommendations for all 555 open decisions." A2 needed no decision and is carried in the register's Value engineering section.
+- **Status:** accepted. Amish, 2026-10-02: "APPROVED: Design-for-construction changes in 10 repos (CityTwin, CoolShade, PalletPilot, Heliolite, PotholeLog, EarthPress, ReadyKit, CellCheck, CargoMule and ThermaCart)". This covers the changes P1 to P15 in Table 1, made under Amish's 2026-09-30 instruction to make the design physically buildable, and is recorded in the design decisions register (EPR-DEC-001). Of the items in Table 3, A1 and A3 were accepted by Amish earlier the same day as recommended in the design decisions register (EPR-DEC-001): "i approve your recommendations for all 555 open decisions." A2 needed no decision and is carried in the register's Value engineering section.
 
 ## Context
 

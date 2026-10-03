@@ -60,6 +60,30 @@ fill,"Fill +0 %: pressure, block height","2.00 MPa, 90.0 mm",
 fill,"Fill +2 %: pressure, block height","2.69 MPa, 90.0 mm",
 fill,"Fill +4 %: pressure, block height","1.15 MPa, 97.0 mm",
 fill,Best pressure one operator reaches at any overfill,0.53,MPa
+chart,Design soil: pressure rises tenfold over the last,20.0,mm
+chart,"Peak grip force at nominal fill, total",809,N
+chart,"Peak grip force at nominal fill, per operator (two on the T-handle)",405,N
+chart,"Fill -2.0 % (-153 g): pressure, height, peak grip per operator","1.63 MPa, 90.0 mm, 329 N, at the stop",
+chart,"Fill -1.0 % (-76 g): pressure, height, peak grip per operator","1.80 MPa, 90.0 mm, 365 N, at the stop",
+chart,"Fill +0.0 % (+0 g): pressure, height, peak grip per operator","2.00 MPa, 90.0 mm, 405 N, at the stop",
+chart,"Fill +1.0 % (+76 g): pressure, height, peak grip per operator","2.22 MPa, 90.0 mm, 449 N, at the stop",
+chart,"Fill +1.3 % (+99 g): pressure, height, peak grip per operator","2.29 MPa, 90.0 mm, 463 N, at the stop",
+chart,"Fill +2.0 % (+153 g): pressure, height, peak grip per operator","2.46 MPa, 90.0 mm, 498 N, at the stop",
+chart,"Fill +2.7 % (+206 g): pressure, height, peak grip per operator","1.07 MPa, 97.9 mm, 501 N, operators stall",
+chart,"Fill +4.0 % (+305 g): pressure, height, peak grip per operator","0.90 MPa, 100.5 mm, 502 N, operators stall",
+chart,"Fill window for 2 MPa at the stop, softer soil, two operators",+0.0 to +2.0,%
+chart,"Weighed fill target, base soil window, centre",+103,g over nominal
+chart,Half-width of the fill window,103,g
+chart,Scoop rule: largest scoop-to-mass standard deviation allowed (three of them fill half the window),34,g
+chart,Scoop rule: as a share of the moist fill mass,0.45,%
+lime,Lime fraction of dry soil (assumed starting value),8,%
+lime,Dry soil per block with lime,6.43,kg
+lime,Hydrated lime per block,0.51,kg
+lime,Hydrated lime per 100 blocks (cement: 33 kg),51,kg
+lime,"Water per block (10 % of dry mix mass, as for cement)",0.69,kg
+lime,Moist fill mass per block (unchanged: same dry block mass and water),7.64,kg
+lime,"Damp curing, cement default",4.0,weeks
+lime,"Damp curing, lime option (assumed, longer)",8.0,weeks
 str,"Abuse load: 1,000 N at the grip at the stop",173.0,kN
 str,Equivalent pressure on the block,4.26,MPa
 str,"R12 latch requirement, 1.5 x nominal block force",121.8,kN
@@ -124,7 +148,10 @@ mass,Linkage guard,5.5,kg
 mass,Bolts,1.2,kg
 mass,"Press total, steel",200.0,kg
 mass,Heaviest single piece,45.0,kg
-mass,Margin to the R7 total of 190 kg (EPR-DDR-002); negative is over,-10.0,kg
+mass,Margin to the R7 total of 200 kg including guard and bolts (2026-10-02); negative is over,0.01,kg
+mass,Eight felt dust seal washers (assumed 0.30 g/cm3; not steel),0.0047,kg
+mass,Press total with the dust seals,199.996,kg
+mass,"R7 total met (200 kg or less with the seals, heaviest piece 50 kg or less)",yes,
 mass,Lever pipe alone (removable),9.2,kg
 out,Cycle time,85,s
 out,Blocks per 8 h day (7 h working),296,
@@ -152,7 +179,7 @@ house,Walling volume,7.07,m3
 house,"CO2, CSEB",0.35,t
 house,"CO2, fired brick",4.55,t
 house,CSEB as a share of fired brick,7.6,%
-cost,"BOM total, press and kit",520,USD
+cost,"BOM total, press and kit",523,USD
 cost,Budget in project.yaml,500,USD
-cost,Under budget by,-20,USD
+cost,Under budget by,-23,USD
 cost,Steel in the press at the indicative price,260,USD

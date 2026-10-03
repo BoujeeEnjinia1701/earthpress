@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1388476301.svg)](https://zenodo.org/badge/latestdoi/1388476301) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/earthpress/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/earthpress/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/earthpress/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/earthpress)
 
-**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** about $500 USD (estimated parts cost $520) · **Difficulty:** 3 of 5
+**Area:** Sustainable Housing · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** about $500 USD (estimated parts cost $523) · **Difficulty:** 3 of 5
 
 A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.
 
@@ -14,7 +14,7 @@ A manual compressed earth block press with a lever and toggle linkage, producing
 
 Compressed stabilized earth blocks turn the soil on a building site into walling with a fraction of the energy of fired brick, but only if someone has a press. A manual lever and toggle press needs no fuel, power or hydraulics, can be welded from stock steel sections, and puts block making in the hands of the builder instead of a factory. The toggle suits the job because soil gets stiffer as it compacts, and a toggle's force ratio rises sharply at the end of its stroke, exactly where the force is needed.
 
-EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press and soil kit come to about $520 in parts (indicative), well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
+EarthPress is open hardware so that a local welder can build, repair and adapt it without license fees or a distant supplier, and so that the soil test kit and mix guidance travel with it. The press and soil kit come to about $523 in parts (indicative), well below the thousands of dollars of hydraulic designs, and garage-buildable with a stick welder, grinder and drill press.
 
 ## Burning platform
 
@@ -55,7 +55,7 @@ Fired bricks and cement blocks carry high embodied carbon and cost; compressed e
 
 ## Concept
 
-A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, and, since the design was made buildable on 2026-10-01 ([EPR-DDR-003](docs/decisions/0003-design-for-construction.md)), a press of about 200 kg in pieces of 45 kg or less and about $520 in parts. Against the targets Amish accepted on 2026-09-25 ([EPR-DDR-002](docs/decisions/0002-recommendations-accepted.md)), R7 is met on paper against the 200 kg total, including the guard and bolts, that Amish set on 2026-10-02 (see the [design decisions register](docs/06-design-decisions.md)), and R13 is USD 20 over its $500 value-engineering target; R2 (pressure) and R4 (output) are at risk. See the [review note](docs/REVIEW.md).
+A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes. A 1.7 m lever drives a toggle under the piston to compact a weighed fill of moist, sieved soil into a 290 x 140 x 90 mm block at 2 MPa (81 kN); the same lever, moved to an eject socket, pushes the block out. The TRL 3 sizing note (EPR-CAL-001) gives a force ratio of 173:1 at the stop and a peak pull of 668 N, so two people share the lever on a T-handle. Estimates: about 296 blocks a day with a crew of four, and, since the design was made buildable on 2026-10-01 ([EPR-DDR-003](docs/decisions/0003-design-for-construction.md)), a press of about 200 kg in pieces of 45 kg or less and about $523 in parts. Against the targets Amish accepted on 2026-09-25 ([EPR-DDR-002](docs/decisions/0002-recommendations-accepted.md)), R7 is met on paper against the 200 kg total, including the guard and bolts, that Amish set on 2026-10-02 (see the [design decisions register](docs/06-design-decisions.md)), and R13 is USD 23 over its $500 value-engineering target; R2 (pressure) and R4 (output) are at risk. See the [review note](docs/REVIEW.md).
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 

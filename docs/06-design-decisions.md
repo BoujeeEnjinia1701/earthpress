@@ -3,7 +3,7 @@ doc_id: EPR-DEC-001
 title: EarthPress design decisions register
 project: EarthPress
 doc_type: Design decisions register
-version: "0.3"
+version: "0.5"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -21,6 +21,14 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Amish approved the recommendations for open decisions 1 to 8 (2026-10-02); moved to decisions made (EPR-DDR-003 A1 and A3 accepted)"
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Design for construction (EPR-DDR-003, P1 to P15) accepted by Amish on 2026-10-02; the 2026-10-01 row no longer says open for review"
+- version: "0.5"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Value engineering restated: USD 523 with the dust seals (USD 23 over the target)'
 ---
 
 # EarthPress design decisions register
@@ -46,10 +54,10 @@ None. All open decisions were decided on 2026-10-02.
 
 ## Value engineering
 
-Value-engineering target: USD 500 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 520 (USD 20 over the target). Main cost drivers and savings worth trying:
+Value-engineering target: USD 500 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 523 (USD 23 over the target). Main cost drivers and savings worth trying:
 
 - Steel is the main cost: 200 kg at about USD 1.30/kg is about USD 260. A lighter press (a 16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate, perhaps 10 kg) would save steel as well as mass; it was option (b) of the R7 mass decision, not taken on 2026-10-02, so it stays a saving worth trying.
-- The parts added to make the press buildable (EPR-DDR-003) account for the rise from USD 488.
+- The parts added to make the press buildable (EPR-DDR-003) account for the rise from USD 488 to USD 520; the felt or rubber dust seals at the bush faces (decided 2026-10-02, about USD 3) take it to USD 523.
 - Plain pins without bushes would save about USD 30, but R8 (wear) would fail, so this is a saving to weigh, not to take.
 - Local prices for steel, turned pins and bushes are to be confirmed when parts are bought; every price is indicative.
 
@@ -61,7 +69,7 @@ Value-engineering target: USD 500 (a hypothetical control target, not a limit). 
 | --- | --- | --- | --- |
 | 2026-09-25 | TRL 2 items 1 to 7 and 9: toggle and one lever (CINVA-Ram pattern), longer arc from a low pivot, 290 x 140 x 90 mm block, 2 MPa, 5 % cement, 12 mm base plate and bolted mold, field soil tests only, no pitch change | Amish: "i accept all your recommendations, go with them across all repos." | EPR-DDR-001, EPR-DDR-002 |
 | 2026-09-25 | TRL 3 items 10 to 16: separate eject seesaw with a lost-motion slot, two operators on a T-handle, R5 reworded, R7 total 190 kg, budget $500, weighed fill, linkage geometry, crank stop, ribbed lid, end pawl, linkage guard, hardened bushes, R4 at 296 blocks a day | Amish, same instruction | EPR-DDR-001, EPR-DDR-002 |
-| 2026-10-01 | Design for construction: columns turned, tapped mold flanges, pin access holes and spacers, round link ends, end skirts on the piston, lid pins in rib ears, rest catch and end pawl on the crank pin, central eject arm, ties moved, guard modelled, gauge made real (P1 to P15) | Made under Amish's 2026-09-30 instruction to make the design physically buildable ("fix the design assumptions to match and be physically feasible"); open for his review | EPR-DDR-003 |
+| 2026-10-01 | Design for construction: columns turned, tapped mold flanges, pin access holes and spacers, round link ends, end skirts on the piston, lid pins in rib ears, rest catch and end pawl on the crank pin, central eject arm, ties moved, guard modelled, gauge made real (P1 to P15) | Made under Amish's 2026-09-30 instruction to make the design physically buildable ("fix the design assumptions to match and be physically feasible"); the changes themselves were accepted on 2026-10-02 (below) | EPR-DDR-003 |
 | 2026-10-02 | R7 total mass: option (a). The R7 total is 200 kg, defined to include the guard and bolts, and the 50 kg piece limit is kept (heaviest piece 45 kg) | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-003, A1 |
 | 2026-10-02 | Rest catch release: option (a), hand release, for the prototype, with the build plan rule that the catch is in before the latch is opened; a foot pedal is considered only if timed cycles (R4) show the extra step costs output | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-003, A3 |
 | 2026-10-02 | First co-design partner: one that already trains builders in stabilized earth blocks and has local soils and cement supply. First candidate to approach: the Auroville Earth Institute in India, whose 290 x 140 x 90 mm block module the press uses | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-001, item 8 |
@@ -70,3 +78,4 @@ Value-engineering target: USD 500 (a hypothetical control target, not a limit). 
 | 2026-10-02 | Fill: weigh every fill, as decided (EPR-DDR-002, item 15); a calibrated scoop is allowed only for a soil whose scoop-to-mass scatter has been measured within the 0 to 2.7 % fill window | Amish: "i approve your recommendations for all 555 open decisions." | EPR-PRC-001, open questions |
 | 2026-10-02 | Stabilizer: cement stays the default; lime is a documented option with its own mix chart and a longer curing period; no change to the press or its dwell | Amish: "i approve your recommendations for all 555 open decisions." | EPR-PRC-001, open questions |
 | 2026-10-02 | Design soil: the operating chart is based on the softer soil (809 N peak, 405 N per operator, within R5's 500 N) until partner soils are measured, then each soil gets its own figure | Amish: "i approve your recommendations for all 555 open decisions." | EPR-PRC-001, open questions |
+| 2026-10-02 | Design for construction accepted: the changes P1 to P15, as made | Amish: "APPROVED: Design-for-construction changes in 10 repos (CityTwin, CoolShade, PalletPilot, Heliolite, PotholeLog, EarthPress, ReadyKit, CellCheck, CargoMule and ThermaCart)" | [EPR-DDR-003](decisions/0003-design-for-construction.md), Table 1 |

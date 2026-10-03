@@ -1,4 +1,4 @@
-"""EarthPress general arrangement drawing EPR-DWG-001 (Rev P2).
+"""EarthPress general arrangement drawing EPR-DWG-001 (Rev P3).
 
 Run from the repo root:  python cad/src/sheets.py
 Builds cad/drawings/EPR-DWG-001.svg, .pdf and .png from the parametric model.
@@ -21,10 +21,11 @@ views = project_views(asm, work)
 g = geometry()
 
 s = Sheet(project="EarthPress", title="Manual CSEB press: general arrangement", dwg_no="EPR-DWG-001",
-          rev="P2", author="Amish Chadha", date="2026-10-01", concept=True,
+          rev="P3", author="Amish Chadha", date="2026-10-02", concept=True,
           material="Mild steel plate, UPN 80, tube and 2 in pipe; C45 pins. See bom/bom.csv",
           revisions=[("P1", "Preliminary GA from the TRL 3 model (EPR-CAL-001)", "2026-09-25", "AC"),
-                     ("P2", "Constructable design (EPR-DDR-003): fixings, guard, catch, eject arm", "2026-10-01", "AC")])
+                     ("P2", "Constructable design (EPR-DDR-003): fixings, guard, catch, eject arm", "2026-10-01", "AC"),
+                     ("P3", "Dust seals at the bush faces (EPR-DEC-001, 2026-10-02)", "2026-10-02", "AC")])
 s.add_ortho(views, ["front", "top", "right"])
 s.add_svg(views["iso"], 276, 30, 140, 80, label="Isometric view", sublabel="Not to scale; seen from the front right and above")
 s.add_notes("Key dimensions and interfaces (mm)", [
@@ -33,7 +34,7 @@ s.add_notes("Key dimensions and interfaces (mm)", [
     f"Mold wall {P['wall']:.0f}, belt {P['belt_t']:.0f} x {P['belt_h']:.0f}; 8 x M16 into tapped flanges",
     "UPN 80 columns, webs toward the mold; pin access holes",
     f"Lid {P['lid_t']:.0f} plate + 2 ribs {P['rib_t']:.0f} x {P['rib_h']:.0f}; pins {P['hinge_pin_d']:.0f} in rib ears",
-    f"Toggle links {P['link_l']:.0f} c/c, {P['link_t']:.0f} x {P['link_w']:.0f}, round ends; pins {P['pin_d']:.0f}",
+    f"Toggle links {P['link_l']:.0f} c/c, {P['link_t']:.0f} x {P['link_w']:.0f}, round ends; pins {P['pin_d']:.0f}; {P['seal_t']:.0f} mm dust seals",
     f"Base pin at {g['z_b']:.0f}; stop at {P['theta_end']:.0f} deg from vertical",
     f"Lever pivot ({P['lever_x']:.0f}, {P['lever_z']:.0f}); crank {P['crank']:.0f}; link {P['conlink']:.0f}",
     f"Lever 2 in sch 40, grip radius {P['grip_r']:.0f}; arc 59 deg",

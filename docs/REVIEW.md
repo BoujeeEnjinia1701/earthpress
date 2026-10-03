@@ -302,7 +302,7 @@ All 8 moved to Decisions made in EPR-DEC-001, dated 2026-10-02; the Open decisio
 ### Documents changed
 
 - `docs/06-design-decisions.md` (EPR-DEC-001 v0.3): items 1 to 8 moved to Decisions made; Open decisions reads "None"; the lighter-press saving in Value engineering reworded now that decision 1 is made
-- `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003 v0.3): A1 and A3 recorded as accepted (status kept Draft; Table 1 still open for review, see below); R7 consequence updated
+- `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003 v0.3): A1 and A3 recorded as accepted (status kept Draft; Table 1 still open for review at that point, see below); R7 consequence updated
 - `docs/03-requirements.md` (EPR-REQ-001 v0.7): R7 relaxed to 200 kg including guard and bolts, now met on paper; R5 status gives the softer design soil; summary updated
 - `docs/04-calcs/01-sizing.md` (EPR-CAL-001 v0.5): R7 text and results row against 200 kg; softer design soil noted under R5
 - `docs/02-concept.md` (EPR-PRC-001 v0.7): R7 status; weighed fill and scoop rule; design soil; bush dust seals; lime option; plain mold walls
@@ -313,7 +313,7 @@ All 8 moved to Decisions made in EPR-DEC-001, dated 2026-10-02; the Open decisio
 - `docs/decisions/0002-recommendations-accepted.md` (EPR-DDR-002 v0.2): item 8 recorded as decided
 - PDFs regenerated with `python3 .kit/render.py`; superseded versions removed.
 
-Note: the register had no open item for accepting the design-for-construction changes P1 to P15 as a whole (EPR-DDR-003, Table 1), so this approval does not cover them; EPR-DDR-003 still says they are open for Amish's review, and the 2026-10-01 row in Decisions made says the same. They should be put to Amish, or confirmed as covered, before the record is treated as accepted.
+Note: the register had no open item for accepting the design-for-construction changes P1 to P15 as a whole (EPR-DDR-003, Table 1), so this approval did not cover them. Amish accepted them later on 2026-10-02 (see the next session).
 
 ### Follow-up actions to carry approved decisions into the design
 
@@ -336,3 +336,58 @@ Raised when the recommendations were written (2026-10-01) and kept here so they 
 - Item 7 overlaps a decision already made: 'lime for clay-rich soils' was accepted with the stabilizer choice on 2026-09-25 (EPR-DDR-001, item 5); only the chart and curing details are open.
 - The seven appearance items from REVIEW.md 2026-09-26 are not in the register. Two touch what the renders claim: item 4 shows one operator although the press needs two (668 N peak), and item 7 leaves the linkage guard out of the renders; both should be resolved before the renders are public.
 - Item 6 is already decided for now (weighed fill, EPR-DDR-002 item 15); the open part is only the future scoop rule.
+
+## Session 2026-10-02: design-for-construction changes accepted
+
+Amish, 2026-10-02: "APPROVED: Design-for-construction changes in 10 repos (CityTwin, CoolShade, PalletPilot, Heliolite, PotholeLog, EarthPress, ReadyKit, CellCheck, CargoMule and ThermaCart)". This accepts the design-for-construction changes P1 to P15 in Table 1 of EPR-DDR-003, which were left open for his review when the open decisions were decided earlier the same day. No other item is decided by it. trl stays 3; no build or test work was done, and the model, BOM, calculations and pictures are unchanged.
+
+### Documents changed
+
+- `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003 v0.4, status Draft): status line now "accepted" with Amish's words.
+- `docs/06-design-decisions.md` (EPR-DEC-001 v0.4): Decisions made row added, dated 2026-10-02; the 2026-10-01 row no longer calls the changes open for review.
+- `docs/05-build-plan.md` (EPR-BLD-001 v0.3): section 2 says EPR-DDR-003 is accepted.
+- PDFs regenerated.
+
+### Recommended next step
+
+No change: the follow-up actions of the previous session stand. TRL 4 remains on hold by Amish's instruction.
+
+## Session 2026-10-02: approved follow-ups carried out
+
+Authority: Amish, 2026-10-02, approved every follow-up action from the open-decision sign-off. `trl` and `trl_target` stay at 3; `budget_usd` is unchanged at 500. No commit or push.
+
+### Follow-ups
+
+1. Decision 1, R7 at 200 kg: done. `docs/04-calcs/sizing.py` re-run: steel 200.0 kg (199.991 kg) plus about 5 g of felt dust seals is 199.996 kg, so R7 is met on paper with a 4 g margin; `results.csv` updated. The margin is too small to mean anything; the weighed prototype decides.
+2. Decision 4, dust seals in the model and BOM: done. `cad/src/model.py` now has eight 2 mm felt or rubber washers (50 mm outside, 35.5 mm bore) on the outer link faces at the base, knee and upper pins; pins already ended 4 mm past the links, which leaves room for the seal and a 1.5 mm circlip, so no part of the stack-up changed. Model checks: 52 of 52 pass (new: seal contacts, circlip room, seal clearance from the column webs). BOM line 5 goes from USD 91 to USD 94 (eight washers at about USD 0.35, rounded to USD 3); STEP and STL regenerated.
+3. Decision 4, drawings and pictures: done. EPR-DWG-001 now Rev P3; the toggle link making sketch (EPR-DWG-107) notes the seals; joint pictures for the base pin, knee and upper pin, the overview and assembly steps 5 to 7 show them; concept media regenerated.
+4. Decisions 6 and 8, operating chart and scoop rule: done. New build plan section 3.15 (soil test kit procedure) carries the operating chart for the softer design soil and the scoop rule; `sizing.py` section 4b computes them. Finding: on the softer soil the good fill window narrows to 0 to +2.0 % (from 0 to +2.7 %), so the weighing target for it is +1.0 % (7.72 kg) give or take 75 g, not +1.3 %. Peak pull 809 N (405 N each) at nominal fill and 498 N each at +2.0 %.
+5. Decision 7, lime chart: done, as starting values to be confirmed by strength tests: 8 % hydrated lime (51 kg per 100 blocks against 33 kg of cement), about 8 weeks damp curing against about 4 (`sizing.py` section 4c; build plan Table 3). The 8 % and 8 weeks are my assumptions, not sourced figures.
+6. Decision 5, mold wall wear measurement: not done, TRL 4 test plan work.
+7. Decision 3, approach the Auroville Earth Institute: not done, outreach by Amish.
+
+### Requirement status changes
+
+- R7: met on paper (was not met against 190 kg until 2026-10-02; the calculation now confirms it): 199.996 kg.
+- R13: stays over the target, now by USD 23 (USD 523 against USD 500). Value-engineering target: USD 500. Estimated cost of the constructable design: USD 523 (USD 23 over the target).
+- No other status changed.
+
+### Documents changed and new versions
+
+EPR-CAL-001 v0.6; EPR-REQ-001 v0.8; EPR-PRC-001 v0.8; EPR-BLD-001 v0.4; EPR-DEC-001 v0.5. Also `README.md`, `bom/bom.csv`, `bom/bom-notes.md`, `docs/04-calcs/sizing.py` and `results.csv`, `cad/src/model.py`, `sheets.py`, `build_plan_media.py`, `concept_media.py`, `product_model.py`.
+
+### Render scenes
+
+`cad/src/product_model.py` was out of date (it still used parameters from before the constructable design and failed to run). It now takes every steel part from `cad/src/model.py` itself (round link ends, tapped flanges, access holes, catch, guard, bolts, seals) and adds only paint, rubber, felt, circlips, grease nipples, grips, the sieve, test kit, blocks and the mannequin. The decorative extras of 2026-09-26 that no longer match (nameplate, pinch-point label, rest stop pad, latch hook grip, mold rim band, bush flanges) are dropped; the guard is now shown. Scenes exported to `/home/claude/renders/earthpress` for the views hero, exploded and detail, with `earthpress__jobs.json`. Photoreal images, `card.png` and `social-preview.png` are to be made on Amish's Mac.
+
+### Cross-repo actions
+
+None for other repos.
+
+### Decisions proposed and awaiting Amish
+
+None new. The lime values (8 %, 8 weeks) in Table 3 of the build plan are starting figures to confirm at TRL 4.
+
+## 2026-10-02: photoreal renders redone on the constructable design
+
+Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.

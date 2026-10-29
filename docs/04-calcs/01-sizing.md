@@ -3,9 +3,9 @@ doc_id: EPR-CAL-001
 title: EarthPress sizing calculations
 project: EarthPress
 doc_type: Calculation note
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-25'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,13 +33,19 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: 'sizing.py re-run: R7 met at 200 kg (199.996 kg with the dust seals), BOM USD 523 with dust seals (R13 over by USD 23); operating chart for the softer design soil and the scoop rule added (section 5b)'
+- version: "0.7"
+  date: '2026-10-25'
+  author: Amish Chadha
+  change: 'Kit 1.9.1: pin bending and lug bearing checked (section 6b); the 35 mm C45 pins failed and were replaced by 40 mm 42CrMo4 +QT pins in 40 x 46 mm bushes with 28 mm lugs (EPR-DEC-001 F1, standing instruction); masses from the detailed model with bushes, fasteners and weld metal (203.8 kg, R7 not met); BOM USD 542; requirements renumbered PR-001 to PR-016 (EPR-PRS-001)'
 ---
 
 # EarthPress sizing calculations
 
-On paper the press reaches 2 MPa on the 290 x 140 x 90 mm block, but only with **two people on the lever** and a **weighed fill**. The toggle and 1.7 m lever give a force ratio of 173:1 at the stop, and the peak pull under the base soil assumption is **668 N**, which comes about 3 mm before the end of the stroke. One operator pulling 500 N stalls at about 0.5 MPa, so the press is a two-person machine, as Amish decided on 2026-09-25 (EPR-DDR-002). Against the targets he accepted that day, **R5** is met on paper (334 N per operator, grip 0.86 to 1.89 m, peak at 1.16 m). Since the design was made buildable on 2026-10-01 (EPR-DDR-003, v0.3 of this note), R7 was not met (200 kg against 190 kg; no piece over 45 kg, so the 50 kg piece limit is met) until Amish set the total at 200 kg including the guard and bolts on 2026-10-02, so it is now met on paper (199.996 kg, a 4 g margin), and **R13 is over its value-engineering target** (estimated $523 against a $500 target, USD 23 over, after the dust seals decided on 2026-10-02 added $3); the cost savings worth trying are in the design decisions register (EPR-DEC-001). R2 and R4 are **at risk**; R3, R8, R10 and R14 cannot be verified at TRL 3.
+On paper the press reaches 2 MPa on the 290 x 140 x 90 mm block, but only with **two people on the lever** and a **weighed fill**. The toggle and 1.7 m lever give a force ratio of 173:1 at the stop, and the peak pull under the base soil assumption is **668 N**, which comes about 3 mm before the end of the stroke. One operator pulling 500 N stalls at about 0.5 MPa, so the press is a two-person machine, as Amish decided on 2026-09-25 (EPR-DDR-002). Against the targets he accepted that day, **R5** is met on paper (334 N per operator, grip 0.86 to 1.89 m, peak at 1.16 m). Since the design was made buildable on 2026-10-01 (EPR-DDR-003, v0.3 of this note), R7 was not met (200 kg against 190 kg; no piece over 45 kg, so the 50 kg piece limit is met) until Amish set the total at 200 kg including the guard and bolts on 2026-10-02, so it was met on paper at 199.996 kg in v0.6; counted with every bush, nut, washer and weld bead in the kit 1.9.1 model and with the pin fix, it is **not met at 203.8 kg** (v0.7). **R13 is over its value-engineering target** (estimated $542 against a $500 target, USD 42 over); the cost savings worth trying are in the design decisions register (EPR-DEC-001). R2 and R4 are **at risk**; R3, R8, R10 and R14 cannot be verified at TRL 3.
 
 The calculation corrects four TRL 2 figures and one TRL 2 mechanism. The press mass rises from about 123 kg to 187 kg, the cost from about $403 to $488 and the compaction work falls from 0.6 to 1.2 kJ to about 0.35 to 0.71 kJ (0.49 kJ base). The 22 mm lid would reach yield at 2 MPa and is now a ribbed lid. The TRL 2 concept ejected the block by pulling the lever on past the compaction point, which a toggle ending near straight cannot do; ejection now uses a separate seesaw lever and a lost-motion slot in the push rod.
+
+**Kit 1.9.1 update (v0.7, 2026-10-25).** The STEM check (EPR-STM-001) found that this note checked the toggle pins in shear only. In bending, as pins loaded through a clevis, the 35 mm C45 base pin reached 388 MPa against 370 MPa at the nominal 81.2 kN and 826 MPa at the 173 kN design load, and the 20 mm base pin lugs reached 124 MPa in bearing against 100 MPa. Under Amish's standing instruction of 2026-10-23 the pins are now 40 mm 42CrMo4 +QT in 40 x 46 mm bushes, the lugs 28 mm, the connecting link 24 x 60 mm and the slot 205 mm (EPR-DEC-001 F1). The pins now reach 498 MPa against 750 MPa at the design load (section 6b), and the lowest safety factor in the press is 1.29. The masses now come from the detailed kit 1.9.1 model with every bush, nut, washer, circlip and weld bead: **203.8 kg, so R7 (PR-007) is not met by 3.8 kg**; the 4 g margin of v0.6 left out the bushes and nut hardware. The priced BOM is **USD 542**. Requirement numbers R1 to R14 are now PR-001 to PR-014 in EPR-PRS-001, with PR-015 (human powered, met by design: no electricity, hydraulics or engine) and PR-016 (every load-path member below yield at the 173 kN design load, sections 6 and 6b).
 
 Every number here is printed by `docs/04-calcs/sizing.py` (run from the repo root: `python docs/04-calcs/sizing.py`), which also writes `docs/04-calcs/results.csv`. The script reads the geometry from `cad/src/model.py` and the costs from `bom/bom.csv`. All values are first-principles estimates; nothing is measured.
 
@@ -56,7 +62,7 @@ Every number here is printed by `docs/04-calcs/sizing.py` (run from the repo roo
 | Soil compaction law | Pressure rises tenfold over the last 14 mm of the stroke (exponential); range 10 to 20 mm | Assumed; to be measured with partner soil |
 | Operators | 500 N for one person (R5 limit); 1,000 N for two on the T-handle, also the abuse case | Assumed |
 | Working grip band | 0.8 to 1.9 m above ground, peak force at 1.0 m or higher | R5 as accepted by Amish, EPR-DDR-002 |
-| Steel | Yield 250 MPa (plate and sections), 240 MPa (A53 grade B pipe), 370 MPa (C45 pins); E = 200 GPa | Lower-bound catalog values |
+| Steel | Yield 250 MPa (plate and sections), 240 MPa (A53 grade B pipe), 750 MPa (42CrMo4 +QT pins, 16 < d <= 40 mm; were 370 MPa C45); E = 200 GPa | Lower-bound catalog values; 42CrMo4 from the [Swiss Steel 42CrMoS4 data sheet](https://swisssteel-group.com/content-media/documents/Data-Sheets/Engineering-Steel/42CrMoS4_en.pdf), accessed 2026-10-25 |
 | Bush bearing pressure | 100 MPa allowable, hardened steel, greased, slow oscillation | Assumed |
 | Lateral pressure in the mold | 0.5 x vertical during pressing; 0.1 MPa residual after unloading, friction 0.6 | Assumed |
 | Soil rebound at 2 MPa | 1.0 mm | Assumed |
@@ -156,27 +162,46 @@ The weighing target for the softer soil is therefore +1.0 % (+76 g over nominal)
 
 | Member | Nominal 81.2 kN | Abuse 173 kN |
 | --- | --- | --- |
-| Toggle pins, 35 mm C45, double shear | 42 MPa (5.03) | 90 MPa (2.36) |
-| Bush bearing, 2 x 28 mm links | 42 MPa (2.40) | 89 MPa (1.13) |
-| Link net section at the 41 mm bush hole, 28 x 70 mm | 50 MPa (4.97) | 107 MPa (2.33) |
+| Toggle pins, 40 mm 42CrMo4 +QT, double shear | 32 MPa (13.3) | 69 MPa (6.25) |
+| Bush bearing, 2 x 28 mm links on 40 mm | 36 MPa (2.74) | 78 MPa (1.29) |
+| Link net section at the 46 mm bush hole, 28 x 70 mm | 61 MPa (4.12) | 129 MPa (1.93) |
 | Link buckling out of plane | SF 103 | SF 48 |
-| Push rod net section at the slot, 60 mm square | 59 MPa (4.25) | 125 MPa (1.99) |
+| Push rod net section at the 42 mm slot, 60 mm square | 75 MPa (3.33) | 160 MPa (1.56) |
 | Lid, 20 mm plate with two 20 x 70 mm ribs, 420 mm between hinge and latch pins | 73 MPa (3.43) | 155 MPa (1.61) |
 | Lid deflection at mid-span | 0.08 mm | 0.17 mm |
-| Hinge and latch pins, 30 mm, double shear | 29 MPa (7.43) | 61 MPa (3.49) |
+| Hinge and latch pins, 30 mm 42CrMo4 +QT, double shear | 29 MPa (15.1) | 61 MPa (7.07) |
 | Mold long wall with the 16 x 50 mm belt | 89 MPa (2.80) | 190 MPa (1.31) |
 | Columns, UPN 80 in tension | 37 MPa (6.77) | 79 MPa (3.18) |
-| Columns at the 40 mm pin access hole | 47 MPa (5.30) | 101 MPa (2.49) |
+| Columns at the 46 mm pin access hole | 49 MPa (5.07) | 105 MPa (2.38) |
 | Mold to column bolts, 8 x M16 8.8 | SF 5.9 | SF 2.8 |
 | Base beam, two 20 x 100 mm plates | 73 MPa (3.41) | 156 MPa (1.60) |
-| Connecting link, 50 x 24 mm, 42.2 kN at the abuse case | | buckling SF 15.3 |
+| Connecting link, 60 x 24 mm, 42.2 kN at the abuse case | | buckling SF 18.3 |
 | Lever, 2 in schedule 40 at the socket mouth | 102 MPa at the 668 N peak (2.35) | 153 MPa at 1,000 N (1.57) |
 
-The lowest factor is 1.13 (bush bearing at the abuse load). The connecting link acts 39.1 mm from the lever pivot at the stop and carries 42.2 kN at the abuse case; the two tie tubes from the lever bracket to the base beam carry a horizontal 34.1 kN. The mold wall bulges 0.08 mm at 2 MPa and the columns stretch 0.16 mm, so neither affects block size.
+The lowest factor is 1.29 (bush and lug bearing at the abuse load; it was 1.13 with the 35 mm pins). The connecting link acts 39.1 mm from the lever pivot at the stop and carries 42.2 kN at the abuse case; the two tie tubes from the lever bracket to the base beam carry a horizontal 34.1 kN. The mold wall bulges 0.08 mm at 2 MPa and the columns stretch 0.16 mm, so neither affects block size.
 
 **The TRL 2 lid does not work.** A plain 22 mm plate, 220 mm wide, spanning the 420 mm between hinge and latch pins reaches 315 MPa at the nominal 81 kN, above yield. The ribbed lid in the model is the fix; it weighs 27 kg with its pins, which the operator lifts at the latch end every cycle (about 133 N).
 
-**Fatigue (R8).** The highest nominal stress range per block is 89 MPa (mold wall), below the 243 MPa allowed for a FAT 71 welded detail at 50,000 cycles. Wear of bushes and mold faces cannot be estimated without soil data, so **R8 is not verifiable at TRL 3**.
+### 6b. Pin bending and lug bearing (PR-016; EPR-STM-001 S9 and S10)
+
+A toggle pin is loaded like a clevis pin: on each side the outer member pushes one way and the inner member the other, so the pin carries a bending moment of the link force per side times the distance between the centres of the two bearing faces. Versions 0.1 to 0.6 checked shear only.
+
+*Table 5b. Pin bending and lug bearing, 40 mm 42CrMo4 +QT pins (yield 750 MPa) and 28 mm lugs.*
+
+| Check | Nominal 81.2 kN | Abuse 173 kN |
+| --- | --- | --- |
+| Base pin, arm 36 mm (link to lug) | 234 MPa (3.21) | 498 MPa (1.51) |
+| Knee pin, arm 32 mm, with the connecting link force | 217 MPa (3.45) | 463 MPa (1.62) |
+| Upper pin, arm 31 mm (link to rod) | 201 MPa (3.72) | 429 MPa (1.75) |
+| Base pin lugs, 2 x 28 mm bearing on 40 mm | 36 MPa (2.74) | 78 MPa (1.29) |
+| Hinge and latch pins, 30 mm, arm 22 mm | 168 MPa (4.45) | 359 MPa (2.09) |
+| **v0.6 base pin, 35 mm C45, arm 40 mm** | **388 MPa against 370 (0.95)** | **826 MPa (0.45)** |
+| **v0.6 lugs, 2 x 20 mm on 35 mm** | | **124 MPa against 100** |
+| v0.6 hinge and latch pins, 30 mm C45 | | 359 MPa (1.03) |
+
+The 35 mm C45 base pin would have yielded at the nominal load, so the design did not meet PR-016. The fix (EPR-DEC-001 F1, decided on 2026-10-25 under Amish's standing instruction of 2026-10-23) keeps the working principle and the linkage geometry: 40 mm 42CrMo4 +QT pins in 40 x 46 mm case-hardened bushes, the base pin lugs 28 mm thick (grown toward the links, so the base spacers shrink from 16 to 8 mm and the bending arm from 40 to 36 mm), the connecting link widened from 50 to 60 mm round its 40.5 mm knee hole, the column access holes 46 mm, the push rod slot 42 x 205 mm, and the hinge and latch pins also in 42CrMo4 +QT. It adds about 1.2 kg and about USD 19 (estimate).
+
+**Fatigue (R8).** The highest nominal stress range per block in a welded member is 89 MPa (mold wall), below the 243 MPa allowed for a FAT 71 welded detail at 50,000 cycles. The turned pins are not welded; their highest bending range is 234 MPa against about 350 MPa (half of an endurance limit taken as 0.5 Rm with a 0.7 surface and size factor, Rm 1,000 MPa; first-order). Wear of bushes and mold faces cannot be estimated without soil data, so **R8 is not verifiable at TRL 3**.
 
 **Safety features (R12).** If the lever is released at the end of the stroke, the soil rebound and column stretch return about **47 J** to it (roughly a 5 kg mass dropped 1 m), so it kicks back upward. The end pawl and the rest catch, spring pawls on the lever bracket, hold the crank pin at the end and at the start of the stroke; the end pawl takes the kickback end on. The T-handle stays 846 mm above the ground at the stop, and the grip is more than 1.5 m from the frame. The crank, connecting link and knee form a scissor point, covered by the linkage guard (BOM item 13). **R12 is met on paper.**
 
@@ -188,24 +213,24 @@ Breaking the block free takes 4.64 kN of wall friction, 4.84 kN with the piston 
 
 ## 8. Mass (R7)
 
-*Table 6. Piece masses from the model at 7,850 kg/m³.*
+*Table 6. Piece masses from the detailed kit 1.9.1 model (every part at its material's density; bushes, seals, fasteners and weld beads included; the guard's expanded metal at 35 % of solid sheet).*
 
 | Piece | Mass |
 | --- | --- |
-| Base frame with lever bracket, ties and eject posts | 45.0 kg |
-| Press core, columns and base beam | 28.2 kg |
-| Mold box with hinge and latch lugs | 30.4 kg |
-| Lid with ribs, hinge and latch pins | 27.0 kg |
-| Piston and slotted push rod | 12.6 kg |
-| Toggle links, pins and spacers | 24.6 kg |
+| Base frame with lever bracket, ties and eject posts | 44.5 kg |
+| Press core, columns and base beam | 28.9 kg |
+| Mold box with hinge and latch lugs | 30.6 kg |
+| Lid with ribs, hinge and latch pins | 27.5 kg |
+| Piston and slotted push rod | 12.1 kg |
+| Toggle links, pins, bushes, spacers and seals | 26.8 kg |
 | Lever hub, crank, shaft and crank pin | 8.2 kg |
-| Lever pipe and T-handle (pipe alone 9.2 kg) | 10.4 kg |
+| Lever pipe and T-handle | 10.5 kg |
 | Eject seesaw, pivot pin, end pawl and rest catch | 7.0 kg |
-| Linkage guard (expanded metal at 35 % of solid sheet) | 5.5 kg |
-| Bolts | 1.2 kg |
-| **Total** | **200.0 kg** |
+| Linkage guard | 5.4 kg |
+| Bolts, nuts and washers | 2.2 kg |
+| **Total** | **203.8 kg** |
 
-**R7 was not met on paper** against the earlier 190 kg: the total is 200.0 kg against the 190 kg accepted by Amish on 2026-09-25 (EPR-DDR-002), 10 kg over. Of the 13 kg added since v0.2, 6.7 kg is the guard and bolts, which v0.2 did not count, and the rest is the round link ends, lugs, larger base plate and other parts added to make the press buildable (EPR-DDR-003). The heaviest piece is 45.0 kg, so the 50 kg piece limit is met. The press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. On 2026-10-02 Amish set the R7 total at 200 kg, including the guard and bolts, and kept the 50 kg piece limit (EPR-DDR-003, A1), so R7 is now met on paper: 200.0 kg of steel plus about 5 g of felt dust seals is 199.996 kg, a margin of 4 g, which is no real margin; the weighed prototype at TRL 4 decides it (`sizing.py`, section 7).
+**R7 (PR-007) is not met on paper:** 203.8 kg against the 200 kg total Amish set on 2026-10-02 (EPR-DDR-003, A1), 3.8 kg over. The v0.6 figure (199.996 kg) counted the steel parts and the seals but not the ten bushes (0.9 kg), the nuts and washers, or the weld metal (1.2 kg); the pin fix of 2026-10-25 adds about 1.2 kg. The heaviest piece is 44.5 kg, so the 50 kg piece limit is met, and the press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. The options are in EPR-DEC-001 (decision D2, proposed, awaiting Amish). `sizing.py`, section 7.
 
 ## 9. Output and crew (R4)
 
@@ -229,11 +254,11 @@ In 7 working hours the press makes **296 blocks per day**, 1 % short of the 300 
 
 Per 100 blocks the crew digs 778 kg of soil, sieves out 117 kg of oversize, adds 33 kg of cement and 69 kg of water, and mixes 787 kg including 23 kg of remixed spill and rejects. The press turns out 764 kg of moist blocks, which cure to 712 kg after losing 51 kg of water (Figure 3 in EPR-PRC-001).
 
-A small house with a 22 m perimeter, 2.7 m walls and 15 % openings has 50.5 m² of wall. At 33.3 blocks per m² with 10 mm joints it needs **1,683 blocks**, about 5.7 press days (8.9 m² of wall a day), and 556 kg of cement (11.1 bags of 50 kg). Its 7.07 m³ of walling embodies about **0.35 t CO2 as CSEB against 4.55 t as fired brick**, 7.6 % of the brick figure (**R11 met on paper**; mortar and transport excluded). R10 (strength with 8 % cement or less) is set by design at 5 % but cannot be verified without block tests.
+A small house with a 22 m perimeter, 2.7 m walls and 15 % openings has 50.5 m² of wall. At 33.3 blocks per m² with 10 mm joints it needs **1,683 blocks**, about 5.7 press days (8.9 m² of wall a day), and 556 kg of cement (11.1 bags of 50 kg). Its 7.07 m³ of walling embodies about **0.35 t CO2 as CSEB against 4.55 t as fired brick**, 7.6 % of the brick figure (**R11 met on paper**; mortar and transport excluded; counting the 556 kg of cement at about 0.9 kg CO2 per kg, an assumed factor, gives about 0.5 t or 11 %, still inside the 25 % limit). R10 (strength with 8 % cement or less) is set by design at 5 % but cannot be verified without block tests.
 
 ## 11. Cost (R13)
 
-Value-engineering target: USD 500. Estimated cost of the constructable design: USD 523 (USD 23 over the target) on indicative prices. The priced BOM totals **$523**: the $520 of 2026-10-01 plus $3 for eight felt or rubber dust seal washers at the bush faces (BOM line 5, decided on 2026-10-02; about $0.35 each from 2 mm felt or rubber sheet). `budget_usd` in `project.yaml` (a hypothetical control target) is unchanged, so **R13 is over the target by USD 23**. The steel alone (200 kg at about $1.30/kg) is about $260. The parts added to make the press buildable (EPR-DDR-003) account for the rise from $488. `budget_usd` is unchanged; the savings worth trying are in the Value engineering section of EPR-DEC-001.
+Value-engineering target: USD 500. Estimated cost of the constructable design: **USD 542** (USD 42 over the target) on indicative prices. The rise from USD 523 is the pin fix (USD 14 on line 5 and USD 2 on line 3: 42CrMo4 +QT pins and 40 x 46 bushes, estimates of 2026-10-25), about USD 1 of steel for the thicker lugs and about USD 2 for the corrected bolt lengths (line 11). `budget_usd` in `project.yaml` (a hypothetical control target) is unchanged, so **R13 is over the target by USD 42**. The steel in the press (about 204 kg at about USD 1.30/kg) is about USD 265. The savings worth trying are in the Value engineering section of EPR-DEC-001.
 
 ## 12. Results against requirements
 
@@ -247,13 +272,15 @@ Value-engineering target: USD 500. Estimated cost of the constructable design: U
 | R4 | Output | 296 blocks per day, crew of four | 300 or more | At risk |
 | R5 | Operator force and grip height | Peak 668 N total (334 N each for two) at 1.16 m; 809 N (405 N each) for the softer design soil of the operating chart; grip 0.86 to 1.89 m; eject 470 N | 500 N or less per operator; grip 0.8 to 1.9 m; peak at 1.0 m or higher | Met on paper (two operators) |
 | R6 | Garage-buildable | Plate, sections, pipe and tube; turned pins, shafts and bushes bought | Stick welder, grinder, drill press | Met (design review) |
-| R7 | Movable | 200 kg total (199.996 kg with the dust seals); heaviest piece 45.0 kg; plan 1.28 x 0.58 m | 200 kg total including guard and bolts (190 kg until 2026-10-02); 50 kg per piece; 1.5 m bed | Met on paper (piece limit met) |
-| R8 | Durability | Stress range 89 MPa against 243 MPa; bushes, grease nipples | 50,000 blocks; replaceable bushes | Not verifiable at TRL 3 (wear) |
+| R7 | Movable | 203.8 kg total with bushes, fasteners and weld metal; heaviest piece 44.5 kg; plan 1.28 x 0.58 m | 200 kg total including guard and bolts (190 kg until 2026-10-02); 50 kg per piece; 1.5 m bed | **Not met** by 3.8 kg (piece limit met) |
+| R8 | Durability | Welded range 89 MPa against 243 MPa; pin range 234 MPa against about 350 MPa; bushes, grease nipples | 50,000 blocks; replaceable bushes | Not verifiable at TRL 3 (wear) |
 | R9 | Soil test kit | Field tests, chart and a 10 kg scale for fill weighing | Go or no-go in 1 h, full result in 24 h | Met (design review); accuracy not verifiable at TRL 3 |
 | R10 | Low stabilizer use | 5 % cement, 0.33 kg per block | 8 % or less reaching R3 | Not verifiable at TRL 3 |
 | R11 | Embodied carbon | 7.6 % of fired brick | 25 % or less | Met on paper |
 | R12 | Safe operation | Rest catch and end pawl on the crank pin; latch and lid rated 173 kN; guard over the linkage; grip over 1.5 m from the frame | No free fall; latch 1.5 x (121.8 kN); guards or 100 mm | Met on paper |
-| R13 | Affordable | $523 | At or below the $500 value-engineering target | **Over the value-engineering target by USD 23** |
+| PR-016 | Structure at the design load | Lowest safety factor 1.29 at 173 kN; pins 498 MPa against 750 MPa (section 6b) | Every load-path member below yield at 173 kN | Met on paper after EPR-DEC-001 F1 (the 35 mm C45 pins did not meet it) |
+| R13 | Affordable | $542 | At or below the $500 value-engineering target | **Over the value-engineering target by USD 42** |
 | R14 | Open and documented | Model, drawing, BOM and this note | Build by an outside welder without the author | Not verifiable at TRL 3 |
+| PR-015 | Human powered | Lever, toggle and eject seesaw only | No electricity, hydraulics or engine | Met by design |
 
 > **Safety:** The press delivers 81 kN at 2 MPa and up to 173 kN if two people pull hard at the stop. Keep hands out of the mold, the linkage and the eject arm while anyone is on the lever. The lever kicks back with about 47 J if released at the end of the stroke; engage the end pawl before letting go. Never open the lid until the lever is back on its rest stop.

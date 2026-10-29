@@ -3,9 +3,9 @@ doc_id: EPR-PRC-001
 title: EarthPress design precis
 project: EarthPress
 doc_type: Design precis
-version: "0.8"
+version: "0.9"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-25'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -41,13 +41,17 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: 'Cost USD 523 with the dust seals (R13 over by USD 23); R7 199.996 kg; operating chart and lime chart in the build plan section 3.15'
+- version: "0.9"
+  date: '2026-10-25'
+  author: Amish Chadha
+  change: 'Kit 1.9.1: toggle pins 40 mm 42CrMo4 +QT (fix F1, EPR-DEC-001); mass 203.8 kg from the detailed model (PR-007 not met); cost USD 542; requirement numbers PR-001 to PR-016 (EPR-PRS-001); concept options B and C (EPR-OPT-001)'
 ---
 
 # EarthPress design precis
 
 ## Summary
 
-EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003), the press weighs about 200 kg, its heaviest piece 45 kg, and the press and kit cost about $523 in parts. Against the targets Amish accepted on 2026-09-25 (EPR-DDR-002), R5 (334 N per operator) is met on paper, R7 is met on paper against the 200 kg total (including the guard and bolts) that Amish set on 2026-10-02 (EPR-DEC-001), R13 is over its value-engineering target (estimated $523 against a $500 target, USD 23 over), and R2 and R4 are at risk. All values are estimates.
+EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003) and modelled part by part in kit 1.9.1, the press weighs about 204 kg, its heaviest piece 44.5 kg, and the press and kit cost about $542 in parts. The kit 1.9.1 STEM check found the 35 mm toggle pins too weak in bending; they are now 40 mm 42CrMo4 +QT (fix F1, EPR-DEC-001). Against the product requirements (EPR-PRS-001), PR-005 (405 N per operator for the softer design soil) is met on paper, **PR-007 is not met** (203.8 kg against the 200 kg total Amish set on 2026-10-02; decision D2 awaiting him), PR-013 is over its value-engineering target ($542 against $500), and PR-002 and PR-004 are at risk. Two other concepts, a power screw press and a rope-lifted drop rammer, score within 10 % of this design and are with Amish (EPR-OPT-001). All values are estimates.
 
 ![Hero render](../media/hero.png)
 
@@ -81,8 +85,8 @@ Numbers match the exploded view (Figure 4) and `bom/bom.csv`. The general arrang
 | 1 | Frame, in two bolted pieces | Base: 60 x 60 x 3 mm tube skids 1.0 m long, 50 x 50 mm cross tubes flush with the skids, 12 mm base plate, shaped lever bracket plates with a rest stop bar, tie tubes bolted to the core, eject posts. Core: two UPN 80 columns, webs toward the mold, with pin access holes, and a base beam of two 20 x 100 mm plates with lugs carrying the toggle base pin | The press force closes through the core and mold; the base only carries weight and the lever reaction. 45.0 and 28.2 kg |
 | 2 | Mold box | 12 mm plate round a 290 x 140 x 200 mm cavity, 16 x 50 mm belt round the top, side flanges tapped for eight M16 8.8 bolts through the column webs, hinge and latch lugs | 30.4 kg |
 | 3 | Lid with hinge and latch | 20 mm plate with two 20 x 70 mm ribs cut long as ears for the 30 mm hinge pin and the 30 mm latch pin | Rated for 173 kN; 27.0 kg with pins |
-| 4 | Piston and push rod | 25 mm plate with two end skirts on a 60 mm square rod with a 200 mm lost-motion slot | Clearance about 1 mm per side in the mold |
-| 5 | Toggle linkage | Four 28 x 70 mm round-ended links, 245 mm between centers; 24 x 50 mm connecting link, 420 mm; three 35 mm C45 pins in case-hardened steel bushes with grease nipples and felt or rubber dust seals at the bush faces, with spacers | Crank stop at 6° limits the force to 173 kN |
+| 4 | Piston and push rod | 25 mm plate with two end skirts on a 60 mm square rod with a 205 mm lost-motion slot | Clearance about 1 mm per side in the mold |
+| 5 | Toggle linkage | Four 28 x 70 mm round-ended links, 245 mm between centers; 24 x 60 mm connecting link, 420 mm; three 40 mm 42CrMo4 +QT pins in case-hardened 40 x 46 mm steel bushes with grease nipples and felt or rubber dust seals at the bush faces, with spacers | Crank stop at 6° limits the force to 173 kN |
 | 6 | Lever, crank hub and T-handle | 1.7 m of 2 in schedule 40 pipe in a socket on a hub with a 107 mm crank; pivot at 266 mm height, 468 mm from the piston axis; 0.5 m T-handle | Removable; the same pipe fits the eject socket |
 | 7 | Eject lever, rest catch and end pawl | Seesaw with a central arm whose round nose lifts the push rod, 160 mm from its pivot on the +X side; spring catch and pawl that hold the crank pin at the start and the end of the stroke | Eject ratio 10.3:1 |
 | 8 | Soil sieve | 5 mm welded mesh in a 700 x 900 mm timber frame on a prop | Removes stones and clods |
@@ -111,14 +115,14 @@ All values are estimates from EPR-CAL-001, where the assumptions are stated.
 | Compaction work | 494 J (353 to 705 J) | Same soil law |
 | Fill window for 2 MPa at the stop | 0 to +2.7 % of nominal (0 to 206 g) | Two operators |
 | Design load for the structure | 173 kN (4.26 MPa on the block) | 1,000 N at the grip at the stop |
-| Lowest safety factor at 173 kN | 1.13 (bush bearing); lid 1.61, base beam 1.60, lever 1.57 | EPR-CAL-001 Table 5 |
+| Lowest safety factor at 173 kN | 1.29 (bush and lug bearing); toggle pins in bending 1.51; lid 1.61, base beam 1.60, lever 1.57 | EPR-CAL-001 Tables 5 and 5b |
 | Kickback energy if released at the stop | 47 J | 1 mm soil rebound plus column stretch |
 | Eject force and grip force | 4.84 kN; 470 N | 0.1 MPa residual wall pressure, friction 0.6 (assumed) |
 | Output | 296 blocks per day, crew of four; 8.9 m² of wall | 85 s cycle (assumed) |
 | Small house, 50.5 m² of wall | 1,683 blocks, 5.7 press days, 556 kg cement (11.1 bags) | 22 m perimeter, 2.7 m walls, 15 % openings |
 | Embodied CO2 of that wall | 0.35 t as CSEB against 4.55 t as fired brick (7.6 %) | 49 and 643 kg CO2/m³ ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)); excludes mortar and transport |
-| Press mass | 199.996 kg with guard, bolts and dust seals; heaviest piece 45.0 kg | Model volumes at 7,850 kg/m³ |
-| Parts cost | $523 (indicative; USD 23 over the $500 value-engineering target; includes $3 of dust seals) | `bom/bom.csv` |
+| Press mass | 203.8 kg with guard, bolts, bushes, seals and weld metal (PR-007 not met; 200 kg target); heaviest piece 44.5 kg | Detailed kit 1.9.1 model, each part at its material's density |
+| Parts cost | $542 (indicative; USD 42 over the $500 value-engineering target) | `bom/bom.csv` |
 
 ## Key design choices
 
@@ -146,7 +150,7 @@ All of these choices were decided by Amish on 2026-09-25: go with recommendation
 
 > **Safety:** Portland cement is alkaline and can burn skin and eyes. Wear gloves, long sleeves and eye protection when mixing. Sieving dry soil raises dust that may contain respirable crystalline silica; sieve damp soil where possible, work upwind and wear an FFP2 or N95 respirator.
 
-> **Safety:** A moist block weighs about 7.6 kg, the lid 27 kg on its hinge and the press 200 kg. Lift blocks close to the body, rotate tasks in the crew, and move the press dismantled, two people to each piece.
+> **Safety:** A moist block weighs about 7.6 kg, the lid 27 kg on its hinge and the press about 204 kg. Lift blocks close to the body, rotate tasks in the crew, and move the press dismantled, two people to each piece.
 
 > **Safety:** Blocks made by EarthPress are not certified. Walls in seismic zones, multi-storey walls and any building that needs a permit require a structural design and block tests by a qualified engineer under the local building code.
 

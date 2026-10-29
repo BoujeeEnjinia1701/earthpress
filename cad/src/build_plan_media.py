@@ -173,8 +173,8 @@ def sheets(only=None):
                    "Beam: two 20 x 100 plates 286 long, on the outside faces of",
                    "  the column flanges, tops 185 up from the foot; the -X plate",
                    "  drilled 13.5 through with the flange holes.",
-                   "Lugs: two 20 mm plates 80 x 95 between the beam plates, 56",
-                   "  apart inside, with a 41 bush hole 210 up from the foot.",
+                   "Lugs: two 28 mm plates 80 x 95 between the beam plates, 56",
+                   "  apart inside, with a 46 bush hole 210 up from the foot.",
                    "Weld on a flat table; check the webs are parallel and 196 apart."],
             **base))
 
@@ -191,7 +191,7 @@ def sheets(only=None):
                    "Belt: 16 x 50 bar round the top, flush with the rim.",
                    "Side flanges: 16 mm plates 120 x 150 under the belt on the",
                    "  long walls. Before welding, drill 14 and tap M16 in 4 places:",
-                   "  18 each side of centre, 35 and 115 up from the bottom edge.",
+                   "  on the centre line, 20, 57, 93 and 130 up from the bottom edge.",
                    "Hinge lugs (+X end) and latch lugs (-X end): 20 mm plates on",
                    "  the belt ends, inner faces 144 apart; 31 holes 37 out from the",
                    "  belt, 10 above the rim (hinge) and 25 below it (latch).",
@@ -256,18 +256,18 @@ def sheets(only=None):
             notes=["Make four, all the same. Bar 70 x 28, 315 long.",
                    "Centres 245 apart on the bar's centre line, 35 from each end.",
                    "Round both ends to a 35 radius about the centres.",
-                   "Bore 41 at both centres for the pressed-in bushes (35 bore),",
+                   "Bore 46 at both centres for the pressed-in bushes (40 bore),",
                    "  bores parallel within 0.2 mm over the 28 mm thickness.",
                    "Drill all four links clamped together, or on a jig, so the",
                    "  centres match within 0.2 mm.",
                    "Press in the bushes with a vice or press; ream to fit the",
-                   "  35 pins with a light running fit; add a grease nipple at",
+                   "  40 pins with a light running fit; add a grease nipple at",
                    "  one end of each link (6 mm hole into the bore).",
                    "Fit: two lower links outside (64 to 92 from the centre line),",
                    "  two upper links inside (32 to 60), with spacers between.",
-                   "  A 2 mm felt or rubber dust seal washer (50 outside, 35.5 bore)",
+                   "  A 2 mm felt or rubber dust seal washer (56 outside, 40.5 bore)",
                    "  goes on the pin against each outer link face, round the bush.",
-                   "Check: all four links stacked, a 35 pin passes through both ends."],
+                   "Check: all four links stacked, a 40 pin passes through both ends."],
             **base))
 
     # 108 connecting link
@@ -277,11 +277,11 @@ def sheets(only=None):
         out.append(bv.component_sheet(
             Part("Connecting link", cl, COL["conlink"]), [M["hub"], M["upper"], M["lower"]],
             dwg_no="EPR-DWG-108", title="EarthPress connecting link: making sketch",
-            material="Mild steel flat bar 50 x 24 mm", view_shape=fl, inset_view=(15, -40),
-            notes=["Bar 50 x 24, 470 long. Centres 420 apart, 25 from each end.",
-                   "Round both ends to a 25 radius about the centres.",
+            material="Mild steel flat bar 60 x 24 mm", view_shape=fl, inset_view=(15, -40),
+            notes=["Bar 60 x 24, 480 long. Centres 420 apart, 30 from each end.",
+                   "Round both ends to a 30 radius about the centres.",
                    "Crank end: bore 30.5 for the 30 mm crank pin.",
-                   "Knee end: bore 35.5 for the 35 mm knee pin.",
+                   "Knee end: bore 40.5 for the 40 mm knee pin.",
                    "The 420 centre distance sets the stroke: hold it within 0.3 mm.",
                    "Fit: sits on the centre line between the two crank plates",
                    "  (4 mm each side) and between the knee spacers.",
@@ -386,10 +386,10 @@ def sheets(only=None):
             notes=["Two side frames of 20 x 20 x 3 angle, 316 long and 568 tall,",
                    "  230 apart (outside faces 274), covered with expanded metal.",
                    "Top: expanded metal 210 x 230 over the crank end, 568 up.",
-                   "Feet: one angle foot each side at the core end, 11 hole,",
-                   "  M10 to the base plate.",
-                   "Brackets: two angle brackets each side at the lever end, 45",
-                   "  long, M10 with 35 mm spacer tubes to the bracket plates.",
+                   "Feet: one angle foot each side at the core end, 11 hole, M10",
+                   "  x 16 into a hole tapped M10 in the base plate.",
+                   "Brackets: two 45 mm spacer brackets each side at the lever",
+                   "  end, M10 x 95 through the frame to the bracket plates.",
                    "Mesh openings no larger than 12 mm so fingers stay out.",
                    "Fit: the crank, connecting link, ties and knee move inside;",
                    "  nothing touches the guard over the full stroke.",
@@ -627,7 +627,7 @@ def steps(only=None):
        elev=18, azim=-20, label_done=False)
     E = L + [part("Eject", S("eject", "eject_pin"), COL["eject"])]
     st(11, E, [mv(M["guard"], (0, 0, 300))], "linkage guard",
-       "Feet to the base plate with M10; brackets to the bracket plates with M10 and 35 mm spacers. Work the lever after (section 6)",
+       "Feet to the base plate with M10 x 16; brackets to the bracket plates with M10 x 95 through the 45 mm spacer brackets. Work the lever after (section 6)",
        elev=24, azim=-125, label_done=False)
     F = E + [M["guard"]]
     st(12, F, [mv(part("Lid", C["lid"].shape, COL["lid"]), (0, 0, 260)),

@@ -51,6 +51,10 @@ def fit(draw, text, fonts, name, sizes, width, max_lines):
 def band(strip, height, width):
     """A smooth fill that continues the studio background: column medians, blurred sideways."""
     col = np.median(strip, axis=0).astype(np.uint8)[None, :, :]
+    lum = float((0.2126 * col[..., 0] + 0.7152 * col[..., 1] + 0.0722 * col[..., 2]).mean())
+    if lum < 150 or float(col.std()) > 28:
+        # a site render (dark ground, sky or busy edge): a plain light band keeps the dark text readable
+        return Image.new("RGB", (width, height), (238, 239, 240))
     im = Image.fromarray(np.repeat(col, 8, axis=0)).filter(ImageFilter.GaussianBlur(radius=max(8, width // 24)))
     return im.resize((width, height), Image.BILINEAR)
 

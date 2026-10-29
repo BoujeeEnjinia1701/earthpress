@@ -1,0 +1,47 @@
+{
+ "level": "D3",
+ "stage": "P3",
+ "hash": "c93829d5b22986e9",
+ "options": {
+  "A": {
+   "title": "Lever and toggle press",
+   "parts": 251,
+   "made_or_bought": 90,
+   "fasteners": 105,
+   "welds": 56,
+   "bare": [],
+   "bare_share": 0.0,
+   "interference": [],
+   "mass_kg": 240.8,
+   "step_files": 90
+  },
+  "B": {
+   "title": "Power screw press",
+   "parts": 185,
+   "made_or_bought": 42,
+   "fasteners": 104,
+   "welds": 39,
+   "bare": [],
+   "bare_share": 0.0,
+   "interference": [],
+   "mass_kg": 165.5,
+   "step_files": 0
+  },
+  "C": {
+   "title": "Rope-lifted drop rammer",
+   "parts": 165,
+   "made_or_bought": 42,
+   "fasteners": 86,
+   "welds": 37,
+   "bare": [],
+   "bare_share": 0.0,
+   "interference": [],
+   "mass_kg": 170.5,
+   "step_files": 0
+  }
+ },
+ "failures": [],
+ "warnings": [],
+ "passed": true,
+ "seconds": 56.9
+}

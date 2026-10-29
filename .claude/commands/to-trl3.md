@@ -3,6 +3,7 @@ description: Take a scaffolded repo from TRL 1 or 2 to TRL 3 in one run (populat
 ---
 Work only in this repo. Read CLAUDE.md, .kit/STANDARDS.md and project.yaml first. Every repo targets TRL 3 (STANDARDS section 10), so run the whole path in one session:
 
+0. Kit 1.8: before any design work, do everything /stem-check and /concept-options ask (STANDARDS sections 20 and 21); design only the recommended option, and stop for Amish if two options are within 10 % or a STEM claim fails. Do /pipeline-docs at the end.
 1. Do everything /populate asks (.claude/commands/populate.md), without stopping at its end.
 2. Then do everything /advance-trl3 asks (.claude/commands/advance-trl3.md), including the prototype build plan BLD-001. Amish's go for this command counts as the TRL 2 approval that /advance-trl3 needs.
 

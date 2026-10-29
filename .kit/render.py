@@ -19,7 +19,7 @@ ROOT = KIT.parent
 OUT = ROOT / "docs" / "pdf"
 REQUIRED = ["doc_id", "title", "project", "doc_type", "version", "status", "date", "author", "license", "revisions"]
 STATUSES = {"Draft", "In review", "Released", "Superseded"}
-ID_RE = re.compile(r"^[A-Z]{3}-(PRC|PRB|REQ|CAL|DDR|BOM|DWG|TST|STD|BLD|DEC)-\d{3}$")
+ID_RE = re.compile(r"^[A-Z]{3}-(PRC|PRB|REQ|CAL|DDR|BOM|DWG|TST|STD|BLD|DEC|STM|OPT|URS|PRS|RTM|REG|FEA|RSK|MKT|PLN)-\d{3}$")
 VER_RE = re.compile(r"^\d+\.\d+$")
 FM_RE = re.compile(r"^---\n(.*?)\n---\n", re.S)
 
@@ -102,7 +102,7 @@ def trl_check(docs) -> list[str]:
         if trl >= level and not ok:
             errs.append(f"TRL {trl} claimed but TRL {level} evidence is missing: {what}")
     need(1, "PRB" in by_type, "problem statement (PRB)")
-    need(2, "PRC" in by_type and "REQ" in by_type, "precis (PRC) and requirements (REQ)")
+    need(2, "PRC" in by_type and ("REQ" in by_type or "PRS" in by_type), "precis (PRC) and requirements (PRS, or REQ before kit 1.8)")
     if trl >= 3:
         model = ROOT / "cad/src/model.py"
         need(3, "CAL" in by_type, "calculation note (CAL)")
@@ -117,6 +117,7 @@ def trl_check(docs) -> list[str]:
         need(3, "DEC" in by_type, "design decisions register (DEC, STANDARDS section 18)")
         need(3, pm.get("design_state") == "constructable", "design_state: constructable in project.yaml (STANDARDS section 18)")
         need(3, (ROOT / "docs/05-build-plan/overview.png").exists(), "build plan pictures (docs/05-build-plan/overview.png)")
+    errs += pipeline_check(pm, trl, by_type)
     envs = [str(m.get("environment", "")) for _, m in by_type.get("TST", [])]
     need(4, bool(envs), "test report (TST)")
     need(4, len(list((ROOT / "build-log").glob("*.md"))) > 1, "build log entries")
@@ -129,6 +130,61 @@ def trl_check(docs) -> list[str]:
     for f in pm.get("trl_evidence") or []:
         if not (ROOT / f).exists():
             errs.append(f"trl_evidence lists a missing file: {f}")
+    return errs
+
+
+STAGES = ["P0", "P1", "P2", "P3", "P4", "P5", "P6"]
+STAGE_DOCS = {"P0": ["STM", "OPT", "REG", "FEA", "PLN"], "P1": ["URS", "PRS", "RSK", "MKT"], "P2": ["RTM", "CAL"], "P3": ["BLD", "DEC"]}
+
+
+def kit_version() -> tuple:
+    try:
+        return tuple(int(x) for x in (KIT / "KIT_VERSION").read_text().strip().split(".")[:2])
+    except Exception:
+        return (0, 0)
+
+
+def pipeline_check(pm, trl, by_type) -> list[str]:
+    """Pipeline stages, STEM check, concept options and traceability (STANDARDS sections 19 to 23).
+    Applies once a repo has been upgraded to kit 1.8 (project.yaml has a 'stage' field)."""
+    if "stage" not in pm:
+        return ["project.yaml has no 'stage' field (kit 1.8, STANDARDS section 19); run /upgrade-1.8"] if kit_version() >= (1, 8) and trl >= 2 else []
+    errs, stage = [], str(pm.get("stage"))
+    if stage not in STAGES:
+        return [f"stage '{stage}' must be one of P0 to P6"]
+    k = STAGES.index(stage)
+    if trl >= 3 and k < 3:
+        errs.append(f"TRL {trl} needs stage P3 or later, not {stage}")
+    if trl == 2 and k < 1:
+        errs.append(f"TRL 2 needs stage P1 or later, not {stage}")
+    for s in STAGES[: k + 1]:
+        for code in STAGE_DOCS.get(s, []):
+            if code not in by_type:
+                errs.append(f"stage {stage} reached but {s} deliverable {code} is missing (STANDARDS section 19)")
+    stem = str(pm.get("stem_check", "")).lower()
+    if trl >= 2 and stem == "fail":
+        errs.append("stem_check: fail; a concept with a failed STEM claim cannot be TRL 2 (STANDARDS section 20)")
+    if trl >= 2 and stem not in ("pass", "open", "fail"):
+        errs.append(f"stem_check is '{stem or 'missing'}'; set pass, open or fail from the STEM check (STANDARDS section 20)")
+    for p, m in by_type.get("STM", []):
+        if re.search(r"\|\s*\**Fails\**\s*\|", p.read_text(encoding="utf-8")) and stem != "fail":
+            errs.append(f"{p.name} has a Fails verdict but project.yaml says stem_check: {stem}")
+    opts = pm.get("concept_options") or []
+    if trl >= 2 and len(opts) < 2:
+        errs.append("fewer than two concept options in project.yaml concept_options (STANDARDS section 21)")
+    if trl >= 2 and opts and not (ROOT / "media/options.png").exists():
+        errs.append("media/options.png missing; run python .kit/options.py")
+    if kit_version() >= (1, 9):
+        r = subprocess.run([sys.executable, str(KIT / "cad_check.py"), "--status"], cwd=ROOT, capture_output=True, text=True)
+        if r.returncode:
+            errs += [l[5:] for l in r.stdout.splitlines() if l.startswith("FAIL")] or ["CAD fidelity check failed (STANDARDS section 24)"]
+    if k >= 3:
+        rsk = "\n".join(p.read_text(encoding="utf-8") for p, _ in by_type.get("RSK", []))
+        if "RPN" not in rsk:
+            errs.append("stage P3 needs a first-pass design FMEA in the risk document (STANDARDS section 23)")
+        if (ROOT / "docs/03a-user-requirements.md").exists():
+            r = subprocess.run([sys.executable, str(KIT / "trace.py"), "--check"], cwd=ROOT, capture_output=True, text=True)
+            errs += [l[5:] for l in r.stdout.splitlines() if l.startswith("FAIL")]
     return errs
 
 
@@ -150,6 +206,9 @@ def phase_check(docs) -> tuple[list[str], list[str]]:
     pm = project_meta()
     errs, warns = [], []
     trl, target = int(pm.get("trl", 0) or 0), int(pm.get("trl_target", 0) or 0)
+    scap = str(ph.get("stage_cap", "P6"))
+    if "stage" in pm and str(pm["stage"]) in STAGES and scap in STAGES and STAGES.index(str(pm["stage"])) > STAGES.index(scap):
+        errs.append(f"stage {pm['stage']} exceeds the portfolio stage cap {scap} (.kit/PHASE.yaml)")
     if trl > cap:
         errs.append(f"trl {trl} exceeds the portfolio cap of TRL {cap} (.kit/PHASE.yaml)")
     if target > cap:

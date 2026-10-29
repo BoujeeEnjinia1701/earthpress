@@ -5,19 +5,37 @@ repo: BoujeeEnjinia1701/earthpress         # GitHub repository, shown on every d
 area: Sustainable Housing
 trl: 3                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
 trl_target: 3
+stage: P3                # pipeline stage (STANDARDS section 19)
+stem_check: open         # EPR-STM-001: no fails; S2, S5, S6, S8, S14, S18, S21 (and B2, B3, C2, C5, C6) plausible, to confirm with partner soils
+concept_options:         # EPR-OPT-001; all within 10 %, sent to Amish without a pick (EPR-DDR-004); concept_chosen left unset
+  - Lever and toggle press
+  - Power screw press
+  - Rope-lifted drop rammer
 design_state: constructable   # concept or constructable, see .kit/STANDARDS.md section 18
 trl_evidence:
   - docs/01-problem.md
+  - docs/01b-stem-check.md
   - docs/02-concept.md
+  - docs/02a-concept-options.md
   - docs/03-requirements.md
+  - docs/03a-user-requirements.md
+  - docs/03b-traceability.md
   - docs/decisions/0001-trl2-review-decisions.md
   - docs/decisions/0002-recommendations-accepted.md
   - docs/decisions/0003-design-for-construction.md
+  - docs/decisions/0004-concept-selection.md
   - docs/04-calcs/01-sizing.md
   - docs/04-calcs/sizing.py
   - docs/04-calcs/results.csv
+  - docs/04-calcs/stem_check.py
+  - docs/04-calcs/stem_results.csv
   - cad/src/model.py
-  - cad/step/earthpress-assembly.step
+  - cad/src/epr_options.py
+  - cad/src/epr_parts.py
+  - cad/fidelity.json
+  - cad/step/A-assembly.step
+  - cad/step/B-assembly.step
+  - cad/step/C-assembly.step
   - cad/stl/earthpress-assembly.stl
   - cad/drawings/EPR-DWG-001.svg
   - cad/drawings/EPR-DWG-001.pdf
@@ -25,6 +43,11 @@ trl_evidence:
   - bom/bom-notes.md
   - docs/05-build-plan.md
   - docs/06-design-decisions.md
+  - docs/07-regulatory.md
+  - docs/08-feasibility.md
+  - docs/09-risk.md
+  - docs/10-market.md
+  - docs/11-plan.md
 shortlisted: false
 pitch: >-
   A manual compressed earth block press with a lever and toggle linkage, producing stabilized soil blocks for low-carbon walls, with a simple soil test kit to choose mixes.

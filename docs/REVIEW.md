@@ -1,5 +1,84 @@
 # Review note: EarthPress
 
+## Session 2026-10-24: kit 1.9.1 upgrade
+
+Kit 1.9.1 rollout on Amish's instructions of 2026-10-24 ("I want detailed TRL3 CAD"; "Detail every option"; "Kit 1.9.1 rollout - proceed to rollout across the other repos"), run on 2026-10-25: the kit 1.8 pipeline documents and the kit 1.9 detailed CAD for every concept option. The design keeps its working principle; one STEM row failure was fixed under the standing instruction of 2026-10-23 and five fastener or fit details were corrected from the detailed model.
+
+### What was added
+
+- STEM check: `docs/01b-stem-check.md` (EPR-STM-001), `docs/04-calcs/stem_check.py`, `docs/04-calcs/stem_results.csv`.
+- Concept options: `docs/02a-concept-options.md` (EPR-OPT-001), `docs/decisions/0004-concept-selection.md` (EPR-DDR-004); options B and C modelled in `cad/src/epr_options.py`.
+- Requirements: `docs/03a-user-requirements.md` (EPR-URS-001, 16 URs), `docs/03-requirements.md` (now EPR-PRS-001, 16 PRs, migrated from EPR-REQ-001 v0.8 with the old R numbers in "Was"), `docs/03b-traceability.md` (EPR-RTM-001, generated, 0 gaps).
+- Pipeline documents: `docs/07-regulatory.md` (REG), `docs/08-feasibility.md` (FEA), `docs/09-risk.md` (RSK with hazard analysis and design FMEA), `docs/10-market.md` (MKT), `docs/11-plan.md` (PLN with the reference list); users-and-needs and stakeholders tables in `docs/01-problem.md`.
+- CAD: `cad/src/model.py` rebuilt to the kit 1.9 interface (`PARAMS`, `OPTIONS`, `PRINCIPLES`, `CHOSEN = "A"`, `OPTION_VIEWS`, `ALLOWED_CONTACTS`, `components(option)`), with repo helpers in `cad/src/epr_parts.py`; `cad/fidelity.json`; per-part STEP files in `cad/step/A/` (90) and `cad/step/A-assembly.step`, `B-assembly.step`, `C-assembly.step`; STL at 0.15 mm in `cad/stl/`. The old `cad/step/earthpress-*.step` exports are removed (replaced by these). `cad/src/product_model.py` rebuilt from `components("A")` with a block-yard site; `cad/src/concept_media.py` rebuilt from the same parts.
+- Updated: EPR-CAL-001 v0.7 (section 6b pin bending, masses, cost), EPR-DEC-001 v0.6, EPR-PRC-001 v0.9, EPR-BLD-001 v0.5, EPR-PRB-001 v0.6, `bom/bom.csv`, `bom/bom-notes.md`, `README.md`, `project.yaml` (`stage: P3`, `stem_check: open`, `concept_options`, `concept_chosen` unset), drawings EPR-DWG-001 (Rev P4) and 101 to 115, build plan pictures, concept media.
+
+### STEM verdicts and fixes
+
+35 rows: 23 within known science, 12 plausible, to confirm (S5, S8, S14 and S21 were downgraded from within known science after the independent review), none failing after the fix, so `stem_check: open`.
+
+- **S9 and S10 failed on first run (Fails, fix proposed).** EPR-CAL-001 v0.6 checked the toggle pins in shear only. As clevis pins in bending, the 35 mm C45 base pin reached 388 MPa against 370 MPa at the nominal 81.2 kN and 826 MPa at the 173 kN design load; the 20 mm base pin lugs reached 124 MPa in bearing against 100 MPa. **Fix F1, decided under the standing instruction** (EPR-DEC-001 Table 1a): 40 mm 42CrMo4 +QT pins in 40 x 46 mm bushes, 28 mm lugs (spacers 8 mm), connecting link 24 x 60 mm, column access holes 46 mm, slot 42 x 205 mm with 12.5 mm of rod below it, seals 56 x 40.5 mm, hinge and latch pins 42CrMo4 +QT. Rerun: base pin 498 MPa against 750 MPa (SF 1.51), lugs 78 MPa (1.29); lowest factor in the press 1.29. About 1.2 kg and USD 19 (estimate) more. Amish can reverse it.
+- Open rows for option A: S2 (block strength at 2 MPa), S6 (soil compaction law), S18 (lime dose); all need partner soils and block tests (TRL 4, on hold). Options: B2 (a greased two-start screw may not self-lock), B3 (nut within 8 % of its bearing allowable), C2 (impact against static density), C5 (output under a third of the benchmark), C6 (impact force).
+- Corrections from the detailed model (EPR-DEC-001 Table 1b, Amish can reverse): C1 mold bolts in one line on the column web (two lines put the 30 mm washers on the UPN 80 flanges); C2 M16 x 25 for full thread engagement; C3 M12 x 50 and M12 x 60 for the feet and tie tabs (the BOM lengths were too short for two washers and a nut); C4 guard feet bolted into tapped base plate holes, foot extended 15 mm (the bolt head sat under the guard's vertical member and the nut inside the cross tube); C5 M10 x 95 through the guard brackets.
+
+### Option scores
+
+A, lever and toggle press: 186 of 245. B, power screw press: 181. C, rope-lifted drop rammer: 168. B is 2.7 % and C 9.7 % below A, so all three go to Amish without a pick (EPR-DDR-004).
+
+### Part counts and mass per option (`cad/fidelity.json`, detail level D3, passed)
+
+| Option | Parts | Made or bought | Fasteners | Weld beads | Mass in the model |
+| --- | --- | --- | --- | --- | --- |
+| A, lever and toggle press | 251 | 90 | 105 | 56 | 240.8 kg (with the 27.0 kg soil kit and the guard's expanded metal counted as solid sheet; the press alone is 203.8 kg, EPR-CAL-001 section 8) |
+| B, power screw press | 185 | 42 | 104 | 39 | 165.5 kg |
+| C, rope-lifted drop rammer | 165 | 42 | 86 | 37 | 170.5 kg |
+
+### Requirements not met
+
+- **PR-007 (was R7) not met:** 203.8 kg against the 200 kg total. The v0.6 figure of 199.996 kg left out the bushes (0.9 kg), nuts, washers and weld metal (1.2 kg); F1 adds about 1.2 kg. Decision D2.
+- **PR-013 (R13) over target:** USD 542 against USD 500 (was USD 523).
+- PR-002 and PR-004 at risk (unchanged); PR-003, PR-008, PR-010 and PR-014 to verify at TRL 4.
+
+### Decisions awaiting Amish
+
+- D1, concept selection: A 186, B 181, C 168, all within 10 %, no pick; the repo stays on A meanwhile (EPR-DDR-004).
+- D2, R7 mass: (a) set the total at 205 kg counting bushes, nuts, washers and weld metal (recommended, as for the mass question of 2026-10-02), (b) lighten by about 10 kg, (c) record not met.
+- Design load question (from the independent review): whether the abuse case stays at 1,000 N at the grip (two operators) or is raised to about 1,500 N (about 260 kN), which would need larger lugs or a grip stop; and the 173:1 force ratio to be re-checked on the prototype.
+- Fix F1 and corrections C1 to C5 were made under the standing instruction and the D3 modelling instruction; any of them can be reversed.
+
+### Independent review
+
+The reviewer (claude-opus-5-5, run headless, shown only the STEM check, CAL, PRS and the two scripts) found nothing blocking and recomputed S1, S9, S10 (arithmetic), S15 to S16, S19, S20, S22, S23, B1 to B6 and C1, C3, C4 as holding. Findings and what was done under the fix rule:
+
+- **S5 (operator force), S8 (scale), S14 (eject force), S21 (team lift): downgraded to Plausible, to confirm.** S5 rests on the assumed soil law (S6) and equal shares; S8 used the base soil's half-width (103 g) while the design soil's window is about 76 g and a 50 g division is not scale accuracy; S14 has a 6 % margin on an assumed 0.1 MPa residual pressure (930 N at 0.2 MPa); S21 assumed that two people halve the load exactly. The script and Table 1 now show these as plausible.
+- **S3 (force ratio):** the closed-form estimate (201:1, symmetric knee) is 14 % above the 173:1 of CAL, which is the numerical derivative of the modelled linkage kinematics (the lever pivot, link and piston at their real positions, not a symmetric knee). The model is taken as authoritative and the closed form as an upper bound. Not changed; the design load stays at 173 kN. If the real ratio were 201:1 the lugs would reach about 91 MPa and the lowest factor about 1.11, so the linkage geometry should be re-checked in the TRL 4 prototype.
+- **Design load basis (S7, S9, S10):** 1,000 N at the grip is two operators at their normal pull; two people hanging body weight (about 1,500 N) would give about 260 kN and exceed the lug allowable. The crank stop and end pawl are not separately checked. Proposed to Amish: either state the abuse case as 1,000 N and add a grip stop that limits the load, or raise the lug and pin sizes again. Not changed because it changes the stated design load and scope (the design load question).
+- **S7 yield:** S235 plate is 235 MPa (225 MPa for 16 to 40 mm), not the 250 MPa used. The lowest factor of 1.29 is the base pin lug bearing, not a plate, so the headline holds; the mold wall factor falls from 1.31 to about 1.18. Noted, to correct in CAL v0.8.
+- **S11, S12 (fatigue):** no partial factor, nominal load rather than the top of the fill window, no stress concentration at the grease hole, and the lug fillet welds are not checked (FAT 36 to 45). Margins are thin; noted, still "within known science" at first order, to be re-checked with the prototype.
+- **S13 (kickback):** not independent of CAL; at the top of the fill window it would be about 80 J. The end pawl takes it either way.
+- **S17 (carbon):** the cement count gives about 11 % rather than 7.6 %; the text now says so and R11 is still met.
+- **Documents:** CAL has two tables numbered "5b" (to renumber in the next CAL revision).
+
+### Kit bugs and notes met
+
+- `.kit/cad_parts.py` `weld_fillet()` returns a bead whose legs are about 4.7 mm for a 6 mm leg (the edge fillet eats the legs); the repo uses its own `bead()` in `cad/src/epr_parts.py`.
+- build123d `fillet()` on a solid taken from a compound (`shape.solids()`) fillets the whole parent compound, so `cad_parts.break_edges()` on such a solid returns every solid of the compound (two feet became two overlapping copies). The repo detaches solids first (`epr_parts.solids()`); a kit fix would be for `break_edges()` to copy its input.
+- `cad_parts.channel()` has no root radius, so the fidelity check cannot catch a washer sitting on a UPN root radius (correction C1 was found by hand).
+- `.kit/options.py` without `--export` is the coordinator's job, so `media/options.png` is missing and `render.py --check` reports it until the Mac render.
+- `trace.py` dates the matrix with today's date, so the RTM is dated 2026-10-25 although this section is named for 2026-10-24 as the brief asks.
+
+### Stale until regenerated on Amish's Mac
+
+`media/options.png` (missing), `media/render-hero.png`, `render-exploded.png`, `render-detail.png` and the new `render-studio.png`, `media/card.png` and `media/social-preview.png` still show the kit 1.7 model or do not exist. RENDER_VIEWS: hero (outdoor block yard, soil ground, sun 42 deg from -75 deg), studio, exploded, detail.
+
+### Safety concerns
+
+The pin fix removes a real overload risk: the 35 mm C45 pins would have bent at the working load. The other hazards are unchanged and listed in EPR-RSK-001: kickback (47 J, end pawl), crushing in the linkage (guard), the lid under load (latch rule), silica dust and wet cement, and manual handling of 45 kg pieces.
+
+### Recommended next step
+
+Amish to decide D1 and D2; the coordinator to render the options picture and the product renders. TRL 4 (soil compaction test, prototype, block tests) stays on hold under the portfolio cap.
+
 ## Session 2026-10-01: constructable design and prototype build plan (kit 1.7.0)
 
 Kit 1.7.0 installed (`.kit/`, `.claude/commands/`, `CLAUDE.md`). The design was checked for construction with build123d and made buildable under Amish's 2026-09-30 instruction ("fix the design assumptions to match and be physically feasible"); every change is in `docs/decisions/0003-design-for-construction.md` (EPR-DDR-003, Draft, open for his review).

@@ -34,6 +34,21 @@ r = run(sys.executable, str(KIT / "render.py"), "--check")
 (ok if r.returncode == 0 else fail)("render.py --check" + ("" if r.returncode == 0 else ": " + " ".join(
     l.strip() for l in r.stdout.splitlines() if l.startswith(("FAIL", "     -")))[:400]))
 
+# 1b. The pipeline (sections 19 to 23)
+if "stage" in pm:
+    stem = str(pm.get("stem_check", "")).lower()
+    (ok if stem == "pass" else fail)(f"STEM check: {stem or 'missing'}" + ("" if stem == "pass" else " (STANDARDS section 20)"))
+    n = len(pm.get("concept_options") or [])
+    (ok if n >= 2 else fail)(f"{n} concept options" + ("" if n >= 2 else "; at least two are required (STANDARDS section 21)"))
+    if pm.get("concept_chosen"):
+        ok(f"concept chosen: {pm['concept_chosen']}")
+    else:
+        warn("no concept_chosen in project.yaml; the concept selection is still awaiting Amish")
+    t = run(sys.executable, str(KIT / "trace.py"), "--check")
+    (ok if t.returncode == 0 else fail)("traceability matrix" + (" current" if t.returncode == 0 else ": " + " ".join(l[5:] for l in t.stdout.splitlines() if l.startswith("FAIL"))[:300]))
+else:
+    warn("repo not yet on kit 1.8 pipeline documents (no 'stage' in project.yaml); run /upgrade-1.8")
+
 # 2. Storefront (section 13)
 for f in ["media/render-hero.png", "media/card.png", "media/social-preview.png"]:
     (ok if (ROOT / f).exists() else fail)(f + (" present" if (ROOT / f).exists() else " missing (python .kit/cards.py .)" if "render" not in f else " missing"))

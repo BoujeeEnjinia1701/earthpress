@@ -1,4 +1,4 @@
-"""EarthPress sizing calculations, EPR-CAL-001 v0.3 (TRL 3, constructable design, EPR-DDR-003).
+"""EarthPress sizing calculations, EPR-CAL-001 v0.7 (TRL 3, constructable design, EPR-DDR-003; kit 1.9.1 model).
 
 Run from the repo root:  python docs/04-calcs/sizing.py
 Prints every number quoted in docs/04-calcs/01-sizing.md and writes docs/04-calcs/results.csv.
@@ -29,7 +29,8 @@ A = {
     "grip_lo": 800.0, "grip_hi": 1900.0,   # working grip band used for the design study (mm)
     "fy_plate": 250.0,            # MPa, mild steel plate and sections (A36 / S235 lower bound)
     "fy_pipe": 240.0,             # MPa, A53 grade B pipe
-    "fy_pin": 370.0,              # MPa, C45 turned pins
+    "fy_pin": 750.0,              # MPa, 42CrMo4 +QT turned pins, 16 < d <= 40 mm (EN 10083-3; Swiss Steel data sheet); EPR-DEC-001 F1, 2026-10-25
+    "fy_pin_c45": 370.0,          # MPa, the C45 pins of v0.6, kept to show the check that failed (EPR-STM-001 S9)
     "bush_allow": 100.0,          # MPa, hardened steel bush, greased, slow oscillation (assumed)
     "E": 200000.0,                # MPa
     "K0": 0.5,                    # lateral to vertical pressure ratio in the mold
@@ -300,7 +301,7 @@ for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
         dw = w * Lw ** 4 / (384 * A["E"] * I2)
         out("str", "Mold wall bulge at 2 MPa", dw, "mm", "{:.3f}")
     chk(f"Columns UPN 80 in tension, {tag}", F / 2 / 1100.0, A["fy_plate"])
-    chk(f"Column net section at the 40 mm access hole, {tag}", F / 2 / (1100.0 - 40 * P["col_web"]), A["fy_plate"])
+    chk(f"Column net section at the {P['pin_d'] + 6:.0f} mm access hole, {tag}", F / 2 / (1100.0 - (P["pin_d"] + 6) * P["col_web"]), A["fy_plate"])
     out("str", f"Mold to column bolts, {A['n_bolts_mold']} x M16 8.8, {tag}",
         f"{F / 1000:.0f} kN on {A['n_bolts_mold'] * A['bolt_FvRd_kN']:.0f} kN (SF {A['n_bolts_mold'] * A['bolt_FvRd_kN'] * 1000 / F:.1f})", "")
     col_y = BW / 2 + P["wall"] + P["flange_t"] + P["col_b"] / 2
@@ -323,22 +324,60 @@ T = A["G_two"] * R
 Fc = T / arm
 out("str", "Connecting link moment arm about the lever pivot at the stop", arm, "mm")
 out("str", "Connecting link force at the abuse case", Fc / 1000, "kN")
-Ic = 50 * P["conlink_t"] ** 3 / 12
+Ic = P["conlink_w"] * P["conlink_t"] ** 3 / 12
 Pc = math.pi ** 2 * A["E"] * Ic / P["conlink"] ** 2
-out("str", "Connecting link buckling capacity (50 x 24 flat)", f"{Pc / 1000:.0f} kN (SF {Pc / Fc:.1f})", "")
+out("str", f"Connecting link buckling capacity ({P['conlink_w']:.0f} x {P['conlink_t']:.0f} flat)", f"{Pc / 1000:.0f} kN (SF {Pc / Fc:.1f})", "")
 out("str", "Tie tube load (two 40 mm tubes), horizontal component", abs(Fc * ux / Lc) / 1000, "kN")
 Do, t = P["lever_od"], P["lever_wall"]
 Di = Do - 2 * t
 Zp = math.pi * (Do ** 4 - Di ** 4) / (32 * Do)
 for Gv, tag in ((Gb[ipk], "working peak"), (A["G_two"], "abuse")):
     chk(f"Lever 2 in sch 40 at the socket mouth, {tag}", Gv * (R - 250) / Zp, A["fy_pipe"])
+
+# ---------------------------------------------------------------- 5b pin bending and lug bearing (EPR-STM-001 S9, S10; PR-016)
+# Each toggle pin carries its link forces as a clevis: the outer members push one way, the inner members the other,
+# so the pin between them is in bending with a moment of the link force per side times the distance between the
+# centres of the two bearing faces (pin in a clevis, no clamping). v0.6 checked shear only.
+from model import derived  # noqa: E402
+Dg = derived()
+yl_c = sum(Dg["y_lower"]) / 2; yu_c = sum(Dg["y_upper"]) / 2; ylug_c = sum(Dg["lug_y"]) / 2
+y_rod = P["rod"] / 4                                          # centre of the rod's half bearing on the upper pin
+Zpin = math.pi * d ** 3 / 32
+for F, tag in ((F_nom, "nominal"), (F_abuse, "abuse")):
+    side = F / cth / 2
+    Fc_t = Fc * F / F_abuse                                    # connecting link force scales with the grip force
+    Mb = side * (yl_c - ylug_c)
+    Mk = math.hypot(side * (yl_c - yu_c), Fc_t / 2 * (yu_c - P["conlink_t"] / 4))
+    Mu = side * (yu_c - y_rod)
+    chk(f"Base pin {d:.0f} mm in bending, arm {yl_c - ylug_c:.0f} mm, {tag}", Mb / Zpin, A["fy_pin"])
+    chk(f"Knee pin {d:.0f} mm in bending with the connecting link, {tag}", Mk / Zpin, A["fy_pin"])
+    chk(f"Upper pin {d:.0f} mm in bending, {tag}", Mu / Zpin, A["fy_pin"])
+    chk(f"Base pin lug bearing, 2 x {P['base_lug_t']:.0f} mm on the {d:.0f} mm bush bore, {tag}", 2 * side / (2 * P["base_lug_t"] * d), A["bush_allow"])
+    hs = F / 2 / 2
+    arm_h = (P["lug_y0"] + P["lug_t"] / 2) - P["rib_y"]
+    chk(f"Hinge and latch pins {P['hinge_pin_d']:.0f} mm in bending, arm {arm_h:.0f} mm, {tag}", hs * arm_h / (math.pi * P["hinge_pin_d"] ** 3 / 32), A["fy_pin"])
+# the v0.6 design for comparison: 35 mm C45 pins, 20 mm lugs 28 to 48 mm off centre
+side_ab = F_abuse / cth / 2; side_nm = F_nom / cth / 2
+Z35 = math.pi * 35 ** 3 / 32
+V06 = dict(nom=side_nm * 40 / Z35, ab=side_ab * 40 / Z35, lug=2 * side_ab / (2 * 20 * 35), hinge=F_abuse / 4 * 22 / (math.pi * 30 ** 3 / 32))
+out("str", "v0.6 base pin, 35 mm C45, bending at nominal load (arm 40 mm)", f"{V06['nom']:.0f} MPa against {A['fy_pin_c45']:.0f} MPa (SF {A['fy_pin_c45'] / V06['nom']:.2f})", "")
+out("str", "v0.6 base pin, 35 mm C45, bending at the abuse load", f"{V06['ab']:.0f} MPa (SF {A['fy_pin_c45'] / V06['ab']:.2f})", "")
+out("str", "v0.6 base pin lugs, 2 x 20 mm on 35 mm, bearing at the abuse load", f"{V06['lug']:.0f} MPa against {A['bush_allow']:.0f} MPa", "")
+out("str", "v0.6 hinge pins, 30 mm C45, bending at the abuse load", f"{V06['hinge']:.0f} MPa (SF {A['fy_pin_c45'] / V06['hinge']:.2f})", "")
 min_sf = min(c[3] for c in checks)
 out("str", "Lowest safety factor on yield or capacity (abuse case)", min_sf, "", "{:.2f}")
 
 # fatigue at nominal load, 50,000 blocks
-ranges = [c[1] for c in checks if "nominal" in c[0] and "buckling" not in c[0] and "Bush" not in c[0]]
-out("str", "Highest nominal stress range per block", max(ranges), "MPa", "{:.0f}")
+ranges = [c[1] for c in checks if "nominal" in c[0] and "buckling" not in c[0] and "Bush" not in c[0]
+          and "bending" not in c[0] and "bearing" not in c[0] and "shear" not in c[0]]   # welded members only
+pin_ranges = [c[1] for c in checks if "nominal" in c[0] and "pin" in c[0] and "bending" in c[0]]
+# turned 42CrMo4 +QT pins, not welded: pulsating range against half the endurance limit taken as 0.5 Rm (Rm 1,000 MPa
+# minimum for 16 < d <= 40 mm) with a 0.7 surface and size factor, so 350 MPa (assumed, first-order)
+pin_allow = 0.5 * 1000.0 * 0.7
+out("str", "Highest nominal stress range per block in a welded member", max(ranges), "MPa", "{:.0f}")
 out("str", "Allowed range, FAT 71 welded detail at 50,000 cycles", A["fat_range_MPa"], "MPa", "{:.0f}")
+out("str", "Highest nominal bending stress range in a toggle pin per block", max(pin_ranges), "MPa", "{:.0f}")
+out("str", "Allowed range for the turned 42CrMo4 +QT pins (0.5 Rm x 0.7, assumed)", pin_allow, "MPa", "{:.0f}")
 
 # kickback
 d_loop = F_nom / 2 / 1100.0 / A["E"] * (P["mold_top"] - 72.0)
@@ -370,14 +409,12 @@ head("7. Mass (R7)")
 for n, m in masses.items():
     out("mass", n, m, "kg")
 tot = sum(masses.values())
-out("mass", "Press total, steel", tot, "kg")
+out("mass", "Press total (steel, bushes, seals, fasteners and weld metal)", tot, "kg")
 out("mass", "Heaviest single piece", max(masses.values()), "kg")
 R7_TOTAL = 200.0   # kg, R7 total including the guard and bolts (Amish, 2026-10-02, EPR-DDR-003 A1); was 190 kg
 out("mass", "Margin to the R7 total of 200 kg including guard and bolts (2026-10-02); negative is over", R7_TOTAL - tot, "kg", "{:.2f}")
-m_seals = 8 * math.pi / 4 * (P["seal_od"] ** 2 - P["seal_id"] ** 2) * P["seal_t"] * 0.30e-6   # eight felt washers at 0.30 g/cm3 (assumed)
-out("mass", "Eight felt dust seal washers (assumed 0.30 g/cm3; not steel)", m_seals, "kg", "{:.4f}")
-out("mass", "Press total with the dust seals", tot + m_seals, "kg", "{:.3f}")
-out("mass", "R7 total met (200 kg or less with the seals, heaviest piece 50 kg or less)", "yes" if tot + m_seals <= R7_TOTAL and max(masses.values()) <= 50.0 else "no")
+out("mass", "R7 total met (200 kg or less)", "yes" if tot <= R7_TOTAL else "no")
+out("mass", "Heaviest piece within the 50 kg piece limit", "yes" if max(masses.values()) <= 50.0 else "no")
 out("mass", "Lever pipe alone (removable)", math.pi / 4 * (Do ** 2 - Di ** 2) * P["lever_len"] * 7850e-9, "kg")
 
 # ---------------------------------------------------------------- 8 output and crew
@@ -435,7 +472,7 @@ with open(ROOT / "bom/bom.csv", newline="") as f:
 out("cost", "BOM total, press and kit", total, "USD", "{:.0f}")
 budget = next(float(l.split(":")[1].split("#")[0]) for l in (ROOT / "project.yaml").read_text().splitlines() if l.startswith("budget_usd:"))
 out("cost", "Budget in project.yaml", budget, "USD", "{:.0f}")
-out("cost", "Under budget by", budget - total, "USD", "{:.0f}")
+out("cost", "Under the value-engineering target by (negative is over)", budget - total, "USD", "{:.0f}")
 out("cost", "Steel in the press at the indicative price", tot * A["steel_usd_kg"], "USD", "{:.0f}")
 
 with open(ROOT / "docs/04-calcs/results.csv", "w", newline="") as f:

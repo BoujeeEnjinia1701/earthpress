@@ -45,7 +45,7 @@ for view in pm.RENDER_VIEWS:
     np.savez_compressed(out / f"{stem}.npz", **arrays)
     (out / f"{stem}.json").write_text(json.dumps(dict(project=pm.TITLE, title=view["name"], parts=meta), indent=1))
     jobs.append(dict(repo=repo, view=view["name"], npz=f"{stem}.npz",
-                     args=["--product", "--res=1600x1200", f"--el={view.get('el', 30)}", f"--az={view.get('az', -40)}"],
+                     args=["--product", "--res=1600x1200", f"--el={view.get('el', 30)}", f"--az={view.get('az', -40)}"] + list(view.get("args", [])),
                      title=pm.TITLE if view["name"] == "hero" else f"{pm.TITLE.split(':')[0]}: {view['name'].replace('-', ' ')}",
                      note=view.get("note", "")))
     print(stem, len(meta), "parts", sum(len(arrays[f'f{k}']) for k in range(len(meta))), "tris")

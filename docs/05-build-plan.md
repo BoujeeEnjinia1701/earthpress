@@ -3,9 +3,9 @@ doc_id: EPR-BLD-001
 title: EarthPress prototype build plan
 project: EarthPress
 doc_type: Build plan
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-25'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,6 +25,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: 'Dust seals at the bush faces added (parts, steps 5 to 7, pictures); section 3.15 soil test kit procedure with the operating chart, scoop rule and lime mix chart; cost USD 523'
+  - version: "0.5"
+    date: '2026-10-25'
+    author: Amish Chadha
+    change: 'Kit 1.9.1: toggle pins 40 mm 42CrMo4 +QT in 40 x 46 mm bushes, 28 mm base pin lugs, 60 mm connecting link, 205 mm slot (fix F1, EPR-DEC-001); mold bolts in one line on the column web, corrected bolt lengths and guard fixings (C1 to C5); pictures redrawn from the detailed model; cost USD 542'
 ---
 
 # EarthPress prototype build plan
@@ -37,7 +41,7 @@ revisions:
 
 *Figure 1. Every component pulled apart and numbered in build order. The soil sieve, test kit and block gauge are separate and are made last.*
 
-The prototype is one EarthPress: a welded steel press about 1.3 m long, 0.6 m wide and 1 m to the mold rim, with a removable 1.7 m lever, plus its soil sieve, soil test kit and block gauge. Figure 1 shows the 14 press components in the order you make or fit them. Thirteen are made in a welding shop: the base frame and the press core (two welded pieces that bolt together), the mold box, the lid, the piston with its push rod, four toggle links, the connecting link, the lever hub, the rest catch and end pawl, the eject seesaw, the linkage guard and the lever pipe. Bought parts are the turned pins, shaft and bushes, spacer tubes, bolts, springs and the test kit. The work is sawing, flame or plasma cutting, drilling, tapping, stick welding and grinding of mild steel plate, channel, tube and pipe. The parts cost about $523 from the bill of materials, against a value-engineering target of $500.
+The prototype is one EarthPress: a welded steel press about 1.3 m long, 0.6 m wide and 1 m to the mold rim, with a removable 1.7 m lever, plus its soil sieve, soil test kit and block gauge. Figure 1 shows the 14 press components in the order you make or fit them. Thirteen are made in a welding shop: the base frame and the press core (two welded pieces that bolt together), the mold box, the lid, the piston with its push rod, four toggle links, the connecting link, the lever hub, the rest catch and end pawl, the eject seesaw, the linkage guard and the lever pipe. Bought parts are the turned pins, shaft and bushes, spacer tubes, bolts, springs and the test kit. The work is sawing, flame or plasma cutting, drilling, tapping, stick welding and grinding of mild steel plate, channel, tube and pipe. The parts cost about $542 from the bill of materials, against a value-engineering target of $500.
 
 > **Safety:** The finished press puts 81 kN (over 8 tonne-force) on the block, and up to 173 kN if two people pull hard at the end of the stroke. Keep hands out of the mold, the linkage and the eject arm whenever anyone is on the lever. Building it involves welding, grinding and cutting: wear welding PPE, guard the grinder, and work away from anything that burns. The press weighs about 200 kg; its heaviest piece, the base frame, is 45 kg: lift every piece with two people.
 
@@ -82,7 +86,7 @@ Make and check each component before the assembly step that needs it. Sizes are 
 
 1. Cut two skids of 60 x 60 x 3 tube 1,000 long and four cross tubes of 50 x 50 x 3 tube 460 long.
 2. Lay the skids on a flat table, 520 apart between centres. Fit the cross tubes between them with their tops flush with the skid tops, centred 25, 405, 670 and 975 from the left ends. Check the diagonals are equal, then weld all round.
-3. Cut the base plate, 12 mm, 315 x 340. Drill eight 13.5 holes for the core feet (on a 110 x 70 pattern each side, centred 120 either side of the middle) and two 11 holes for the guard feet, as Figure 2 shows. Weld the plate onto the two middle cross tubes, 380 to 695 from the left ends.
+3. Cut the base plate, 12 mm, 315 x 340. Drill eight 13.5 holes for the core feet (on a 110 x 70 pattern each side, centred 120 either side of the middle) and two holes tapped M10 for the guard feet (drill 8.5, tap M10), 26 from the left edge and 103 either side of the centre line, as Figure 2 shows. Weld the plate onto the two middle cross tubes, 380 to 695 from the left ends.
 4. Cut the two lever bracket plates from 10 mm plate to the outline of Figure 3 (a mirror pair). Drill the shaft hole 40.5, the pawl shaft hole 16.5 and the 31 crank pin access hole in the +Y plate, and the catch shaft hole 16.5 in the -Y plate.
 5. Stand the bracket plates on the left cross tube, inner faces 120 apart, with a 40 mm bar through both shaft holes to hold them in line. Weld both sides. Weld the 30 mm rest stop bar, 120 long, across between them at the position in Figure 3, and slide on its rubber sleeve after painting.
 6. Cut two 40 x 3 round tubes 358 long for the ties. Slot one end of each 10 mm wide and 40 deep so it straddles a bracket plate, and weld the other end square to a 10 mm tab 88 x 80. Drill each tab with two 13.5 holes, as Figure 6 shows.
@@ -105,12 +109,12 @@ Make and check each component before the assembly step that needs it. Sizes are 
 
 1. Cut two UPN 80 columns 842 long, ends square.
 2. In each web, drill four 18 holes for the mold bolts, 18 each side of the centre line, 687 and 767 up from the bottom end.
-3. In one column only (the +Y column), drill two 40 access holes on the web's centre line, 210 and 611 up from the bottom end.
+3. In one column only (the +Y column), drill two 46 access holes on the web's centre line, 210 and 611 up from the bottom end.
 4. In one flange of each column (the left flange), drill two 13.5 holes 32 from the web face, 113 and 158 up from the bottom end, for the tie bolts.
 5. Cut two feet, 16 mm plate 140 x 90, each drilled with four 13.5 holes on a 110 x 70 pattern. Weld a column upright on the middle of each foot, its web over the foot's long centre line.
 6. Stand the two columns on a flat table with their webs facing each other, 196 apart between the web faces and square to each other.
 7. Cut two beam plates, 20 x 100 x 286. Clamp one to the outside faces of the left flanges, top edge 185 above the feet, and drill through the 13.5 tie bolt holes. Weld both beam plates to the outside faces of the flanges.
-8. Cut two lugs, 20 mm plate 80 x 95, with a 41 hole 55 from the top edge. Fit them between the beam plates, 56 apart inside, with a 41 bar through both holes to hold them in line, 210 above the feet, and weld them to both beam plates.
+8. Cut two lugs, 28 mm plate 80 x 95, with a 46 hole 55 from the top edge. Fit them between the beam plates, 56 apart inside, with a 46 bar through both holes to hold them in line, 210 above the feet, and weld them to both beam plates.
 
 **How it fits the parts next to it.**
 
@@ -122,7 +126,7 @@ Make and check each component before the assembly step that needs it. Sizes are 
 
 *Figure 6. Joint 2: two M12 bolts pass through the tie's tab, the beam plate and the column flange; the nuts go on inside the open channel.*
 
-**Check before moving on.** The webs are parallel and 196 apart (plus 0.5, minus 0) at top and bottom; a 41 bar slides through both lugs.
+**Check before moving on.** The webs are parallel and 196 apart (plus 0.5, minus 0) at top and bottom; a 46 bar slides through both lugs.
 
 ### 3.3 Mold box
 
@@ -137,7 +141,7 @@ Make and check each component before the assembly step that needs it. Sizes are 
 1. Cut two long walls 314 x 200 and two end walls 140 x 200 from 12 mm plate. Mark the inside faces.
 2. Tack the box together on a flat plate with the end walls between the long walls, check the cavity is 290 x 140 and square, and weld outside only.
 3. Grind the four inside faces flat and square within 0.5 mm and break the inside edges at top and bottom by 1 mm.
-4. Cut two side flanges, 16 mm plate 120 x 150. Before welding, drill 14 and tap M16 in four places: 18 each side of the centre, 35 and 115 up from the bottom edge.
+4. Cut two side flanges, 16 mm plate 120 x 150. Before welding, drill 14 and tap M16 in four places on the centre line, 20, 57, 93 and 130 up from the bottom edge (one line, so the washers sit on the flat of the column web).
 5. Weld the 16 x 50 belt round the top, flush with the rim, then the flanges centred on the long walls under the belt.
 6. Cut four lugs from 20 mm plate (Figure 7). Drill each pair together with a 31 drill on one bar. Weld the hinge lugs to the right end of the belt and the latch lugs to the left end, inner faces 144 apart, with a 30 bar through each pair so the holes stay in line: the hinge holes 37 out from the belt and 10 above the rim, the latch holes 37 out and 25 below the rim.
 
@@ -163,7 +167,7 @@ The flanges slide between the two column webs; shim to a gap of 0.5 mm or less. 
 
 1. Cut the plate, 25 mm, 288 x 138, and break its edges 1 mm.
 2. Cut two skirts, 12 mm plate 138 x 60, and weld them under the plate's two short ends, flush with the ends.
-3. Cut the push rod, 60 x 60 bar, 238 long. Cut the slot through it, side to side: 37 wide and 200 long, its top 23 below the plate and its bottom 15 above the rod's foot. Chain drill and file, or mill. Deburr.
+3. Cut the push rod, 60 x 60 bar, 238 long. Cut the slot through it, side to side: 42 wide and 205 long, its top 20 below the plate and its bottom 12.5 above the rod's foot. Chain drill and file, or mill. Deburr.
 4. Weld the rod square under the plate's centre, slot running across the press, with a fillet all round. Check it is square to the plate within 0.5 mm over its length.
 5. Grind the rod's foot flat and square: the eject arm pushes on it.
 
@@ -183,16 +187,16 @@ The piston has 1 mm clearance each side in the mold; the upper links pass 2 mm f
 
 *Figure 11. Toggle link making sketch (EPR-DWG-107).*
 
-**What it is and what it is made from.** The four links that straighten under the piston and multiply the lever's force. Mild steel flat bar 70 x 28, with pressed-in case-hardened bushes, 35 bore and 41 outside.
+**What it is and what it is made from.** The four links that straighten under the piston and multiply the lever's force. Mild steel flat bar 70 x 28, with pressed-in case-hardened bushes, 40 bore and 46 outside.
 
 **How to make it.**
 
 1. Cut four lengths of 70 x 28 bar, 315 long.
-2. Clamp all four together, mark two centres 245 apart on the centre line, 35 from each end, and drill and bore 41 through all four at once, square to the faces.
+2. Clamp all four together, mark two centres 245 apart on the centre line, 35 from each end, and drill and bore 46 through all four at once, square to the faces.
 3. Round both ends to a 35 radius about the centres.
 4. Press a bush into each bore with a vice or press. Drill a 6 hole from the edge into one bore of each link and fit a grease nipple.
-5. Ream the bushes to a light running fit on the 35 pins.
-6. Cut or buy eight dust seal washers, 2 thick, 50 outside and 35.5 bore, from felt or rubber sheet (the toggle needs eight in all).
+5. Ream the bushes to a light running fit on the 40 pins.
+6. Cut or buy eight dust seal washers, 2 thick, 56 outside and 40.5 bore, from felt or rubber sheet (the toggle needs eight in all).
 
 **How it fits the parts next to it.**
 
@@ -202,7 +206,7 @@ The piston has 1 mm clearance each side in the mold; the upper links pass 2 mm f
 
 Two links are the lower links, outside, from 64 to 92 off the centre line; two are the upper links, inside, from 32 to 60.
 
-**Check before moving on.** With all four links stacked, a 35 pin passes through both ends.
+**Check before moving on.** With all four links stacked, a 40 pin passes through both ends.
 
 ### 3.6 Connecting link
 
@@ -210,12 +214,12 @@ Two links are the lower links, outside, from 64 to 92 off the centre line; two a
 
 *Figure 13. Connecting link making sketch (EPR-DWG-108).*
 
-**What it is and what it is made from.** The link from the crank on the lever hub to the toggle's knee. Mild steel flat bar 50 x 24.
+**What it is and what it is made from.** The link from the crank on the lever hub to the toggle's knee. Mild steel flat bar 60 x 24.
 
 **How to make it.**
 
 1. Cut 470 long. Mark two centres 420 apart on the centre line, 25 from each end; hold 420 within 0.3, since it sets the stroke.
-2. Bore 30.5 at the crank end and 35.5 at the knee end. Round both ends to a 25 radius.
+2. Bore 30.5 at the crank end and 40.5 at the knee end. Round both ends to a 30 radius.
 
 **How it fits the parts next to it.**
 
@@ -310,9 +314,9 @@ A washer and circlip hold each shaft; a torsion spring holds the tip against the
 
 1. Make two side frames of angle, 316 long and 568 tall, and join them at the top with angle so their outside faces are 274 apart.
 2. Cover both sides, and the top over the left 210, with expanded metal; weld or bolt it to the frame.
-3. Weld an angle foot with an 11 hole at the bottom right corner of each side, and two short angle brackets near the left end of each side, each with an 11 hole for an M10 bolt and a 35 mm spacer tube.
+3. Weld an angle foot with an 11 hole at the bottom right corner of each side, and two short angle brackets near the left end of each side, each a 45 mm spacer bracket with an 11 hole for an M10 bolt. Extend each foot 15 mm toward the middle and drill its 11 hole there, clear of the vertical angle.
 
-**How it fits the parts next to it.** The feet bolt to the base plate with M10; the brackets bolt to the bracket plates' outside faces with M10 through 35 mm spacers. Nothing that moves touches the guard over the full stroke.
+**How it fits the parts next to it.** The feet bolt to the base plate with M10 x 16 into the tapped holes; the brackets bolt to the bracket plates' outside faces with M10 x 95 through the frame and the 45 mm spacer brackets. Nothing that moves touches the guard over the full stroke.
 
 **Check before moving on.** No opening larger than 12 mm; no sharp wire ends.
 
@@ -425,11 +429,11 @@ Mix the lime dry into the sieved soil first, then add the water, and press the m
 
 Buy to specification, not brand. Line numbers are those of the bill of materials.
 
-- **Toggle pins (line 5).** Three C45 turned pins, 35 diameter, with a circlip groove near each end: two 192 long (base and knee) and one 128 long (upper).
-- **Bushes and spacers (line 5).** Ten case-hardened steel bushes, 35 bore, 41 outside, 28 long (eight for the links, two for the lugs); two spacer tubes 50 x 35.5 inside, 16 long (base pin) and two 20 long (knee pin); six grease nipples; eight dust seal washers of felt or rubber, 2 thick, 50 outside and 35.5 bore.
-- **Hub shaft and pins (lines 3, 6, 7).** One 40 shaft 154 long; one 30 crank pin 112 long; two 30 pins 196 long (hinge and latch, the latch pin with a welded T-handle); one 30 eject pin 152 long; all C45 with circlip grooves; one 12 locking pin with R-clip.
+- **Toggle pins (line 5).** Three 42CrMo4 +QT turned pins, 40 diameter, with a circlip groove near each end: two 192 long (base and knee) and one 128 long (upper). Not C45: in bending a 35 mm C45 pin yields at the working load (EPR-CAL-001 section 6b).
+- **Bushes and spacers (line 5).** Ten case-hardened steel bushes, 40 bore, 46 outside, 28 long (eight for the links, two for the lugs); two spacer tubes 50 x 40.5 inside, 8 long (base pin) and two 20 long (knee pin); six M6 grease nipples; eight dust seal washers of felt or rubber, 2 thick, 56 outside and 40.5 bore.
+- **Hub shaft and pins (lines 3, 6, 7).** One 40 shaft 154 long; one 30 crank pin 112 long; two 30 pins 196 long (hinge and latch, the latch pin with a welded T-handle), 42CrMo4 +QT; one 30 eject pin 152 long; the shaft and the crank and eject pins C45; all with circlip grooves; one 12 locking pin with R-clip.
 - **Springs (line 7).** Two small torsion springs for the catch and the pawl.
-- **Fixings (line 11).** Eight M16 x 20 grade 8.8 hex bolts with washers; eight M12 x 40 and four M12 x 50 grade 8.8 bolts with nuts and washers; four M10 x 30 and four M10 x 50 bolts with nuts, and four 35 mm spacer tubes; ten 10 mm washers for the hub and seesaw; circlips for every pin.
+- **Fixings (line 11).** Eight M16 x 25 grade 8.8 hex bolts with washers; eight M12 x 50 and four M12 x 60 grade 8.8 bolts with nuts and two washers each; four M10 x 16 bolts with washers into the tapped base plate holes, and four M10 x 95 bolts with nuts and two washers each; ten 10 mm washers for the hub and seesaw; circlips for every pin.
 - **Soil test kit (line 9).** Two 1 L clear jars with lids, a 600 x 40 x 40 shrinkage box, three measuring buckets, a 10 kg hanging scale with 50 g divisions, salt and the laminated test chart.
 - **Finish (line 11).** Primer and paint for all steel except the mold cavity, the pins and the bushes.
 
@@ -501,7 +505,7 @@ Hold the seesaw between the posts with a washer each side, nose under the push r
 
 ![Step 11](05-build-plan/step-11.png)
 
-Seen from behind. Feet to the base plate with M10 bolts; brackets to the bracket plates with M10 bolts through the 35 mm spacers. **Hold point:** safety stop S2 in section 6.
+Seen from behind. Feet to the base plate with M10 bolts; brackets to the bracket plates with M10 x 95 bolts through the 45 mm spacer brackets. **Hold point:** safety stop S2 in section 6.
 
 ### Step 12: lid, hinge pin and latch pin
 

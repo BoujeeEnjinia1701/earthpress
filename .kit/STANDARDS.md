@@ -3,9 +3,9 @@ doc_id: OHP-STD-001
 title: Documentation and drawing standard
 project: Open Hardware Portfolio
 doc_type: Standard
-version: "1.7"
+version: "1.8.1"
 status: Released
-date: 2026-09-30
+date: 2026-10-23
 author: Amish Chadha
 license: CC-BY-SA-4.0
 revisions:
@@ -41,6 +41,14 @@ revisions:
     date: 2026-09-30
     author: Amish Chadha
     change: Concept and constructable design states; design decisions register (DEC) kept apart from the build plan; prototype build plan (BLD, section 18) with pictures by component is required TRL 3 evidence; every repo targets TRL 3 during the populate phase; build_views.py; /to-trl3 and /build-plan commands
+  - version: "1.8"
+    date: 2026-10-23
+    author: Amish Chadha
+    change: "The pipeline: stages P0 to P6 beside TRL (section 19), STEM check (section 20), concept options (section 21), user and product requirements with a generated traceability matrix (section 22), regulatory, feasibility, risk, market and plan documents (section 23); trace.py, stem_check.py, options.py; render.py and the release gate check the pipeline deliverables"
+  - version: "1.8.1"
+    date: 2026-10-23
+    author: Amish Chadha
+    change: "STEM check fix rule (section 20): on Amish's standing instruction, a failed detail is fixed in the design in the same session and recorded in the decisions register; working principle, pitch or scope changes still go to Amish"
 ---
 
 # Documentation and drawing standard
@@ -59,7 +67,18 @@ Every controlled document has a unique ID in the form `PRJ-TYP-NNN`.
 | --- | --- | --- |
 | PRC | Design precis | `docs/02-concept.md` |
 | PRB | Problem statement | `docs/01-problem.md` |
-| REQ | Requirements | `docs/03-requirements.md` |
+| REQ | Requirements (kit 1.7 and earlier; replaced by URS and PRS) | `docs/03-requirements.md` |
+| STM | STEM check (section 20) | `docs/01b-stem-check.md` |
+| OPT | Concept options (section 21) | `docs/02a-concept-options.md` |
+| URS | User requirements (section 22) | `docs/03a-user-requirements.md` |
+| PRS | Product requirements and specifications (section 22) | `docs/03-requirements.md` |
+| RTM | Traceability matrix, generated (section 22) | `docs/03b-traceability.md` |
+| REG | Regulatory and standards register (section 23) | `docs/07-regulatory.md` |
+| FEA | Feasibility assessment (section 23) | `docs/08-feasibility.md` |
+| RSK | Risk register, hazard analysis and design FMEA (section 23) | `docs/09-risk.md` |
+| MKT | Market and viability (section 23) | `docs/10-market.md` |
+| PLN | Project plan, resources and references (section 23) | `docs/11-plan.md` |
+| MIN | Meeting minutes, optional (section 19) | `docs/minutes/YYYY-MM-DD.md` |
 | CAL | Calculation or sizing note | `docs/04-calcs/*.md` |
 | DDR | Design decision record | `docs/decisions/*.md` |
 | BOM | Bill of materials | `bom/bom.csv` |
@@ -179,8 +198,8 @@ Each project states its maturity as a Technology Readiness Level on the NASA and
 | TRL | Definition | Evidence the repo must contain |
 | --- | --- | --- |
 | 1 | Basic principles observed | Problem statement (PRB) |
-| 2 | Technology concept formulated | Draft precis (PRC) and requirements (REQ) |
-| 3 | Analytical or experimental proof of concept | Calculation note (CAL), working build123d model with STEP export, drawing sheet (DWG), priced BOM with every unit cost filled in, prototype build plan (BLD) with pictures, `design_state: constructable` |
+| 2 | Technology concept formulated | Draft precis (PRC), user and product requirements (URS, PRS; REQ before kit 1.8), STEM check (STM) with no failed claim, at least two concept options (OPT); pipeline stage P1 or later |
+| 3 | Analytical or experimental proof of concept | Calculation note (CAL), working build123d model with STEP export, drawing sheet (DWG), priced BOM with every unit cost filled in, prototype build plan (BLD) with pictures, `design_state: constructable`, STEM check passed, generated traceability matrix (RTM), and the regulatory, feasibility, risk (with design FMEA), market and plan documents; pipeline stage P3 |
 | 4 | Components validated in the lab | Test report (TST) with `environment: lab`, build log entries |
 | 5 | Validated in a relevant environment | Test report (TST) with `environment: relevant` |
 | 6 | System prototype demonstrated in a relevant environment | Precis at version 1.0 or later with status Released, a drawing at a lettered revision (Rev A or later), and a system-level TST with `environment: relevant` |
@@ -384,3 +403,112 @@ The build plan describes the design as it stands; it never lists outstanding dec
 Pictures are generated from the model by `cad/src/build_plan_media.py` using `.kit/build_views.py` (overview, component making sketches, joint close-ups, assembly steps), so they always match the model. They are written to `docs/05-build-plan/` and `cad/drawings/`. Look at every picture before committing: labels readable, nothing overlapping, the part in question clearly visible.
 
 `render.py --check` at TRL 3 requires a BLD document, `design_state: constructable` in `project.yaml`, and `docs/05-build-plan/overview.png`.
+
+## 19. The pipeline: stages and deliverables
+
+Every project moves through the pipeline, seven stages that sit beside the TRL scale. `project.yaml` records `stage` (P0 to P6); `.kit/PHASE.yaml` caps it with `stage_cap`, set by Amish (P3 while the TRL cap is 3). A stage is reached when its deliverables exist and are not placeholders; each stage also updates the documents of the stages before it.
+
+| Stage | Name | TRL | Deliverables added |
+| --- | --- | --- | --- |
+| P0 | Proposal | 1 to 2 | Problem statement with user-needs and stakeholder tables (PRB), STEM check (STM), concept options (OPT), first pass of the regulatory register (REG), feasibility (FEA) and project plan (PLN) |
+| P1 | Definition | 2 | User requirements (URS), product requirements draft (PRS), risk register with preliminary hazard analysis (RSK), market and viability (MKT), regulatory register complete |
+| P2 | Design inputs | 2 to 3 | Product requirements with targets, tolerances and verification (PRS), calculation note (CAL), traceability matrix (RTM), concept selection decision record (DDR), STEM check closed, feasibility closed |
+| P3 | Design outputs | 3 | Model, STEP, drawings (DWG), priced BOM, build plan (BLD), decisions register (DEC), first-pass design FMEA in RSK, traceability complete |
+| P4 | Verification | 4 to 5 | Test plans and lab test reports (TST), verification report, reliability plan, RSK updated from results |
+| P5 | Validation | 5 to 6 | Validation and human factors reports (TST, `environment: relevant`), field trials with a partner, certification status in REG |
+| P6 | Commercialization | 7 to 9 | Launch plan, instructions for use, operator training, standard cost estimate; only with a named deployment partner |
+
+Rules:
+
+- `stage` may not exceed `stage_cap`; `render.py --check` fails if it does.
+- A repo at TRL 2 is at least P1; a repo at TRL 3 is P3. The check fails if `stage` and `trl` disagree.
+- Deliverables of P4 to P6 are not started while the cap is P3. They may appear in PLN as planned work, marked on hold.
+- Meeting minutes (MIN, `docs/minutes/YYYY-MM-DD.md`) are optional: used when people beyond Amish join a project (date, attendees, agenda, notes, decisions, actions with owners).
+
+## 20. STEM check (STM)
+
+Every idea and every concept option passes a written STEM check before it can be called TRL 2: a test that what is envisaged sits within known physics, chemistry and biology, across all their branches, with the mathematics and engineering done correctly. The check exists to stop wonky science reaching a drawing.
+
+**File:** `docs/01b-stem-check.md` (`PRJ-STM-001`), calculations in `docs/04-calcs/stem_check.py` using `.kit/stem_check.py`.
+
+**Fields and branches.** One row per claim the design makes, tagged with its field and branch:
+
+| Field | Branches |
+| --- | --- |
+| Physics | Mechanics and statics, strength of materials, thermodynamics, heat transfer, fluid mechanics, electromagnetism and circuits, optics and radiation, acoustics and vibration, nuclear and ionising radiation |
+| Chemistry | Inorganic, organic, physical (kinetics, equilibria, thermochemistry), electrochemistry and batteries, materials and polymer chemistry, analytical, environmental and atmospheric chemistry |
+| Biology | Microbiology, human physiology and biomechanics, ergonomics, ecology and agronomy, plant and animal biology, toxicology, epidemiology, biochemistry |
+| Mathematics | Units and dimensional analysis, orders of magnitude, statistics and uncertainty, numerical method |
+| Engineering and technology | Power and link budgets, control, sensing resolution, manufacturing tolerances, standards practice |
+
+**Method.**
+
+1. List every physical, chemical or biological claim, with its number and unit, field and branch.
+2. Tie each claim to its governing law or a cited source (textbook, standard, datasheet or peer-reviewed paper).
+3. Do the first-order calculation in `docs/04-calcs/stem_check.py`, so the check reruns when the design changes. Typical checks: energy and mass balance, efficiency against its theoretical limit (Carnot, Betz, Shockley-Queisser, pump curves), stress against yield with a safety factor, suction lift, heat flow, reaction stoichiometry and dose, battery life from a power budget, an order-of-magnitude estimate within a factor of about 3.
+4. Give each row a verdict: **Within known science**; **Plausible, to confirm at TRL 3** (naming the CAL item that will confirm it); **Fails, fix proposed** (a detail fails, and a fix that keeps the working principle exists; see the fix rule below); or **Fails** (the working principle itself does not hold).
+5. An independent reviewer pass (a second agent that does not see the author's reasoning) tries to refute every "Within known science" verdict; its findings are recorded in the document.
+
+**Fix rule (Amish, 2026-10-23).** When a row fails, Claude proposes the best fix for the design and its constructability and implements it in the same session: model, drawings, calculations, BOM, build plan and requirements. The fix is recorded in the design decisions register as decided under Amish's standing instruction of 2026-10-23, with the options weighed and the cost, and Amish can reverse it. The STEM check is then rerun and the row is closed by the fix (verdict **Within known science**, "Closed by" naming the decision). Two exceptions go to Amish as decisions instead: a fix that changes the working principle, the pitch or the user-facing scope, and a row that is **Fails** outright (the concept goes back to concept options, section 21).
+
+**Pass rule.** No row may be **Fails**: a concept whose working principle fails is dropped. A **Fails, fix proposed** row keeps the check open until its fix is implemented under the fix rule, or decided by Amish where the fix rule sends it to him. Every field the concept touches has at least one row; a field marked not relevant says why in one line. Every **Plausible** row is closed by a CAL result before TRL 3. `project.yaml` records `stem_check: pass`, `open` or `fail`. `render.py --check` fails at TRL 2 or above if STM is missing or `stem_check` is `fail`. The release gate fails unless `stem_check` is `pass`, so an open item (a Plausible row not yet closed, or a Fails, fix proposed row not yet fixed) blocks any release until it is closed. A repo already at TRL 3 when its first STEM check finds an open item (the kit 1.8 upgrade) keeps its TRL and applies the fix rule to the items. Health and biology claims use soft, non-clinical wording.
+
+## 21. Concept options (OPT)
+
+Every idea gets at least two genuinely different design concepts, three where a clearly different working principle exists, scored against the same user requirements before one is carried forward. A variant that only changes size or material does not count.
+
+**File:** `docs/02a-concept-options.md` (`PRJ-OPT-001`); option models in `cad/src/options.py`, drawn side by side at one scale by `.kit/options.py` into `media/options.png`.
+
+Each option records: name and one-line working principle; a massing render at the shared scale; first-order numbers (cost, mass, output or throughput, energy, parts count); its own STEM check rows (an option that fails is shown, marked and dropped); key risks; what it needs from a co-design partner.
+
+**Scoring.** A weighted table: criteria are the user requirements (High weighs 3, Medium 2, Low 1) plus cost against the value-engineering target, buildability with local skills, safety and maintenance. Each option scores 1 to 5 per criterion with a one-line reason. The table shows weighted totals, the recommended option, and the runner-up's best idea to graft onto it.
+
+**Choice.** The selection is a decision for Amish: recorded as "Proposed, awaiting Amish" in the decisions register (DEC) and argued in a concept selection decision record (DDR). If two options score within 10 %, both go to Amish without a pick. The chosen option is what PRC describes.
+
+**Existing designs.** In a repo designed before kit 1.8, the current design is option A. If another option outscores it, that goes to Amish as a decision; the repo is not redesigned without his go.
+
+`project.yaml` records `concept_options` (each option's name) and `concept_chosen`. `render.py --check` fails at TRL 2 or above if OPT is missing or lists fewer than two options.
+
+## 22. Requirements and traceability (URS, PRS, RTM)
+
+Requirements are split into what users need and what the design must do, and every product requirement traces to a user need and to its evidence.
+
+**User requirements** (`docs/03a-user-requirements.md`, `PRJ-URS-001`): one table with ID (UR-001 and on), category (deployment and assembly, performance, usability, safety, environment and durability, logistics, maintenance, cost, regulatory), title, need written from the user's side, priority (High, Medium, Low) and source (the user type or stakeholder in PRB).
+
+**Product requirements and specifications** (`docs/03-requirements.md`, `PRJ-PRS-001`, which replaces REQ): one table with ID (PR-001 and on), traces to (UR IDs), category, title, requirement (a "shall" statement), target, tolerance, units, verification (analysis, inspection, demonstration or test, and the TRL at which it happens), status (met on paper, met by design, at risk, not met, over target, withdrawn, to verify at TRL 4) and, for repos migrated from REQ, the old R number in a "Was" column. Targets remain proposals for review with a co-design partner.
+
+**Traceability matrix** (`docs/03b-traceability.md`, `PRJ-RTM-001`): generated by `python .kit/trace.py`, never typed by hand. It reads URS, PRS, the CAL results, the BOM and the build plan and lists UR to PR to evidence (CAL, DWG, BOM line or BLD step) to verification. It flags a High UR with no PR, a PR with no UR, a PR with no evidence and a PR with no verification. `render.py --check` fails at TRL 3 if the matrix is missing or out of date, or if a High UR has no PR.
+
+## 23. Regulatory, feasibility, risk, market and plan documents
+
+| Code | File | Content |
+| --- | --- | --- |
+| REG | `docs/07-regulatory.md` | Regulatory and standards register: standard or regulation, jurisdiction, applicability, owner (role), status (to assess, applies, does not apply, met by design, certification needed later). Standards shared across a focus area are researched once and cited in each repo. Health projects: soft, non-clinical wording, and any device classification is "to assess" with a regulatory consultant. |
+| FEA | `docs/08-feasibility.md` | Feasibility assessment: aspect (design, materials, manufacturing and assembly, power, controls, supply), assessment, rating (High, Medium, Low), risks and notes, with links to STM and CAL. |
+| RSK | `docs/09-risk.md` | Project risk register (risk, cause, effect, likelihood and impact 1 to 5, owner role, response); preliminary hazard analysis (hazard, cause, harm, severity, likelihood, control, residual); from P3 a first-pass design FMEA (item, function, failure mode, effect, cause, severity, occurrence, detection, RPN, action). |
+| MKT | `docs/10-market.md` | Market and viability: segment, target users and region, competitive benchmark with cited price, estimated cost per unit (from the BOM), value proposition, and the open, non-commercial route (who would build it and how it spreads). Prices and benchmarks are cited with a date. |
+| PLN | `docs/11-plan.md` | Project plan: workstreams with owner role, resources needed (role, deliverable, effort, cost), stage gates and dates, next steps and decision request, and the reference list of every source cited in the repo's documents. |
+
+`render.py --check` requires REG, FEA and PLN from P0, RSK and MKT from P1, and the design FMEA in RSK at P3.
+
+## 24. CAD fidelity at every TRL (kit 1.9)
+
+Amish, 2026-10-24: "I want detailed TRL3 CAD - and in fact want to ensure the CAD is detailed across all TRLs." The model is detailed from the first concept, not a massing block that is detailed later, and every concept option is modelled to the repo's level (Amish, 2026-10-24: "Detail every option").
+
+**Model interface.** `cad/src/model.py` defines `PARAMS` (every main dimension; the calculations read it), `OPTIONS` (key to name), `PRINCIPLES` (key to one-line working principle), `CHOSEN` (the option carried to the drawing, BOM and build plan), optional `OPTION_VIEWS` (key to render elevation, azimuth and scale) and `ALLOWED_CONTACTS`, and `components(option)`, which returns a list of `cad_parts.part()` dicts. Every part has a name, a solid, a material from `cad_parts.MATERIALS` and a kind: made, bought, fastener, weld or context.
+
+**Parts library.** `.kit/cad_parts.py` supplies real stock (rectangular, square and round hollow sections, angle, channel, flat and round bar, sheet with holes, folded sheet, mesh), ISO fasteners (ISO 4017 bolts, ISO 4032 nuts, ISO 7089 washers, `hex_bolt_set` for a bolted joint, coach screws, anchors, ISO 2341 clevis pins and split pins), fillet weld beads, hinges, bushes, pulleys, a 200 L drum, rope, hand wheels and levers, and `break_edges()` for the radius or chamfer a real part has. Use it rather than bare boxes and cylinders.
+
+**Detail levels.**
+
+| Level | Stage | What the model must have | Checked by `cad_check.py` |
+| --- | --- | --- | --- |
+| D1 Recognisable | P0 (TRL 1) | Every visible part its own solid; real stock sections; moving parts at their real pivots; bought parts at catalogue envelope; broken edges; a material per part | At least 8 parts per option; no more than 50 % of made or bought parts are bare boxes or cylinders; every part has a material |
+| D2 Engineered | P1 and P2 (TRL 2) | D1 plus dimensions from `PARAMS`; hole patterns; every bolt, nut, washer, pin and screw; welds as beads; hinges, pins and bushes; mass per part; no interference | At least 15 parts; bare share at most 25 %; fasteners present; no two parts overlap by more than 5 mm3 unless listed in `ALLOWED_CONTACTS` |
+| D3 Constructable | P3 (TRL 3) | D2 plus every made part drawable on its own; fits and clearances checked; the assembly sequence the build plan follows; STEP per made or bought part of the chosen option, and an assembly STEP per option | At least 20 parts; bare share at most 15 %; per-part STEP files in `cad/step/<chosen>/` and `cad/step/<option>-assembly.step` for every option (fasteners and welds appear in the assemblies only); every made or bought part of the chosen option has a BOM line that exists in `bom/bom.csv` |
+
+`project.yaml` may set `cad_level` to raise the level above the stage's; it can never lower it. At TRL 3 every option's geometry reaches D3; the drawing, priced BOM and build plan describe the chosen option only.
+
+**Running the check.** `python .kit/cad_check.py --export` checks every option, writes the STEP files and stores the result (export tessellations for the web viewer and STL use a 0.1 to 0.2 mm chord error, so no file nears GitHub's 50 MB warning) with a hash of the CAD sources in `cad/fidelity.json`. `render.py --check` fails at kit 1.9 when that file is missing, stale, checked at too low a level, or failed.
+
+**Renders.** From D1 every picture of the product is a Blender Cycles render (`.kit/photoreal.py`), not a shaded matplotlib view: the options picture (`python .kit/options.py` renders `components()` of every option), the product renders and the hero. Materials come from `cad_parts.MATERIALS` and render as physically based materials (painted steel with edge wear, galvanised and stainless steel, aluminium, HDPE, EPDM, timber, plywood, bamboo, coir, rope, concrete, mirror, water). Site renders use `--scene=outdoor` with a physical sky and sun and a procedural ground (`--ground=mud`, `concrete`, `roof`, `sand`, `soil`, `grass`, `workshop`) and optional still water (`--water=<mm>`); the product model supplies any site structure (a headwall, a roof parapet) as context parts. The blueprint sheet and the 3D viewer stay as they are.

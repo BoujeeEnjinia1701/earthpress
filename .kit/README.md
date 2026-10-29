@@ -14,6 +14,11 @@ Shared documentation and drawing kit for every Open Hardware Portfolio repo. The
 | `cards.py` | Storefront images: `media/card.png` and `media/social-preview.png` from the hero render |
 | `image_qc.py` | Image quality: caption text inside the image, never overlapping, readable size, sharp renders |
 | `release_gate.py` | Checks a repo is ready to go public (STANDARDS sections 14, 16 and 17) |
+| `trace.py` | Generates the requirements traceability matrix and lists gaps (STANDARDS section 22) |
+| `stem_check.py` | Helpers for the STEM check: limits, balances, order-of-magnitude checks (STANDARDS section 20) |
+| `cad_parts.py` | Parts library for detailed CAD at every TRL: steel sections, sheet, ISO fasteners, welds, pins, hinges, pulleys, drums (STANDARDS section 24) |
+| `cad_check.py` | CAD fidelity check per detail level (D1, D2, D3), interference, BOM match, STEP per part (STANDARDS section 24) |
+| `options.py` | Draws the concept options side by side at one scale into `media/options.png` (STANDARDS section 21) |
 | `archive.py` | REUSE licensing metadata, the Zenodo DOI and the archive badges (STANDARDS sections 16 and 17) |
 | `style/` | PDF template and stylesheet |
 | `templates/` | Starting points for new controlled documents; `templates/issue/` and `templates/issue-openratio/` hold the GitHub issue templates |
@@ -56,3 +61,23 @@ python .kit/archive.py zenodo --doi 10.5281/zenodo.NNN   # after the first archi
 
 Order on release day: `archive.py reuse`, `archive.py zenodo`, release gate, Amish switches the repo on in Zenodo, signed tag and release, repo made public, concept DOI recorded, Software Heritage save requested. The steps are in STANDARDS sections 16 and 17.
 
+
+## The pipeline (kit 1.8)
+
+```
+python docs/04-calcs/stem_check.py   # STEM check calculations -> docs/04-calcs/stem_results.csv
+python .kit/options.py               # media/options.png from cad/src/options.py
+python .kit/trace.py                 # docs/03b-traceability.md from URS, PRS, CAL, BLD and BOM
+python .kit/render.py --check        # checks the stage's deliverables, the STEM check and the options
+```
+
+Stages P0 to P6 and their deliverables are in STANDARDS section 19; the stage cap is in `PHASE.yaml`.
+
+
+## CAD fidelity and Cycles renders (kit 1.9)
+
+```
+python .kit/cad_check.py --export    # every option in cad/src/model.py at the stage's detail level; STEP per part
+python .kit/options.py               # options picture rendered in Blender Cycles from components(option)
+python .kit/photoreal.py scene.npz out.png --product --scene=outdoor --ground=mud --water=60   # site render
+```

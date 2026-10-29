@@ -6,7 +6,7 @@ Work only in this repo. Read CLAUDE.md, .kit/STANDARDS.md and docs/REVIEW.md fir
 Goal: TRL 3 evidence and nothing beyond it. Deliverables:
 
 1. CAL-001 in docs/04-calcs: sizing calculations with a script, stated assumptions, and a results table against every requirement, marking any requirement that is not met.
-2. A parametric build123d model in cad/src/model.py with STEP and STL exports.
+2. A parametric build123d model in cad/src/model.py at detail level D3 for every option (kit 1.9, STANDARDS section 24), with `python .kit/cad_check.py --export` passing, STEP per part and per assembly, and STL exports of the chosen design.
 3. Drawing sheet DWG-001 at Rev P1 (general arrangement) generated with .kit/drawing.py.
 4. bom/bom.csv with every line priced, and a supplier where known.
 5. Refresh all concept media from the updated model (as in /populate step 3).

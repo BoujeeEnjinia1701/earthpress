@@ -286,12 +286,19 @@ def export_web_model(parts, media_dir="media", poster="hero.png", title="3D mode
     import matplotlib.colors as mc
     md = ROOT / media_dir; md.mkdir(parents=True, exist_ok=True)
     kids = []
+    import copy
     for p in parts:
-        sh = p.shape
+        sh = copy.deepcopy(p.shape)   # a fresh shape: no re-parenting of the caller's shapes, and no finer mesh cached by earlier renders
+        try:   # drop any finer triangulation cached by earlier renders in this run, so the web tolerance applies
+            from OCP.BRepTools import BRepTools
+            BRepTools.Clean_s(sh.wrapped)
+        except Exception:
+            pass
         sh.color = Color(*mc.to_rgb(p.color))
         sh.label = p.name
         kids.append(sh)
-    export_gltf(Compound(children=kids), str(md / "model.glb"), binary=True)
+    # web tessellation: 0.2 mm chord error and 20 degrees angle keep a D3 model under about 15 MB
+    export_gltf(Compound(children=kids), str(md / "model.glb"), binary=True, linear_deflection=0.2, angular_deflection=0.35)
     (md / "viewer.html").write_text(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>

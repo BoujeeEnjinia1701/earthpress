@@ -46,11 +46,11 @@ Every repo needs visuals that explain the idea. Generate them from `cad/src/conc
 | `media/exploded.png` | Exploded view with numbered callouts matching the BOM | Recommended |
 | `media/flow.png` | System, energy or material flow diagram | When the concept moves energy or material |
 
-For small objects (wearables, handheld tools) use a context part such as a hand or forearm instead of the 1.75 m person (`scale_figure=False, context=[...]`); see `tremortrace` for a worked example. At TRL 2 the model may be a simple massing model: correct proportions and main parts, not detailed geometry. Label concept media "CONCEPT, NOT FOR FABRICATION". Mark estimated flow values as estimates.
+For small objects (wearables, handheld tools) use a context part such as a hand or forearm instead of the 1.75 m person (`scale_figure=False, context=[...]`); see `tremortrace` for a worked example. Kit 1.9: the model is detailed at every TRL, never a massing block (STANDARDS section 24): build it in `cad/src/model.py` from `.kit/cad_parts.py`, model every concept option to the repo's detail level (D1 at P0, D2 at P1 and P2, D3 at P3), run `python .kit/cad_check.py --export`, and render every product picture with Blender Cycles. Label concept media "CONCEPT, NOT FOR FABRICATION". Mark estimated flow values as estimates.
 
 ## 5a. Session commands
 
-Use the repo's slash commands rather than improvising scope: `/populate` (strong TRL 2 with media), `/advance-trl3` (only after Amish approves), `/rein-in` (stop and review), `/refresh-media`, `/render-product` (appearance model, photoreal renders and storefront images), `/release` (release gate and release preparation; never makes the repo public).
+Use the repo's slash commands rather than improvising scope: `/populate` (strong TRL 2 with media), `/advance-trl3` (only after Amish approves), `/rein-in` (stop and review), `/refresh-media`, `/render-product` (appearance model, photoreal renders and storefront images), `/release` (release gate and release preparation; never makes the repo public), and for the pipeline `/stem-check`, `/concept-options`, `/pipeline-docs` and `/upgrade-1.8` (section 5c).
 
 ## 5b. Product renders and storefront images (TRL 3)
 
@@ -59,6 +59,17 @@ Use the repo's slash commands rather than improvising scope: `/populate` (strong
 - Render with `.kit/export_views.py` and `.kit/photoreal.py`, caption with `.kit/photo_caption.py`, and lead the README with `media/render-hero.png`.
 - Then run `python .kit/cards.py .` for `media/card.png` and `media/social-preview.png`. See `.kit/STANDARDS.md` sections 12 and 13.
 - Run `python .kit/image_qc.py` and look at every image yourself. Text must be inside the image, never overlap other text or the render, and be readable; renders must be sharp. Fix and regenerate anything that fails.
+
+## 5c. The pipeline (kit 1.8 and 1.9, STANDARDS sections 19 to 24)
+
+- Every repo carries the pipeline documents for its stage: STEM check (STM), concept options (OPT), user and product requirements (URS, PRS), the generated traceability matrix (RTM), regulatory register (REG), feasibility (FEA), risk register with hazard analysis and design FMEA (RSK), market and viability (MKT) and project plan (PLN). Templates are in `.kit/templates/`.
+- **STEM check first.** Before designing anything, list every physical, chemical and biological claim and check it against known science (`docs/04-calcs/stem_check.py`, `.kit/stem_check.py`). A claim that fails stops the concept unless a fix keeps the working principle: then propose the best fix for the design and its constructability and implement it in the same session (Amish's standing instruction, 2026-10-23; STANDARDS section 20, fix rule), record it in the decisions register as decided under that instruction, and rerun the check. A fix that changes the working principle, pitch or scope goes to Amish instead. Then have an independent reviewer (a second agent that does not see your reasoning) try to refute every "Within known science" verdict, and record what it found.
+- **At least two concept options.** Different working principles, not size or material variants. Score them against the user requirements, draw them with `python .kit/options.py`, and record the choice as "Proposed, awaiting Amish". If two options are within 10 %, both go to Amish. In a repo designed before kit 1.8 the current design is option A; never redesign it without Amish's go.
+- **Requirements.** User requirements (UR) come from the users and stakeholders in PRB; every product requirement (PR) traces to one. Run `python .kit/trace.py` after any requirement, calculation, BOM or build plan change. Never type the matrix by hand.
+- **Research.** Regulatory and market facts are cited with a link and the date checked. Standards shared across a focus area are researched once and cited in each repo. Never invent a price, standard number or classification; mark unknowns "to assess".
+- `stage` in `project.yaml` may not exceed `stage_cap` in `.kit/PHASE.yaml` (P3 now). P4 to P6 deliverables appear only as planned work in PLN.
+- **CAD fidelity (kit 1.9).** Every option in `cad/src/model.py` (`OPTIONS`, `components(option)`) is modelled with real stock, fasteners, welds and edge breaks to the stage's detail level, and `cad/fidelity.json` must pass (`python .kit/cad_check.py --export`). The options picture is rendered from those models with `python .kit/options.py`.
+- Commands: `/stem-check`, `/concept-options`, `/pipeline-docs`, `/upgrade-1.8`, `/upgrade-1.9`.
 
 ## 6. Standards
 

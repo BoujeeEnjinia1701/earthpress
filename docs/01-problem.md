@@ -3,9 +3,9 @@ doc_id: EPR-PRB-001
 title: EarthPress problem statement
 project: EarthPress
 doc_type: Problem statement
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-25'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Partner rule and first candidate; design soil and lime option; press mass (EPR-DEC-001, 2026-10-02)"
+- version: "0.6"
+  date: '2026-10-25'
+  author: Amish Chadha
+  change: "Kit 1.8 users-and-needs and stakeholders tables (Tables 1 and 2), the source of EPR-URS-001; press mass from the kit 1.9.1 model (203.8 kg)"
 ---
 
 # EarthPress problem statement
@@ -57,13 +61,39 @@ EarthPress serves people who build small load-bearing or infill walls with the s
 
 The press works outdoors on uneven ground, in dust, heat and rain, and is moved between sites on a pickup or by hand. Operators range from trained masons to first-time volunteers.
 
+### Users and needs
+
+Table 1. Users and needs (the source of the user requirements in EPR-URS-001).
+
+| User type | Goals and needs | Typical use scenario | Pain points and challenges |
+| --- | --- | --- | --- |
+| Self-builders and families | Make walling for a one- or two-room house from site soil at low cash cost; blocks of a size local masons lay | A family and two helpers press for a week or two beside the house plot | Little cash; no power on site; first-time operators; soil of unknown quality; heavy lifting |
+| Masons and builders | Uniform, square blocks of one height so walls run true; enough blocks a day to keep a crew laying | A mason checks blocks with the gauge and lays 8 to 9 m2 of wall a day | Blocks that vary in height or crumble at the edges; slow supply |
+| Small block-making enterprises | Steady output (about 300 blocks a day), low running cost, a press that lasts and can be repaired | A crew of four runs a yard in shade with a soil heap and a water drum | Wear of mold and pins; downtime waiting for parts; cement cost |
+| NGO and community trainers | A press and soil tests that volunteers learn in a day, safe enough for mixed crews, documented for many sites | A program trains masons and builds schools or reconstruction housing | Injuries from levers and pinch points; unclear soil suitability; equipment that cannot be moved between villages |
+| Local welders and fabricators | Drawings and a parts list for common sections, with no machining beyond drilling and bought pins | A small shop builds a press in a few days from stockist steel and sells or repairs it | Undimensioned or closed designs; parts that need a lathe; unclear assembly order |
+| Architects and owner-builders in high-income countries | Blocks that meet an earthen building code; lower embodied carbon | A studio or garden wall where earthen codes allow CEB | Proving block strength to an inspector; finding a press |
+
+### Stakeholders
+
+Table 2. Stakeholders.
+
+| Stakeholder group | Role or interest | Engagement needed |
+| --- | --- | --- |
+| Co-design partner (first candidate: Auroville Earth Institute, decided 2026-10-02) | Trains builders in CSEB; local soils, cement supply and block testing | Co-design sessions, soil compaction tests, review of the requirements and the build plan |
+| Building authorities and code bodies (for example New Mexico, Bureau of Indian Standards) | Set block strength and testing rules | Check the applicable standard per region (EPR-REG-001) before any structural use |
+| Funders and humanitarian programs | Pay for housing and training; need safe, durable outcomes | Safety case, cost per house, training plan |
+| Cement and lime suppliers | Supply the stabilizer | Local price and availability for the mix chart |
+| Steel stockists and machine shops | Supply sections, plate and turned pins | Local sizes and prices; 42CrMo4 bar and 40 x 46 mm bushes (EPR-DEC-001, to confirm) |
+| Testing laboratories | Test block strength and durability | Block tests at TRL 4 (on hold) |
+
 ## Constraints
 
 - Garage-buildable prototype for about $500 USD in parts (`project.yaml`), with no machining beyond drilling and purchased turned pins.
 - Human powered: no electricity, hydraulics or engine on site.
 - Parts from local steel stockists: flat bar, plate, channel, rectangular tube and pipe in common sizes.
 - Wear parts and pins replaceable with hand tools.
-- Movable by four people, or by two people once dismantled (EPR-CAL-001: about 187 kg in eight pieces).
+- Movable by four people, or by two people once dismantled (EPR-CAL-001: about 204 kg in 11 pieces of 45 kg or less).
 - Blocks must meet a recognized strength reference for the intended use (for example Auroville class B, or the New Mexico code minimum of 300 psi, about 2.1 MPa) when made from suitable, tested soil.
 
 ## Out of scope
@@ -90,7 +120,7 @@ This design is for communities the author is not part of, so requirements come f
 - [ ] Identify a local partner organization. Decided on 2026-10-02 (EPR-DEC-001): a partner that already trains builders in stabilized earth blocks and has local soils and cement supply; first candidate to approach, the Auroville Earth Institute in India. Nothing is agreed yet.
 - [ ] Run co-design sessions with intended users; record who, where and what was learned
 - [ ] Validate load, distance, terrain and cost assumptions in the field
-- [ ] Revise requirements (REQ) from findings before freezing the design
+- [ ] Revise the user and product requirements (EPR-URS-001, EPR-PRS-001) from findings before freezing the design
 
 ## Open questions
 
@@ -98,4 +128,4 @@ This design is for communities the author is not part of, so requirements come f
 - EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Amish decided on 2026-09-25 to go with a two-person T-handle (EPR-DDR-002); co-design should still confirm that builders accept it rather than a lower pressure and more cement.
 - Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press? Until they are measured, the operating chart uses the softer soil (809 N, 405 N per operator), and lime is a documented option with its own chart and longer curing (decided 2026-10-02).
 - What block strength do local building rules or funders require, and who will test blocks?
-- How far do blocks and the press travel, and on what vehicle? The press is about 200 kg with its guard and bolts, in pieces of 45 kg or less (R7 total set at 200 kg on 2026-10-02).
+- How far do blocks and the press travel, and on what vehicle? The press is about 204 kg with its guard, bolts, bushes and weld metal, in pieces of 45 kg or less, against the 200 kg R7 total set on 2026-10-02 (decision D2 in EPR-DEC-001, proposed, awaiting Amish).

@@ -164,8 +164,8 @@ mass,Linkage guard,5.4,kg
 mass,"Bolts, nuts and washers",2.2,kg
 mass,"Press total (steel, bushes, seals, fasteners and weld metal)",203.8,kg
 mass,Heaviest single piece,44.5,kg
-mass,Margin to the R7 total of 200 kg including guard and bolts (2026-10-02); negative is over,-3.76,kg
-mass,R7 total met (200 kg or less),no,
+mass,"Margin to the R7 total of 205 kg including guard, bolts, bushes and weld metal (2026-10-30); negative is over",1.24,kg
+mass,R7 total met (205 kg or less),yes,
 mass,Heaviest piece within the 50 kg piece limit,yes,
 mass,Lever pipe alone (removable),9.2,kg
 out,Cycle time,85,s

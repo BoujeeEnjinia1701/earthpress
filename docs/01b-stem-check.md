@@ -3,9 +3,9 @@ doc_id: EPR-STM-001
 title: EarthPress STEM check
 project: EarthPress
 doc_type: STEM check
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: First STEM check (kit 1.8 pipeline, run during the kit 1.9.1 upgrade) for the current design (option A) and options B and C; S9 and S10 failed on the 35 mm C45 toggle pins and were closed by fix F1 under the standing instruction of 2026-10-23; independent review recorded
+- version: "0.2"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "R7 total of 205 kg (decision D2, 2026-10-30)"
 ---
 
 # EarthPress STEM check
@@ -72,7 +76,7 @@ Verdicts: **Within known science**, **Plausible, to confirm at TRL 3**, **Fails,
 | S9 | Fails, fix proposed: 35 mm C45 base pin in bending, 388 MPa against 370 MPa at 81.2 kN and 826 MPa at 173 kN (arm 40 mm from the link to the lug); knee and upper pins 661 and 641 MPa at 173 kN | F1: 40 mm 42CrMo4 +QT pins (Rp0.2 750 MPa), lugs grown to 28 mm so the arm falls to 36 mm (EPR-DEC-001, 2026-10-25, standing instruction) | Within known science: 498 MPa (base), 463 MPa (knee, with the connecting link), 429 MPa (upper) against 750 MPa at 173 kN |
 | S10 | Fails, fix proposed: 2 x 20 mm lugs on a 35 mm pin, 124 MPa against 100 MPa at 173 kN | F1: 2 x 28 mm lugs on the 40 mm bush bore | Within known science: 78 MPa |
 
-The fix keeps the working principle, the linkage geometry and the pitch; it is not a decision for Amish under the fix rule, but he can reverse it. It adds about 1.2 kg and about USD 19 (estimate), which takes the press to 203.8 kg against the 200 kg R7 total (decision D2, proposed, awaiting Amish) and the BOM to USD 542.
+The fix keeps the working principle, the linkage geometry and the pitch; it is not a decision for Amish under the fix rule, but he can reverse it. It adds about 1.2 kg and about USD 19 (estimate), which takes the press to 203.8 kg against the 205 kg R7 total decided on 2026-10-30 (decision D2) and the BOM to USD 542.
 
 ## Fields not relevant
 

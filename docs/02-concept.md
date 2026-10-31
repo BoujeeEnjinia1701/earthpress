@@ -3,9 +3,9 @@ doc_id: EPR-PRC-001
 title: EarthPress design precis
 project: EarthPress
 doc_type: Design precis
-version: "0.9"
+version: "0.10"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -45,13 +45,17 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: 'Kit 1.9.1: toggle pins 40 mm 42CrMo4 +QT (fix F1, EPR-DEC-001); mass 203.8 kg from the detailed model (PR-007 not met); cost USD 542; requirement numbers PR-001 to PR-016 (EPR-PRS-001); concept options B and C (EPR-OPT-001)'
+- version: "0.10"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "PR-007 met against the 205 kg total decided by Amish on 2026-10-30"
 ---
 
 # EarthPress design precis
 
 ## Summary
 
-EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003) and modelled part by part in kit 1.9.1, the press weighs about 204 kg, its heaviest piece 44.5 kg, and the press and kit cost about $542 in parts. The kit 1.9.1 STEM check found the 35 mm toggle pins too weak in bending; they are now 40 mm 42CrMo4 +QT (fix F1, EPR-DEC-001). Against the product requirements (EPR-PRS-001), PR-005 (405 N per operator for the softer design soil) is met on paper, **PR-007 is not met** (203.8 kg against the 200 kg total Amish set on 2026-10-02; decision D2 awaiting him), PR-013 is over its value-engineering target ($542 against $500), and PR-002 and PR-004 are at risk. Two other concepts, a power screw press and a rope-lifted drop rammer, score within 10 % of this design and are with Amish (EPR-OPT-001). All values are estimates.
+EarthPress is a manual press, welded from common steel sections, that compacts moist, sieved and cement-stabilized site soil into 290 x 140 x 90 mm blocks with a 1.7 m lever driving a toggle linkage under the mold. The TRL 3 calculation (EPR-CAL-001) shows that the linkage reaches the 81.2 kN needed for 2 MPa with a force ratio of 173:1 at the stop, but that the peak pull is 668 N, so **two people share the lever on a T-handle**. Each fill is **weighed** to within about 200 g, because the pressure reached at the stop is sensitive to fill mass. The block is ejected with the same lever moved to a separate eject socket. A crew of four could make about 296 blocks a day (8.9 m² of 140 mm wall). Made buildable on 2026-10-01 (EPR-DDR-003) and modelled part by part in kit 1.9.1, the press weighs about 204 kg, its heaviest piece 44.5 kg, and the press and kit cost about $542 in parts. The kit 1.9.1 STEM check found the 35 mm toggle pins too weak in bending; they are now 40 mm 42CrMo4 +QT (fix F1, EPR-DEC-001). Against the product requirements (EPR-PRS-001), PR-005 (405 N per operator for the softer design soil) is met on paper, PR-007 is met on paper with a thin margin (203.8 kg against the 205 kg total Amish set on 2026-10-30), PR-013 is over its value-engineering target ($542 against $500), and PR-002 and PR-004 are at risk. Two other concepts, a power screw press and a rope-lifted drop rammer, score within 10 % of this design and are with Amish (EPR-OPT-001). All values are estimates.
 
 ![Hero render](../media/hero.png)
 
@@ -121,7 +125,7 @@ All values are estimates from EPR-CAL-001, where the assumptions are stated.
 | Output | 296 blocks per day, crew of four; 8.9 m² of wall | 85 s cycle (assumed) |
 | Small house, 50.5 m² of wall | 1,683 blocks, 5.7 press days, 556 kg cement (11.1 bags) | 22 m perimeter, 2.7 m walls, 15 % openings |
 | Embodied CO2 of that wall | 0.35 t as CSEB against 4.55 t as fired brick (7.6 %) | 49 and 643 kg CO2/m³ ([Auroville Earth Institute](https://www.earth-auroville.com/compressed_stabilised_earth_block_en.php)); excludes mortar and transport |
-| Press mass | 203.8 kg with guard, bolts, bushes, seals and weld metal (PR-007 not met; 200 kg target); heaviest piece 44.5 kg | Detailed kit 1.9.1 model, each part at its material's density |
+| Press mass | 203.8 kg with guard, bolts, bushes, seals and weld metal (PR-007 met on paper against the 205 kg total decided on 2026-10-30); heaviest piece 44.5 kg | Detailed kit 1.9.1 model, each part at its material's density |
 | Parts cost | $542 (indicative; USD 42 over the $500 value-engineering target) | `bom/bom.csv` |
 
 ## Key design choices

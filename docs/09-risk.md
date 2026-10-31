@@ -3,9 +3,9 @@ doc_id: EPR-RSK-001
 title: EarthPress risk register and hazard analysis
 project: EarthPress
 doc_type: Risk register and hazard analysis
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,11 +13,15 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: First risk register, preliminary hazard analysis and first-pass design FMEA (kit 1.8 pipeline, stage P3) for option A after fix F1
+- version: "0.2"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "R3 rescored after decision D2 (205 kg total, 2026-10-30): margin 1.2 kg"
 ---
 
 # EarthPress risk register and hazard analysis
 
-The top project risks are that partner soils turn out softer or stiffer than assumed, which moves the operating force and the fill window (R1), and that the press stays over its mass and cost targets (R3, R4). The top hazards are the stored energy at the end of the stroke (lever kickback, about 47 J), crushing in the linkage and the mold, and silica dust and wet cement during mixing. The design FMEA's highest risk priority numbers are the fill weighed outside its window and a worn or missing latch pin. Method: STANDARDS section 23 and the ISO 12100 approach. Likelihood, impact, severity and occurrence are scored 1 (low) to 5 (high); detection 1 (certain to be detected) to 5 (not detected).
+The top project risks are that partner soils turn out softer or stiffer than assumed, which moves the operating force and the fill window (R1), and that the press stays close to its mass limit and over its cost target (R3, R4). The top hazards are the stored energy at the end of the stroke (lever kickback, about 47 J), crushing in the linkage and the mold, and silica dust and wet cement during mixing. The design FMEA's highest risk priority numbers are the fill weighed outside its window and a worn or missing latch pin. Method: STANDARDS section 23 and the ISO 12100 approach. Likelihood, impact, severity and occurrence are scored 1 (low) to 5 (high); detection 1 (certain to be detected) to 5 (not detected).
 
 ## Project risk register
 
@@ -27,7 +31,7 @@ Table 1. Project risks.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | R1 | Partner soils differ from the assumed compaction law | The law (tenfold over the last 14 mm) is assumed (STM S6) | Peak pull above 500 N per operator or a narrower fill window | 3 | 4 | Design lead with the co-design partner | Measure the curve on partner soils first (TRL 4, on hold); the operating chart already uses the softer soil |
 | R2 | No co-design partner engaged | Partner not yet approached | Requirements stay unvalidated; no soils or tests | 3 | 4 | Amish | Approach the first candidate (decided 2026-10-02) when TRL 4 opens |
-| R3 | Mass over the R7 total | Bushes, fasteners and weld metal counted; fix F1 | 203.8 kg against 200 kg | 5 | 2 | Amish (decision D2) | Decide D2; lighten as a value-engineering item if chosen |
+| R3 | Mass over the R7 total | Thin margin: bushes, fasteners and weld metal counted; fix F1 | 203.8 kg against 205 kg (D2 decided 2026-10-30) | 3 | 2 | Design lead | Weigh the prototype; lighten as a value-engineering item if it grows |
 | R4 | Cost over the value-engineering target | Steel mass, turned alloy pins, bushes | USD 542 against USD 500 | 4 | 2 | Design lead | Local quotes; value-engineering items in EPR-DEC-001 |
 | R5 | Concept choice reopened | Options A, B and C within 10 % (D1) | Redesign if B or C is chosen | 2 | 4 | Amish (decision D1) | Decide D1; the repo stays on A meanwhile |
 | R6 | Local parts not available | 42CrMo4 bar, 40 x 46 mm bushes or UPN 80 not stocked | Substitutions change the checks | 3 | 3 | Fabricator | Confirm when parts are bought (EPR-DEC-001 Table 2); recheck with `sizing.py` |

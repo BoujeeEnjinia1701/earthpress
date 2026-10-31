@@ -3,9 +3,9 @@ doc_id: EPR-DEC-001
 title: EarthPress design decisions register
 project: EarthPress
 doc_type: Design decisions register
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: 'Kit 1.9.1 upgrade: toggle pin fix F1 decided under the standing instruction of 2026-10-23 (EPR-STM-001 S9, S10); corrections C1 to C5 from the detailed model; open decisions D1 (concept selection, three options within 10 %, no pick) and D2 (R7 total mass, 203.8 kg); value engineering at USD 542'
+- version: "0.7"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "D2 (R7 total of 205 kg) decided by Amish on 2026-10-30 (EPR-DDR-005); D1 stays open (no pick); design load question added as D3 (no recommendation)"
 ---
 
 # EarthPress design decisions register
@@ -41,12 +45,12 @@ Every design decision still to be made, and every decision made, in one place. E
 
 ## Open decisions
 
-*Table 1. Decisions awaiting Amish.*
+*Table 1. Decisions awaiting Amish (D1 had no pick; D3 had no recommendation). D2 was decided on 2026-10-30 and is in Table 3.*
 
 | # | Decision | Options | Recommendation | Status | Record |
 | --- | --- | --- | --- | --- | --- |
 | D1 | Concept selection (kit 1.8 concept options) | (A) lever and toggle press, the current design: 186 of 245; (B) power screw press: 181; (C) rope-lifted drop rammer: 168 | None: A and B are within 2.7 % and C within 9.7 % of A, so all three go to Amish without a pick (STANDARDS section 21). Notes for the choice: B's self-locking is not assured with a greased screw (EPR-STM-001 B2) and it makes about 225 blocks a day; C's density is unproven (C2) and it makes about 160 a day; A keeps every part of the constructable design | Proposed, awaiting Amish | [EPR-DDR-004](decisions/0004-concept-selection.md), [EPR-OPT-001](02a-concept-options.md) |
-| D2 | R7 total mass: the detailed model gives 203.8 kg against the 200 kg total set on 2026-10-02 | (a) set the R7 total at 205 kg, counting bushes, nuts, washers and weld metal, and keep the 50 kg piece limit; (b) lighten the press by about 10 kg (16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate), which also saves about USD 13 of steel; (c) leave R7 at 200 kg and record it as not met | (a), as Amish chose for the earlier mass question on 2026-10-02, with (b) kept as a saving worth trying in Value engineering | Proposed, awaiting Amish | EPR-CAL-001 section 8, EPR-PRS-001 PR-007 |
+| D3 | Design load basis (independent review): the abuse case at the grip | (a) keep 1,000 N at the grip (173 kN) and add a grip stop that limits the load; (b) raise the abuse case to about 1,500 N (about 260 kN) with larger lugs and pins | None: no recommendation was made in the review (EPR-STM-001 S7, S9, S10) | Proposed, awaiting Amish | EPR-STM-001, EPR-DDR-005 |
 
 ## Decided under Amish's standing instruction of 2026-10-23
 
@@ -89,7 +93,7 @@ Found while modelling every fastener and part to detail level D3 (Amish, 2026-10
 
 Value-engineering target: USD 500 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 542 (USD 42 over the target) after fix F1 and corrections C2 to C5 (USD 19). Main cost drivers and savings worth trying:
 
-- Steel is the main cost: about 204 kg at about USD 1.30/kg is about USD 265. A lighter press (a 16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate, perhaps 10 kg) would save steel as well as mass; it was option (b) of the R7 mass decision, not taken on 2026-10-02, so it stays a saving worth trying.
+- Steel is the main cost: about 204 kg at about USD 1.30/kg is about USD 265. A lighter press (a 16 mm lid plate with deeper ribs, 10 mm mold walls, a lighter base plate, perhaps 10 kg) would save steel as well as mass; it was option (b) of the R7 mass decision, not taken on 2026-10-02 or 2026-10-30 (EPR-DDR-005), so it stays a saving worth trying.
 - The parts added to make the press buildable (EPR-DDR-003) account for the rise from USD 488 to USD 520; the felt or rubber dust seals at the bush faces (decided 2026-10-02, about USD 3) take it to USD 523.
 - Plain pins without bushes would save about USD 30, but R8 (wear) would fail, so this is a saving to weigh, not to take.
 - Local prices for steel, turned pins and bushes are to be confirmed when parts are bought; every price is indicative.
@@ -104,6 +108,7 @@ Value-engineering target: USD 500 (a hypothetical control target, not a limit). 
 | 2026-09-25 | TRL 3 items 10 to 16: separate eject seesaw with a lost-motion slot, two operators on a T-handle, R5 reworded, R7 total 190 kg, budget $500, weighed fill, linkage geometry, crank stop, ribbed lid, end pawl, linkage guard, hardened bushes, R4 at 296 blocks a day | Amish, same instruction | EPR-DDR-001, EPR-DDR-002 |
 | 2026-10-01 | Design for construction: columns turned, tapped mold flanges, pin access holes and spacers, round link ends, end skirts on the piston, lid pins in rib ears, rest catch and end pawl on the crank pin, central eject arm, ties moved, guard modelled, gauge made real (P1 to P15) | Made under Amish's 2026-09-30 instruction to make the design physically buildable ("fix the design assumptions to match and be physically feasible"); the changes themselves were accepted on 2026-10-02 (below) | EPR-DDR-003 |
 | 2026-10-02 | R7 total mass: option (a). The R7 total is 200 kg, defined to include the guard and bolts, and the 50 kg piece limit is kept (heaviest piece 45 kg) | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-003, A1 |
+| 2026-10-30 | R7 total mass (D2): option (a). The R7 total is 205 kg, counting bushes, nuts, washers and weld metal; the 50 kg piece limit is kept (heaviest piece 44.5 kg). The press is 203.8 kg in the model, 1.2 kg under; lightening by about 10 kg stays a value-engineering item | Amish, 2026-10-30: "on the calls - i go with your recommendations" | [EPR-DDR-005](decisions/0005-decisions-2026-10-30.md), EPR-CAL-001 section 8 |
 | 2026-10-02 | Rest catch release: option (a), hand release, for the prototype, with the build plan rule that the catch is in before the latch is opened; a foot pedal is considered only if timed cycles (R4) show the extra step costs output | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-003, A3 |
 | 2026-10-02 | First co-design partner: one that already trains builders in stabilized earth blocks and has local soils and cement supply. First candidate to approach: the Auroville Earth Institute in India, whose 290 x 140 x 90 mm block module the press uses | Amish: "i approve your recommendations for all 555 open decisions." | EPR-DDR-001, item 8 |
 | 2026-10-02 | Bushes: case-hardened steel with grease nipples, as decided (EPR-DDR-002, item 16f), with simple felt or rubber dust seals added at the bush faces; bronze or UHMW-PE revisited only if TRL 4 wear data show scoring | Amish: "i approve your recommendations for all 555 open decisions." | EPR-PRC-001, open questions |

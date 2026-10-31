@@ -411,9 +411,9 @@ for n, m in masses.items():
 tot = sum(masses.values())
 out("mass", "Press total (steel, bushes, seals, fasteners and weld metal)", tot, "kg")
 out("mass", "Heaviest single piece", max(masses.values()), "kg")
-R7_TOTAL = 200.0   # kg, R7 total including the guard and bolts (Amish, 2026-10-02, EPR-DDR-003 A1); was 190 kg
-out("mass", "Margin to the R7 total of 200 kg including guard and bolts (2026-10-02); negative is over", R7_TOTAL - tot, "kg", "{:.2f}")
-out("mass", "R7 total met (200 kg or less)", "yes" if tot <= R7_TOTAL else "no")
+R7_TOTAL = 205.0   # kg, R7 total counting guard, bolts, bushes, nuts, washers and weld metal (Amish, 2026-10-30, EPR-DDR-005 D2); was 200 kg (2026-10-02) and 190 kg
+out("mass", "Margin to the R7 total of 205 kg including guard, bolts, bushes and weld metal (2026-10-30); negative is over", R7_TOTAL - tot, "kg", "{:.2f}")
+out("mass", "R7 total met (205 kg or less)", "yes" if tot <= R7_TOTAL else "no")
 out("mass", "Heaviest piece within the 50 kg piece limit", "yes" if max(masses.values()) <= 50.0 else "no")
 out("mass", "Lever pipe alone (removable)", math.pi / 4 * (Do ** 2 - Di ** 2) * P["lever_len"] * 7850e-9, "kg")
 

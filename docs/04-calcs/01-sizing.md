@@ -3,9 +3,9 @@ doc_id: EPR-CAL-001
 title: EarthPress sizing calculations
 project: EarthPress
 doc_type: Calculation note
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: 'Kit 1.9.1: pin bending and lug bearing checked (section 6b); the 35 mm C45 pins failed and were replaced by 40 mm 42CrMo4 +QT pins in 40 x 46 mm bushes with 28 mm lugs (EPR-DEC-001 F1, standing instruction); masses from the detailed model with bushes, fasteners and weld metal (203.8 kg, R7 not met); BOM USD 542; requirements renumbered PR-001 to PR-016 (EPR-PRS-001)'
+- version: "0.8"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "R7 against the 205 kg total decided by Amish on 2026-10-30 (EPR-DDR-005 D2): met on paper, margin 1.2 kg; sizing.py re-run"
 ---
 
 # EarthPress sizing calculations
@@ -230,7 +234,7 @@ Breaking the block free takes 4.64 kN of wall friction, 4.84 kN with the piston 
 | Bolts, nuts and washers | 2.2 kg |
 | **Total** | **203.8 kg** |
 
-**R7 (PR-007) is not met on paper:** 203.8 kg against the 200 kg total Amish set on 2026-10-02 (EPR-DDR-003, A1), 3.8 kg over. The v0.6 figure (199.996 kg) counted the steel parts and the seals but not the ten bushes (0.9 kg), the nuts and washers, or the weld metal (1.2 kg); the pin fix of 2026-10-25 adds about 1.2 kg. The heaviest piece is 44.5 kg, so the 50 kg piece limit is met, and the press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. The options are in EPR-DEC-001 (decision D2, proposed, awaiting Amish). `sizing.py`, section 7.
+**R7 (PR-007) is met on paper:** 203.8 kg against the 205 kg total Amish set on 2026-10-30 (decision D2 option (a), EPR-DDR-005), a margin of 1.2 kg. The 200 kg of 2026-10-02 (EPR-DDR-003, A1) was exceeded by 3.8 kg once the v0.6 figure (199.996 kg) counted only the steel parts and the seals, not the ten bushes (0.9 kg), the nuts and washers, or the weld metal (1.2 kg); the pin fix of 2026-10-25 adds about 1.2 kg. The heaviest piece is 44.5 kg, so the 50 kg piece limit is met, and the press is 1,280 x 580 mm in plan, so it fits a 1.5 m pickup bed with the lever removed. The margin is thin: the weighed prototype decides. Lightening by about 10 kg stays a value-engineering item (EPR-DEC-001). `sizing.py`, section 7.
 
 ## 9. Output and crew (R4)
 
@@ -272,7 +276,7 @@ Value-engineering target: USD 500. Estimated cost of the constructable design: *
 | R4 | Output | 296 blocks per day, crew of four | 300 or more | At risk |
 | R5 | Operator force and grip height | Peak 668 N total (334 N each for two) at 1.16 m; 809 N (405 N each) for the softer design soil of the operating chart; grip 0.86 to 1.89 m; eject 470 N | 500 N or less per operator; grip 0.8 to 1.9 m; peak at 1.0 m or higher | Met on paper (two operators) |
 | R6 | Garage-buildable | Plate, sections, pipe and tube; turned pins, shafts and bushes bought | Stick welder, grinder, drill press | Met (design review) |
-| R7 | Movable | 203.8 kg total with bushes, fasteners and weld metal; heaviest piece 44.5 kg; plan 1.28 x 0.58 m | 200 kg total including guard and bolts (190 kg until 2026-10-02); 50 kg per piece; 1.5 m bed | **Not met** by 3.8 kg (piece limit met) |
+| R7 | Movable | 203.8 kg total with bushes, fasteners and weld metal; heaviest piece 44.5 kg; plan 1.28 x 0.58 m | 205 kg total including guard, bolts, bushes and weld metal (200 kg from 2026-10-02, 190 kg before); 50 kg per piece; 1.5 m bed | **Met on paper**, margin 1.2 kg (piece limit met) |
 | R8 | Durability | Welded range 89 MPa against 243 MPa; pin range 234 MPa against about 350 MPa; bushes, grease nipples | 50,000 blocks; replaceable bushes | Not verifiable at TRL 3 (wear) |
 | R9 | Soil test kit | Field tests, chart and a 10 kg scale for fill weighing | Go or no-go in 1 h, full result in 24 h | Met (design review); accuracy not verifiable at TRL 3 |
 | R10 | Low stabilizer use | 5 % cement, 0.33 kg per block | 8 % or less reaching R3 | Not verifiable at TRL 3 |

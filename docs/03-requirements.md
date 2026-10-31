@@ -3,9 +3,9 @@ doc_id: EPR-PRS-001
 title: EarthPress product requirements and specifications
 project: EarthPress
 doc_type: Product requirements and specifications
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: 'Kit 1.8 migration of EPR-REQ-001 v0.8 (R1 to R14 become PR-001 to PR-014, old number in "Was"); PR-015 and PR-016 added; traced to EPR-URS-001; status from EPR-CAL-001 v0.7 (PR-007 not met at 203.8 kg; PR-013 USD 542; PR-016 met after fix F1)'
+- version: "0.2"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "PR-007 total set at 205 kg (decision D2, Amish 2026-10-30, EPR-DDR-005): met on paper, margin 1.2 kg"
 ---
 
 # EarthPress product requirements and specifications
@@ -31,7 +35,7 @@ Table 1. Product requirements and specifications. Status from EPR-CAL-001 v0.7 (
 | PR-004 | UR-003 | Performance | Output | A crew of four shall make 300 or more blocks in an 8 h day, including mixing | 300 | min | blocks a day | Analysis (CAL-001 section 9), TRL 3; timed trials, TRL 4 | **At risk**: 296 a day on an assumed 85 s cycle (shortfall accepted by Amish, 2026-09-25) | R4 |
 | PR-005 | UR-004 | Usability | Operator force and grip height | The peak pull per operator at the grip shall be 500 N or less, with the grip between 0.8 and 1.9 m above the ground and the peak at 1.0 m or higher | 500; 0.8 to 1.9; 1.0 | max; band; min | N; m; m | Analysis (CAL-001 sections 3, 4 and 4b), TRL 3; force at the grip, TRL 4 | Met on paper with two operators: 334 N each (base soil), 405 N each (softer design soil); grip 0.86 to 1.89 m; peak at 1.16 m; eject 469 N for one | R5 |
 | PR-006 | UR-005 | Physical architecture | Garage-buildable | The press shall be built with a stick welder, angle grinder, drill press and hand tools; turned parts only as bought pins, shafts and bushes | 0 | max | machined parts made in the shop | Inspection of the model, drawings and build plan (BLD-001), TRL 3 | Met by design | R6 |
-| PR-007 | UR-006 | Packaging and transport | Movable | The complete press, including the guard, bolts and bushes, shall weigh 200 kg or less; no piece over 50 kg after removing pins and bolts; it shall fit a 1.5 m pickup bed | 200; 50; 1.5 | max | kg; kg; m | Analysis (CAL-001 section 8, kit 1.9.1 model), TRL 3; weighing, TRL 4 | **Not met**: 203.8 kg with every bush, nut, washer and weld bead (3.8 kg over; decision D2, proposed, awaiting Amish); heaviest piece 44.5 kg (met); plan 1.28 x 0.58 m (met) | R7 |
+| PR-007 | UR-006 | Packaging and transport | Movable | The complete press, including the guard, bolts and bushes, shall weigh 205 kg or less, counting bushes, nuts, washers and weld metal; no piece over 50 kg after removing pins and bolts; it shall fit a 1.5 m pickup bed | 205; 50; 1.5 | max | kg; kg; m | Analysis (CAL-001 section 8, kit 1.9.1 model), TRL 3; weighing, TRL 4 | **Met on paper**: 203.8 kg with every bush, nut, washer and weld bead, 1.2 kg under the 205 kg total (decision D2, decided by Amish 2026-10-30, EPR-DDR-005); heaviest piece 44.5 kg (met); plan 1.28 x 0.58 m (met) | R7 |
 | PR-008 | UR-007, UR-015 | Materials | Durability | The press shall make 50,000 blocks before mold liners or bushes need replacing; all pins in replaceable bushes; a grease point on every pivot | 50,000 | min | blocks | Analysis (CAL-001 section 6, fatigue), TRL 3; endurance log, TRL 4 | To verify at TRL 4: welded range 89 MPa against 243 MPa, pin range 234 MPa against about 350 MPa; wear needs soil data | R8 |
 | PR-009 | UR-008 | Usability | Soil test kit | Field tests (jar sedimentation, shrinkage box, ribbon and drop tests) shall give a go or no-go and a starting cement content, a first screen within 1 h and a full result within 24 h | 1; 24 | max | h | Inspection of the written procedure (BLD-001), TRL 3; comparison with laboratory grading, TRL 4 | Met by design; accuracy to verify at TRL 4 | R9 |
 | PR-010 | UR-010 | Materials | Low stabilizer use | Blocks shall reach PR-003 with 8 % cement by dry mass or less; 5 % is the design value | 8 | max | % of dry mass | Literature, TRL 3; block tests, TRL 4 | To verify at TRL 4 (design at 5 %, 0.33 kg a block) | R10 |
@@ -46,7 +50,7 @@ Categories: physical architecture, performance, materials, usability, packaging 
 
 ## Requirements not met or at risk
 
-- **PR-007 not met:** 203.8 kg against 200 kg. The earlier 199.996 kg left out the bushes, nuts, washers and weld metal, which the kit 1.9.1 model counts, and fix F1 adds about 1.2 kg. Options in EPR-DEC-001 D2 (proposed, awaiting Amish).
+- **PR-007 now met on paper, with a thin margin:** 203.8 kg against the 205 kg total decided on 2026-10-30 (EPR-DDR-005); the earlier 199.996 kg left out the bushes, nuts, washers and weld metal, and fix F1 adds about 1.2 kg. Any growth above 1.2 kg reopens it.
 - **PR-013 over target:** USD 542 against the USD 500 value-engineering target (a hypothetical control target, `budget_usd` unchanged).
 - **PR-002 at risk:** met only with two operators, a weighed fill and the assumed soil stiffness.
 - **PR-004 at risk:** 296 against 300 blocks a day on an assumed cycle; the shortfall was accepted by Amish on 2026-09-25 (EPR-DDR-002).
@@ -54,7 +58,7 @@ Categories: physical architecture, performance, materials, usability, packaging 
 
 ## Revisions accepted (EPR-DDR-002)
 
-Decided by Amish, 2026-09-25: go with recommendation. R5 (now PR-005) was a peak pull of 500 N or less with the grip between 0.9 and 1.6 m; R7 (PR-007) was 140 kg, then 190 kg, and has been 200 kg including the guard and bolts since 2026-10-02 (EPR-DDR-003 A1); R13 (PR-013) was USD 450 and has been USD 500 since 2026-09-25.
+Decided by Amish, 2026-09-25: go with recommendation. R5 (now PR-005) was a peak pull of 500 N or less with the grip between 0.9 and 1.6 m; R7 (PR-007) was 140 kg, then 190 kg, and was 200 kg including the guard and bolts from 2026-10-02 (EPR-DDR-003 A1) and has been 205 kg, counting bushes, nuts, washers and weld metal, since 2026-10-30 (EPR-DDR-005); R13 (PR-013) was USD 450 and has been USD 500 since 2026-09-25.
 
 ## Assumptions
 

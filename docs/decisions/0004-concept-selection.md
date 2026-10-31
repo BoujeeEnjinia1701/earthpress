@@ -3,9 +3,9 @@ doc_id: EPR-DDR-004
 title: EarthPress concept selection
 project: EarthPress
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: Concept selection between options A, B and C (EPR-OPT-001); all within 10 %, so no pick; proposed, awaiting Amish
+- version: "0.2"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "Mass figure follows decision D2 of 2026-10-30 (EPR-DDR-005); still proposed, awaiting Amish, no pick"
 ---
 
 # 0004: Concept selection
@@ -28,7 +32,7 @@ Kit 1.8 asks every repo for at least two concept options with different working 
 
 | Option | Working principle | Score (of 245) | Strengths | Weaknesses |
 | --- | --- | --- | --- | --- |
-| A. Lever and toggle press (current) | Static pressing; a toggle's rising force ratio meets the stiffening soil | 186 | Output (about 296 a day), fixed block height at the crank stop, every part designed, priced and in the build plan | USD 542 against a USD 500 target; 203.8 kg against 200 kg (D2); two operators; narrow fill window; 47 J kickback held by a pawl |
+| A. Lever and toggle press (current) | Static pressing; a toggle's rising force ratio meets the stiffening soil | 186 | Output (about 296 a day), fixed block height at the crank stop, every part designed, priced and in the build plan | USD 542 against a USD 500 target; 203.8 kg against the 205 kg total (D2, decided 2026-10-30); two operators; narrow fill window; 47 J kickback held by a pawl |
 | B. Power screw press | Static pressing by a two-start screw in a bronze nut, turned by a capstan | 181 | Pressure in hand at any fill; little stored energy; lighter (165.5 kg in the model) | Slower (about 225 a day); a greased two-start screw may not self-lock (B2); specialist bought parts; exposed threads in dust |
 | C. Rope-lifted drop rammer | Dynamic compaction by about 25 blows of a 20 kg weight | 168 | Simplest parts; light pulls (98 N each); cheapest before pricing the pulley and rope | Density and strength against pressed blocks unproven (C2); about 160 a day; a weight falling about 4,000 times a day |
 
@@ -45,5 +49,5 @@ Points for the decision:
 
 ## Consequences
 
-- If A: no design change; B and C stay on record as options; the D2 mass decision and the value-engineering items remain.
+- If A: no design change; B and C stay on record as options; the value-engineering items remain (the D2 mass decision was taken on 2026-10-30, EPR-DDR-005).
 - If B or C: a new constructable design, calculation note, drawing, BOM and build plan for that option, and a pitch change; the soil kit, mold box and block stay.

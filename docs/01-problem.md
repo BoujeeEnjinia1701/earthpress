@@ -3,9 +3,9 @@ doc_id: EPR-PRB-001
 title: EarthPress problem statement
 project: EarthPress
 doc_type: Problem statement
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-10-25'
   author: Amish Chadha
   change: "Kit 1.8 users-and-needs and stakeholders tables (Tables 1 and 2), the source of EPR-URS-001; press mass from the kit 1.9.1 model (203.8 kg)"
+- version: "0.7"
+  date: '2026-10-30'
+  author: Amish Chadha
+  change: "R7 total of 205 kg (decision D2, 2026-10-30)"
 ---
 
 # EarthPress problem statement
@@ -128,4 +132,4 @@ This design is for communities the author is not part of, so requirements come f
 - EPR-CAL-001 finds that one operator pulling 500 N reaches only about 0.5 MPa and that two people are needed on the lever for 2 MPa. Amish decided on 2026-09-25 to go with a two-person T-handle (EPR-DDR-002); co-design should still confirm that builders accept it rather than a lower pressure and more cement.
 - Which soils in the first partner region pass the field tests, what cement or lime content do they need, and how stiff are they in the press? Until they are measured, the operating chart uses the softer soil (809 N, 405 N per operator), and lime is a documented option with its own chart and longer curing (decided 2026-10-02).
 - What block strength do local building rules or funders require, and who will test blocks?
-- How far do blocks and the press travel, and on what vehicle? The press is about 204 kg with its guard, bolts, bushes and weld metal, in pieces of 45 kg or less, against the 200 kg R7 total set on 2026-10-02 (decision D2 in EPR-DEC-001, proposed, awaiting Amish).
+- How far do blocks and the press travel, and on what vehicle? The press is about 204 kg with its guard, bolts, bushes and weld metal, in pieces of 45 kg or less, against the 205 kg R7 total set on 2026-10-30 (decision D2 in EPR-DEC-001, decided).

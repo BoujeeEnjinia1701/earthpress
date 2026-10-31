@@ -24,6 +24,7 @@ trl_evidence:
   - docs/decisions/0002-recommendations-accepted.md
   - docs/decisions/0003-design-for-construction.md
   - docs/decisions/0004-concept-selection.md
+  - docs/decisions/0005-decisions-2026-10-30.md
   - docs/04-calcs/01-sizing.md
   - docs/04-calcs/sizing.py
   - docs/04-calcs/results.csv

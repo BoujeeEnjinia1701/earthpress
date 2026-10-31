@@ -470,3 +470,31 @@ None new. The lime values (8 %, 8 weeks) in Table 3 of the build plan are starti
 ## 2026-10-02: photoreal renders redone on the constructable design
 
 Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.
+
+## Session 2026-10-30: decisions
+
+### What is now decided
+
+Amish, 2026-10-30: "on the calls - i go with your recommendations". Recorded in `docs/decisions/0005-decisions-2026-10-30.md` (EPR-DDR-005) and `docs/06-design-decisions.md` (EPR-DEC-001 v0.7).
+
+- D2, R7 total mass: option (a), the total is 205 kg counting bushes, nuts, washers and weld metal, with the 50 kg piece limit kept.
+
+### What changed
+
+- `docs/04-calcs/sizing.py`: R7 total 205 kg; rerun gives 203.8 kg, margin 1.24 kg, met (`results.csv`). `docs/04-calcs/01-sizing.md` v0.8: section 8 and the R7 row.
+- `docs/03-requirements.md` v0.2: PR-007 target 205 kg, status met on paper (was not met by 3.8 kg). `docs/03b-traceability.md` regenerated.
+- `docs/09-risk.md` v0.2: R3 rescored from 5 x 2 to 3 x 2 (thin margin). `docs/08-feasibility.md`, `docs/02-concept.md`, `docs/01-problem.md`, `docs/01b-stem-check.md`, `docs/05-build-plan.md` (first check), `docs/11-plan.md`, `docs/decisions/0004-concept-selection.md`, `README.md` follow the new figure.
+- No change to the model, BOM, drawings or pictures: the decision moves a limit, not a part. `budget_usd` is unchanged at 500. Option A's model did not change, so the options picture does not need re-rendering for this session.
+
+### Still open
+
+- D1, concept selection: A 186, B 181, C 168 of 245, all within 10 %, no pick. Not decided by Amish's sentence. `concept_chosen` stays unset; the repo stays on option A.
+- D3, design load basis (1,000 N or about 1,500 N abuse case): the independent review raised it without a recommendation. Now listed in EPR-DEC-001 as D3.
+
+### Safety concerns
+
+Unchanged. The 1.2 kg mass margin is small; the team lift of 44.5 kg pieces (two people) is unchanged. PR-013 is still USD 42 over its target.
+
+### Recommended next step
+
+Amish to decide D1 and D3; the coordinator to render the options picture and product renders (stale since the kit 1.9.1 upgrade). TRL 4 stays on hold.

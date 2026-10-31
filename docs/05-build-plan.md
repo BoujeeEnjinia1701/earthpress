@@ -3,9 +3,9 @@ doc_id: EPR-BLD-001
 title: EarthPress prototype build plan
 project: EarthPress
 doc_type: Build plan
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-10-25'
+date: '2026-10-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
     date: '2026-10-25'
     author: Amish Chadha
     change: 'Kit 1.9.1: toggle pins 40 mm 42CrMo4 +QT in 40 x 46 mm bushes, 28 mm base pin lugs, 60 mm connecting link, 205 mm slot (fix F1, EPR-DEC-001); mold bolts in one line on the column web, corrected bolt lengths and guard fixings (C1 to C5); pictures redrawn from the detailed model; cost USD 542'
+  - version: "0.6"
+    date: '2026-10-30'
+    author: Amish Chadha
+    change: "First check for mass states the 205 kg total decided on 2026-10-30"
 ---
 
 # EarthPress prototype build plan
@@ -536,7 +540,7 @@ These are the checks a TRL 4 test report would record; this plan only lists them
 | First block | R1, R2 | Weigh the fill to the chart's target, press with two people to the stop, eject | Block comes out whole; height 90 within 3 mm on the gauge |
 | Pull force | R5 | Spring balance on the T-handle on a test block | 1,000 N or less in total at the peak; record it |
 | Kickback | R12 | At the end of a press, let go with the pawl engaged | The lever stays at the end; the pawl takes the load |
-| Mass of each piece | R7 | Weigh each piece on a platform scale | 50 kg or less each; record the total |
+| Mass of each piece | R7 | Weigh each piece on a platform scale | 50 kg or less each; record the total (205 kg or less, EPR-DDR-005) |
 | Cycle time | R4 | Time ten blocks with a crew of four | Record it; 85 s or less is the target |
 
 ## 6. Safety stops
